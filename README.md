@@ -3,6 +3,7 @@
 * Nous développons sous Linux, en utilisant la librairie ncurses. De base, Clion ne peut pas débugguer des programmes C utilisant ncurses :
   * https://youtrack.jetbrains.com/issue/CPP-822
   * https://youtu.be/2R3OSGmUmoU?t=2015
+* A suivre : comment mettre en place le debug avec clion :)
 
 * Comment ajouter des librairies dans Clion pour pouvoir compiler : https://stackoverflow.com/questions/40710903/undefined-reference-during-linking-using-ncurses-and-cmake <br />
 
