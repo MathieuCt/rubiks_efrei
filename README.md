@@ -14,5 +14,4 @@
   add_executable(XXXX main.c) <br />
   target_link_libraries(XXXX curses) <br />
   target_link_libraries(XXXX menu) <br />
-* Pour débugguer ncurses : https://youtrack.jetbrains.com/issue/CPP-822
 * Librairie standard pour gérer des menus (basée sur ncurses) : https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/menus.html
