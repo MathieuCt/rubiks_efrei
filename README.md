@@ -1,5 +1,5 @@
 # rubiks_efrei
-
+* Formation C OpenClassRoom : https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c
 * Nous développons sous Linux, en utilisant la librairie ncurses. De base, Clion ne peut pas débugguer des programmes C utilisant ncurses :
   * https://youtrack.jetbrains.com/issue/CPP-822
   * https://youtu.be/2R3OSGmUmoU?t=2015
