@@ -21,6 +21,9 @@ int main()
     /* Vérification de la taille du terminal, et la possibilité d'utiliser des couleurs */
     if (!check_term())
     {
+        clear();
+        refresh();
+        endwin();
         exit(1);
     }
 
@@ -28,6 +31,8 @@ int main()
     printw("   \n 1 \n   \n");
     attroff(COLOR_PAIR(BLACK_ON_GREEN)); /* turn color off */
     getch();
+    clear();
+    refresh();
 
     /* On créé le board Rubiks */
     create_board();

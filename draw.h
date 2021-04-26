@@ -13,6 +13,8 @@
 #define SQ_WIDTH 8
 #define SQUARES (RUBIK_LINES * 3) * (RUBIK_COLS * 3)
 
+#define MIN_COLORS_NUMBER 256
+
 extern WINDOW *BOARD[SQUARES];
 
 extern const short BLACK_ON_WHITE;
