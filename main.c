@@ -19,7 +19,10 @@ int main()
     keypad(stdscr, TRUE);
 
     /* Vérification de la taille du terminal, et la possibilité d'utiliser des couleurs */
-    check_term();
+    if (!check_term())
+    {
+        exit(1);
+    }
 
     attron(COLOR_PAIR(BLACK_ON_GREEN)); /* use the above combination */
     printw("   \n 1 \n   \n");
