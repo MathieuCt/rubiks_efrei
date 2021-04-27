@@ -11,26 +11,16 @@ const short BLACK_ON_RED = 4;
 const short BLACK_ON_BLUE = 5;
 const short BLACK_ON_YELLOW = 6;
 
+short NB_LINES;
+short NB_COLS;
+
 void detect_resize(__attribute__((unused)) int dummy)
 {
     printf("Resized...\n");
 }
 
-bool colors(void)
+void set_colors(void)
 {
-    if (!has_colors()) {
-        printf("Votre terminal ne supporte pas les couleurs\n");
-        return false;
-    }
-
-    start_color();
-    if (COLOR_PAIRS < MIN_COLORS_NUMBER)
-    {
-        printf("Votre terminal ne supporte pas assez de couleurs (%d au lieux de %d minimum)", COLOR_PAIRS,
-               MIN_COLORS_NUMBER);
-        return false;
-    }
-
     /* Création des couleurs écriture, couleur background */
     init_pair(BLACK_ON_WHITE, COLOR_BLACK, COLOR_WHITE);
     init_pair(BLACK_ON_ORANGE, COLOR_BLACK, 208); // Orange n'est pas franchement défini...
@@ -38,26 +28,38 @@ bool colors(void)
     init_pair(BLACK_ON_RED, COLOR_BLACK, COLOR_RED);
     init_pair(BLACK_ON_BLUE, COLOR_BLACK, COLOR_BLUE);
     init_pair(BLACK_ON_YELLOW, COLOR_BLACK, 226); // Le COLOR_YELLOW n'est pas du jaune...
-    return true;
 }
 
-bool check_term(void)
+bool check_and_set_term(int *error_type)
 {
     // Il faudra vérifier que l'on calcule correctement la taille de la fenêtre que nous attendons.
-    short nb_lines = SQ_HEIGHT * (RUBIK_LINES + (RUBIK_LINES * 2)) + 20; // Il faut calculer la taille du menu, après.
-    short nb_cols = SQ_WIDTH * (RUBIK_COLS + (RUBIK_COLS * 2));
-    if ((LINES < nb_lines) || (COLS < nb_cols))
+    NB_LINES = SQ_HEIGHT * RUBIK_LINES * 3; // Il faut calculer la taille du menu, après.
+    NB_COLS = SQ_WIDTH * RUBIK_COLS * 3;
+
+    // Vérification de la taille de la console
+    if ((LINES < NB_LINES) || (COLS < NB_COLS))
     {
-        printf("Votre terminal doit faire au moins %d colonnes x %d lignes\n", nb_cols, nb_lines);
-        printf("Actuellement LINES : %d et COLS : %d\n", LINES, COLS);
+        *error_type = TERM_NOT_BIG_ENOUGH;
         return false;
     }
 
-    /* Gestion des couleurs */
-    if (!colors())
-    {
+    // Vérifie si le terminal sait gérer les couleurs
+    if (!has_colors()) {
+        *error_type = TERM_HAS_NO_COLORS;
         return false;
     }
+
+    // Vérifie combien de couleur sont supportées
+    start_color();
+    if (COLOR_PAIRS < MIN_COLORS_NUMBER)
+    {
+        *error_type = TERM_HAS_NOT_ENOUGH_COLORS;
+        return false;
+    }
+
+    // Initialise les couleurs
+    set_colors();
+
     return true;
 }
 
