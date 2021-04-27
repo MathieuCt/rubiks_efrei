@@ -1,6 +1,7 @@
 //
 // Created by clestrat on 26/04/2021.
 //
+#include <jansson.h>
 #include "draw.h"
 
 WINDOW *BOARD[SQUARES];
@@ -30,7 +31,7 @@ void set_colors(void)
     init_pair(BLACK_ON_YELLOW, COLOR_BLACK, 226); // Le COLOR_YELLOW n'est pas du jaune...
 }
 
-bool check_and_set_term(int *error_type)
+int check_and_set_term(void)
 {
     // Il faudra vérifier que l'on calcule correctement la taille de la fenêtre que nous attendons.
     NB_LINES = SQ_HEIGHT * RUBIK_LINES * 3; // Il faut calculer la taille du menu, après.
@@ -39,28 +40,25 @@ bool check_and_set_term(int *error_type)
     // Vérification de la taille de la console
     if ((LINES < NB_LINES) || (COLS < NB_COLS))
     {
-        *error_type = TERM_NOT_BIG_ENOUGH;
-        return false;
+        return TERM_NOT_BIG_ENOUGH;
     }
 
     // Vérifie si le terminal sait gérer les couleurs
     if (!has_colors()) {
-        *error_type = TERM_HAS_NO_COLORS;
-        return false;
+        return TERM_HAS_NO_COLORS;
     }
 
     // Vérifie combien de couleur sont supportées
     start_color();
     if (COLOR_PAIRS < MIN_COLORS_NUMBER)
     {
-        *error_type = TERM_HAS_NOT_ENOUGH_COLORS;
-        return false;
+        return TERM_HAS_NOT_ENOUGH_COLORS;
     }
 
     // Initialise les couleurs
     set_colors();
 
-    return true;
+    return 0;
 }
 
 void create_rubik_side(short line, short col, short color, char name)

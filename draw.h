@@ -22,9 +22,9 @@
 #define MIN_COLORS_NUMBER 256
 
 // Les erreurs possibles lors de la vérification du terminal.
-#define TERM_NOT_BIG_ENOUGH 0
-#define TERM_HAS_NO_COLORS 1
-#define TERM_HAS_NOT_ENOUGH_COLORS 2
+#define TERM_NOT_BIG_ENOUGH 1
+#define TERM_HAS_NO_COLORS 2
+#define TERM_HAS_NOT_ENOUGH_COLORS 3
 
 // Ne servira probablement pas, c'est juste un test.
 extern WINDOW *BOARD[SQUARES];
@@ -42,7 +42,7 @@ extern short NB_LINES;
 // Nombre de colonnes détectées dans le terminal
 extern short NB_COLS;
 
-bool check_and_set_term(int *);
+int check_and_set_term(void);
 
 void set_colors(void);
 

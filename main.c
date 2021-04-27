@@ -25,7 +25,7 @@ int main()
     detected_nb_lines = LINES;
     detected_nb_cols = COLS;
     detected_color_pairs = COLOR_PAIRS;
-    if (!check_and_set_term(&term_error_type))
+    if ((term_error_type = check_and_set_term()) > 0)
     {
         clear();
         refresh();
