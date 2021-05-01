@@ -1,5 +1,6 @@
 # rubiks_efrei
 * Formation C OpenClassRoom : https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c
+* Gestion des conflits de variables dans fichier .h : https://openclassrooms.com/forum/sujet/probleme-de-definitions-multiples
 * Nous développons sous Linux, en utilisant la librairie ncurses. De base, Clion ne peut pas debugger des programmes C utilisant ncurses :
   * https://youtrack.jetbrains.com/issue/CPP-822
   * https://youtu.be/2R3OSGmUmoU?t=2015
