@@ -61,6 +61,28 @@ int check_and_set_term(void)
     return 0;
 }
 
+void change_color(short line, short col, short cube_x, short cube_y, short color)
+{
+    WINDOW *sub[3 * 3];
+    int x, y, orig_x, orig_y, start_y, start_x;
+    orig_x = col * 3 * SQ_WIDTH;
+    orig_y = line * 3 * SQ_HEIGHT;
+
+    for (x = 0; x < 3; x++)
+    {
+        for (y = 0; y < 3; y++)
+        {
+            if ((x == cube_x) && (y == cube_y))
+            {
+                start_x = orig_x + (x * SQ_WIDTH);
+                start_y = orig_y + (y * SQ_HEIGHT);
+                wbkgd(sub[x + y], COLOR_PAIR(color));
+                wrefresh(sub[x + y]);
+            }
+        }
+    }
+}
+
 void create_rubik_side(short line, short col, short color, char name)
 {
     int x, y, i, j;
@@ -111,6 +133,7 @@ void create_board(void)
     create_rubik_side(1, 2, BLACK_ON_RED, 'R');
     create_rubik_side(1, 3, BLACK_ON_BLUE, 'B');
     create_rubik_side(2, 1, BLACK_ON_YELLOW, 'D');
+    change_color(1, 0, 0, 0,BLACK_ON_RED);
     getch();
     clear();
     refresh();
