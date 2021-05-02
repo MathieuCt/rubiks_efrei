@@ -1,7 +1,6 @@
 //
 // Created by clestrat on 26/04/2021.
 //
-#include <jansson.h>
 #include "draw.h"
 
 WINDOW *BOARD[SQUARES];
