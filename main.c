@@ -30,6 +30,8 @@ int main()
         printf("    YYY       \n");
         printf("    YYY       \n");
         printf("--------------\n");
+
+        struct rubiks_side rubiks[6];
     }
     else
     {

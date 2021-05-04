@@ -5,29 +5,7 @@
 #include <stdio.h>
 #include "structur_rubiks.h"
 
-enum color
-{
-    VERT, JAUNE, BLANC, BLEU, ORANGE, ROUGE
-};
-
-struct cubies{
-    int x;
-    int y;
-    int num;
-    char type;
-    char color;
-    enum color toto;
-    struct cubies *next;
-};
-
-struct rubiks_side{
-    char side;
-    struct cubies cubie[9];
-};
-
-struct rubiks_side rubiks[6];
-
-int rubiks_creation(struct rubiks_side *rubik)
+int rubiks_creation(struct rubiks_side rubiks[])
 {
     char side;
     char type;
