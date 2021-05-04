@@ -27,7 +27,7 @@ struct rubiks_side{
 
 struct rubiks_side rubiks[6];
 
-int rubiks_creation(struct rubiks_side *rubiks)
+int rubiks_creation(struct rubiks_side *rubik)
 {
     char side;
     char type;
