@@ -21,8 +21,8 @@ struct cubies{
     int num;
     char type;
     char color;
-    enum color toto;
-    struct cubies *next;
+    //int nb_neighbours;
+    //struct cubies neighbours[3];
 };
 
 struct rubiks_side{
