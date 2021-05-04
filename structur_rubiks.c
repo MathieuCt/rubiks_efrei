@@ -85,6 +85,7 @@ int rubiks_creation(struct rubiks_side *rubiks)
                     return -1;
             }
             rubiks[i].cubie[j].num = j;
+            rubiks[i].cubie[j].type = type;
         }
     }
     return 0;
