@@ -32,6 +32,8 @@ int main()
         printf("--------------\n");
 
         struct rubiks_side rubiks[6];
+        rubiks_creation(rubiks);
+        rubiks_display(rubiks);
     }
     else
     {

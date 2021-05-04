@@ -5,7 +5,8 @@
 #include <stdio.h>
 #include "structur_rubiks.h"
 
-int rubiks_creation(struct rubiks_side rubiks[])
+
+int rubiks_creation(struct rubiks_side *rubiks)
 {
     char side;
     char type;
@@ -87,4 +88,17 @@ int rubiks_creation(struct rubiks_side rubiks[])
         }
     }
     return 0;
+}
+int rubiks_display(struct rubiks_side *rubiks){
+    int i, j;
+    for(i = 0; i < 6 ; i++){
+        printf("\n\n\n");
+        rubiks[i].side;
+        for(j = 0 ; j < 9 ; j++){
+            printf("num :%d, type : %c, color : %c", rubiks[i].cubie[j].num, rubiks[i].cubie[j].type, rubiks[i].cubie[j].color);
+            printf("\n");
+        }
+    }
+    return 0;
+
 }

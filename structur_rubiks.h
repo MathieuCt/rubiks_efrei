@@ -9,6 +9,7 @@
 
 
 int rubiks_creation();
+int rubiks_display();
 
 enum color
 {
