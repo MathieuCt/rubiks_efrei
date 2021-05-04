@@ -3,6 +3,8 @@
 //
 
 #include <stdio.h>
+
+
 enum Test
 {
     VERT, JAUNE, BLANC
@@ -22,7 +24,7 @@ struct rubiks_side {
     struct cubies cubie[9];
 };
 
-int main() {
+int rubiks_creation() {
     struct rubiks_side rubiks[6];
     char side;
     short i, j;
