@@ -13,6 +13,7 @@ enum color
 struct cubies{
     int x;
     int y;
+    int num;
     char type;
     char color;
     enum color toto;
@@ -26,7 +27,7 @@ struct rubiks_side{
 
 struct rubiks_side rubiks[6];
 
-int rubiks_creation(struct rubiks_side rubiks[])
+int rubiks_creation(struct rubiks_side *rubiks)
 {
     char side;
     char type;
@@ -104,6 +105,7 @@ int rubiks_creation(struct rubiks_side rubiks[])
                     printf("OUPS !!!\n");
                     return -1;
             }
+            rubiks[i].cubie[j].num = j;
         }
     }
     return 0;
