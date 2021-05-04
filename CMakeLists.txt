@@ -5,6 +5,6 @@ set(CMAKE_C_STANDARD 99)
 
 include_directories(.)
 
-add_executable(rubiks_efrei main.c draw.c draw.h)
+add_executable(rubiks_efrei main.c draw.c draw.h structur_rubiks.c)
 
 target_link_libraries(rubiks_efrei curses)
