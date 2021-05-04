@@ -8,4 +8,4 @@
 #endif //RUBIKS_EFREI_STRUCTUR_RUBIKS_H
 
 
-int rubiks_creatiob();
+int rubiks_creation();

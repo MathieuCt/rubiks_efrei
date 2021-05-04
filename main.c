@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <locale.h>
-
 #include "draw.h"
+#include "structur_rubiks.h"
 
 int main()
 {
