@@ -8,96 +8,135 @@
 
 int rubiks_creation(struct rubiks_side *rubiks)
 {
-    char side;
-    char type;
-    char color;
-    short i, j;
+//    char side;
+//    char type;
+//    char color;
+    int face, cubie;
 
-    for(i = 0; i < 6; i++)
+    for(face = UP; face <= DOWN; face++)
     {
-        rubiks[i].side = side;
-        switch (i)
+        rubiks[face].side = face;
+//        if (face == LEFT)
+//        {
+//            printf("face: %d left : %d", face, LEFT);
+//        }
+//        switch (face)
+//        {
+//            case 0:
+//                side = 'U';
+//                color = 'B';
+//                break;
+//            case 1:
+//                side = 'L';
+//                color = 'O';
+//                break;
+//            case 2:
+//                side = 'F';
+//                color = 'V';
+//                break;
+//            case 3:
+//                side = 'D';
+//                color = 'J';
+//                break;
+//            case 4:
+//                side = 'R';
+//                color = 'R';
+//                break;
+//            case 5:
+//                side = 'B';
+//                color = 'B';
+//                break;
+//            default:
+//                printf("OUPS !!!\n");
+//                return -1;
+//        }
+//        rubiks[face].cubie[cubie].type = type;
+        for (cubie = 0; cubie < 9; cubie++)
         {
-            case 0:
-                side = 'U';
-                color = 'B';
-                break;
-            case 1:
-                side = 'L';
-                color = 'O';
-                break;
-            case 2:
-                side = 'F';
-                color = 'V';
-                break;
-            case 3:
-                side = 'D';
-                color = 'J';
-                break;
-            case 4:
-                side = 'R';
-                color = 'R';
-                break;
-            case 5:
-                side = 'B';
-                color = 'B';
-                break;
-            default:
-                printf("OUPS !!!\n");
-                return -1;
-        }
-        rubiks[i].cubie[j].type = type;
-        for (j = 0; j < 9; j++)
-        {
-            rubiks[i].cubie[j].color = color;
-            //rubiks[i].cubie[j].type = 1;
-            switch (j)
+            switch (rubiks[face].side)
             {
-                case 0:
-                    type = 'C';
+                case UP:
+                    rubiks[face].cubie[cubie].color = WHITE;
                     break;
-                case 1:
-                    type = 'A';
+                case LEFT:
+                    rubiks[face].cubie[cubie].color = ORANGE;
                     break;
-                case 2:
-                    type = 'C';
+                case FRONT:
+                    rubiks[face].cubie[cubie].color = GREEN;
                     break;
-                case 3:
-                    type = 'A';
+                case RIGHT:
+                    rubiks[face].cubie[cubie].color = RED;
                     break;
-                case 4:
-                    type = 'M';
+                case BACK:
+                    rubiks[face].cubie[cubie].color = BLUE;
                     break;
-                case 5:
-                    type = 'A';
+                case DOWN:
+                    rubiks[face].cubie[cubie].color = YELLOW;
                     break;
-                case 6:
-                    type = 'C';
-                    break;
-                case 7:
-                    type = 'A';
-                    break;
-                case 8:
-                    type = 'C';
-                    break;
-                default:
-                    printf("OUPS !!!\n");
-                    return -1;
             }
-            rubiks[i].cubie[j].num = j;
-            rubiks[i].cubie[j].type = type;
+            // rubiks[face].cubie[cubie].color = cubie;
+            // rubiks[face].cubie[cubie].type = 1;
+            if (cubie == 0 || cubie == 2 || cubie == 6 || cubie == 8)
+            {
+                rubiks[face].cubie[cubie].type = CORNER;
+            }
+            if (cubie == 4)
+            {
+                rubiks[face].cubie[cubie].type = CENTER;
+            }
+            if (cubie == 1 || cubie == 3 || cubie == 5 || cubie == 7)
+            {
+                rubiks[face].cubie[cubie].type = EDGE;
+            }
+//            switch (cubie)
+//            {
+//                case 0:
+//                    type = 'C';
+//                    break;
+//                case 1:
+//                    type = 'A';
+//                    break;
+//                case 2:
+//                    type = 'C';
+//                    break;
+//                case 3:
+//                    type = 'A';
+//                    break;
+//                case 4:
+//                    type = 'M';
+//                    break;
+//                case 5:
+//                    type = 'A';
+//                    break;
+//                case 6:
+//                    type = 'C';
+//                    break;
+//                case 7:
+//                    type = 'A';
+//                    break;
+//                case 8:
+//                    type = 'C';
+//                    break;
+//                default:
+//                    printf("OUPS !!!\n");
+//                    return -1;
+//            }
+            rubiks[face].cubie[cubie].num = cubie;
+//            rubiks[face].cubie[cubie].type = type;
         }
     }
     return 0;
 }
 int rubiks_display(struct rubiks_side *rubiks){
-    int i, j;
-    for(i = 0; i < 6 ; i++){
+    int face, cubie;
+    for(face = 0; face < 6 ; face++){
         printf("\n\n\n");
-        rubiks[i].side;
-        for(j = 0 ; j < 9 ; j++){
-            printf("num :%d, type : %c, color : %c", rubiks[i].cubie[j].num, rubiks[i].cubie[j].type, rubiks[i].cubie[j].color);
-            printf("\n");
+        rubiks[face].side;
+        for(cubie = 0 ; cubie < 9 ; cubie++){
+            printf("num :%d, type : %d, color : %d\n",
+                   rubiks[face].cubie[cubie].num,
+                   rubiks[face].cubie[cubie].type,
+                   rubiks[face].cubie[cubie].color);
         }
     }
     return 0;

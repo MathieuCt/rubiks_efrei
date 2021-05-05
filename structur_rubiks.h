@@ -11,23 +11,23 @@
 int rubiks_creation();
 int rubiks_display();
 
-enum color
-{
-    VERT, JAUNE, BLANC, BLEU, ORANGE, ROUGE
-};
+typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
+typedef enum {UP, LEFT, FRONT, RIGHT, BACK, DOWN} T_SIDE;
+typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
 
 struct cubies{
     int x;
     int y;
     int num;
-    char type;
-    char color;
+    T_CUBIE_TYPE type;
+    T_COLOR color;
     //int nb_neighbours;
     //struct cubies neighbours[3];
 };
 
 struct rubiks_side{
-    char side;
+    T_SIDE side;
+    // conserver le cubie central, ici ?
     struct cubies cubie[9];
 };
 
