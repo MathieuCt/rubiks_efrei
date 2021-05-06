@@ -4,5 +4,8 @@
 
 #ifndef RUBIKS_EFREI_MOVEMENT_FUNCTIONS_H
 #define RUBIKS_EFREI_MOVEMENT_FUNCTIONS_H
-int move(rubiks_side * rubiks);
+#include "structur_rubiks.h"
+
+int move(cubies *side);
+int move_front(rubiks_side *rubiks);
 #endif //RUBIKS_EFREI_MOVEMENT_FUNCTIONS_H
