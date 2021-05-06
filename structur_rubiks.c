@@ -6,7 +6,7 @@
 #include "structur_rubiks.h"
 
 
-int rubiks_creation(struct rubiks_side *rubiks)
+int rubiks_creation(rubiks_side *rubiks)
 {
 //    char side;
 //    char type;

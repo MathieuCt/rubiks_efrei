@@ -5,7 +5,6 @@
 #ifndef RUBIKS_EFREI_STRUCTUR_RUBIKS_H
 #define RUBIKS_EFREI_STRUCTUR_RUBIKS_H
 
-#endif //RUBIKS_EFREI_STRUCTUR_RUBIKS_H
 
 
 int rubiks_creation();
@@ -16,7 +15,7 @@ typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
 typedef enum {UP, LEFT, FRONT, RIGHT, BACK, DOWN} T_SIDE;
 typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
 
-struct cubies{
+typedef struct cubies{
     int x;
     int y;
     int num;
@@ -24,11 +23,13 @@ struct cubies{
     T_COLOR color;
     //int nb_neighbours;
     //struct cubies neighbours[3];
-};
+}cubies;
 
-struct rubiks_side{
+typedef struct rubiks_side{
     T_SIDE side;
     // conserver le cubie central, ici ?
     struct cubies cubie[9];
-};
+}rubiks_side;
+
+#endif //RUBIKS_EFREI_STRUCTUR_RUBIKS_H
 
