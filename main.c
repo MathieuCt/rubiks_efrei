@@ -19,21 +19,10 @@ int main()
     if (print_text_only)
     {
         printf("Mode non graphique\n");
-        printf("--------------\n");
-        printf("    WWW       \n");
-        printf("    WWW       \n");
-        printf("    WWW       \n");
-        printf("OOO GGG RRR BBB\n");
-        printf("OOO GGG RRR BBB\n");
-        printf("OOO GGG RRR BBB\n");
-        printf("    YYY       \n");
-        printf("    YYY       \n");
-        printf("    YYY       \n");
-        printf("--------------\n");
-
         struct rubiks_side rubiks[6];
         rubiks_creation(rubiks);
         rubiks_display(rubiks);
+        draw_rubiks(rubiks);
     }
     else
     {

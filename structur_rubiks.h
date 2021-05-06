@@ -10,6 +10,7 @@
 
 int rubiks_creation();
 int rubiks_display();
+int draw_rubiks();
 
 typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
 typedef enum {UP, LEFT, FRONT, RIGHT, BACK, DOWN} T_SIDE;
