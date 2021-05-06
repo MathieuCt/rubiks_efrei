@@ -122,7 +122,9 @@ int rubiks_creation(struct rubiks_side *rubiks)
 //                    return -1;
 //            }
             rubiks[face].cubie[cubie].num = cubie;
-//            rubiks[face].cubie[cubie].type = type;
+//          rubiks[face].cubie[cubie].type = type;
+            rubiks[face].cubie[cubie].x = rubiks[face].cubie[cubie].num % 3;
+            rubiks[face].cubie[cubie].y = (rubiks[face].cubie[cubie].num - rubiks[face].cubie[cubie].x) / 3;
         }
     }
     return 0;
@@ -133,8 +135,10 @@ int rubiks_display(struct rubiks_side *rubiks){
         printf("\n\n\n");
         rubiks[face].side;
         for(cubie = 0 ; cubie < 9 ; cubie++){
-            printf("num :%d, type : %d, color : %d\n",
+            printf("num :%d, x : %d, y : %d, type : %d, color : %d\n",
                    rubiks[face].cubie[cubie].num,
+                   rubiks[face].cubie[cubie].x,
+                   rubiks[face].cubie[cubie].y,
                    rubiks[face].cubie[cubie].type,
                    rubiks[face].cubie[cubie].color);
         }
