@@ -98,34 +98,34 @@ int rubiks_creation(rubiks_side *rubiks) {
 
             // si le cubie est de type edge, un seul voisin
             if (rubiks[face].cubie[cubie].type == EDGE){
+                //position relative de la face voisine, position absolu
+                int side_relative, side_abs;
+                // trouver a cote de quelle face (relative) le cubie est en fonction de ses coordonnees
                 // soit il a y = 0 (en haut)
                 if (rubiks[face].cubie[cubie].y == 0){
-                    /*on donne le numéro du cubie voisin sur la face voisin
-                    research_num cherche le numero du cubie selon le type et la face voisine
-                    research_side() retrouve la position de relative de la face par rapport à la face voisine
-                     */
-                    rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(*rubiks,face, 0),1);
-                    rubiks[face].cubie[cubie].neighbours[0].num_side = rubiks[face].neighbour_side[0];
+                    side_relative = 0;
                 }
                 // en bas
-                else if(rubiks[face].cubie[cubie].y == 2){
-                    rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(*rubiks,face, 2),1);
-                    rubiks[face].cubie[cubie].neighbours[0].num_side = rubiks[face].neighbour_side[2];
+                if(rubiks[face].cubie[cubie].y == 2){
+                    side_relative = 2;
 
                 }
                 // au milieu : 2 possibilites
                 else{
                     // il est a gauche
                     if(rubiks[face].cubie[cubie].x == 0){
-                        rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(*rubiks,face, 3),1);
-                        rubiks[face].cubie[cubie].neighbours[0].num_side = rubiks[face].neighbour_side[3];
+                       side_relative = 3;
                     }
                     // il est a droite
                     else{
-                        rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(*rubiks,face, 1),1);
-                        rubiks[face].cubie[cubie].neighbours[0].num_side = rubiks[face].neighbour_side[1];
+                        side_relative =1 ;
                     }
                 }
+
+                side_abs = rubiks[face].neighbour_side[side_relative];
+                rubiks[face].cubie[cubie].neighbours[0].num_cubie = side_abs;
+                rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(*rubiks,face, side_abs), EDGE);
+                // position initiale
             }
         }
     }
@@ -133,19 +133,21 @@ int rubiks_creation(rubiks_side *rubiks) {
 }
 
 
-int research_side(rubiks_side *rubiks,int side, int neighgbour_side){
-
+int research_side(rubiks_side *rubiks,int side, int neighbour_face){
+    // neighbour_face ( pos abs de la face voisine)
+    // side : face principale
+    // face : variable locale pour parcourirs la liste de voisin de neighbour side
     for(int face = 0 ; face < 4 ; face++){
 
-        if (rubiks[neighgbour_side].neighbour_side[face] == side) {
+        if (rubiks[neighbour_face].neighbour_side[face] == side) {
             return face ;
         }
     }
-    return -1;
 }
-int research_num( int neighbour_side, int type ){
+//retourne le numéro du cubie selon la position relative de la face de son voisin
+int research_num( int side, int type ){
     if (type == 1){
-        switch (neighbour_side) {
+        switch (side) {
             case 0 :
                 return 1;
             case 1 :
@@ -159,7 +161,6 @@ int research_num( int neighbour_side, int type ){
 
         }
     }
-    return -1 ;
 }
 
 int rubiks_display(struct rubiks_side *rubiks){

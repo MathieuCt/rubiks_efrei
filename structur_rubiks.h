@@ -18,7 +18,7 @@ typedef enum {UP, LEFT, FRONT, RIGHT, BACK, DOWN} T_SIDE;
 typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
 
 typedef struct neighbour{
-    int num_side;
+    T_SIDE num_side;
     int num_cubie;
 }neighbour;
 
@@ -36,7 +36,7 @@ typedef struct rubiks_side{
     T_SIDE side;
     int neighbour_side[4];
     // conserver le cubie central, ici ?
-    struct cubies cubie[9];
+    cubies cubie[9];
 }rubiks_side;
 
 

@@ -11,7 +11,7 @@ int main()
 {
     int term_error_type;
     int detected_nb_lines, detected_nb_cols, detected_color_pairs;
-    bool print_text_only = TRUE;
+    bool print_text_only = true;
 
     signal(SIGWINCH, detect_resize); // Détection du changement de taille du terminal
     setlocale(LC_ALL, "fr_FR.UTF-8"); // Gestion des caractères accentués
@@ -19,7 +19,7 @@ int main()
     if (print_text_only)
     {
         printf("Mode non graphique\n");
-        struct rubiks_side rubiks[6];
+        rubiks_side rubiks[6];
         rubiks_creation(rubiks);
         rubiks_display(rubiks);
         draw_rubiks(rubiks);
