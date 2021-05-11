@@ -96,6 +96,17 @@ int rubiks_creation(rubiks_side *rubiks) {
             rubiks[face].cubie[cubie].x = rubiks[face].cubie[cubie].num % 3;
             rubiks[face].cubie[cubie].y = (rubiks[face].cubie[cubie].num - rubiks[face].cubie[cubie].x) / 3;
 
+        }
+    }
+    rubiks_neighbour(rubiks);
+    return 0;
+}
+
+void rubiks_neighbour(rubiks_side *rubiks) {
+    // initiliser les voisins
+    int face, cubie;
+    for (face = UP; face <= DOWN; face++) {
+        for (cubie = 0; cubie < 9; cubie++) {
             // si le cubie est de type edge, un seul voisin
             if (rubiks[face].cubie[cubie].type == EDGE){
                 //position relative de la face voisine, position absolu
@@ -106,17 +117,17 @@ int rubiks_creation(rubiks_side *rubiks) {
                     side_relative = 0;
                 }
                 // en bas
-                if(rubiks[face].cubie[cubie].y == 2){
+                else if(rubiks[face].cubie[cubie].y == 2){
                     side_relative = 2;
 
                 }
-                // au milieu : 2 possibilites
+                    // au milieu : 2 possibilites
                 else{
                     // il est a gauche
                     if(rubiks[face].cubie[cubie].x == 0){
-                       side_relative = 3;
+                        side_relative = 3;
                     }
-                    // il est a droite
+                        // il est a droite
                     else{
                         side_relative =1 ;
                     }
@@ -124,14 +135,16 @@ int rubiks_creation(rubiks_side *rubiks) {
 
                 side_abs = rubiks[face].neighbour_side[side_relative];
                 rubiks[face].cubie[cubie].neighbours[0].num_cubie = side_abs;
-                rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(*rubiks,face, side_abs), EDGE);
+                rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(rubiks,face, side_abs), EDGE);
                 // position initiale
+            }
+            if (rubiks[face].cubie[cubie].type == EDGE){
+                int a = 2;
             }
         }
     }
-    return 0;
-}
 
+}
 
 int research_side(rubiks_side *rubiks,int side, int neighbour_face){
     // neighbour_face ( pos abs de la face voisine)

@@ -7,11 +7,6 @@
 
 
 
-int rubiks_creation();
-int rubiks_display();
-int draw_rubiks();
-int research_side();
-int research_num();
 
 typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
 typedef enum {UP, LEFT, FRONT, RIGHT, BACK, DOWN} T_SIDE;
@@ -33,12 +28,17 @@ typedef struct cubies{
 }cubies;
 
 typedef struct rubiks_side{
-    T_SIDE side;
     int neighbour_side[4];
-    // conserver le cubie central, ici ?
+    T_SIDE side;
     cubies cubie[9];
 }rubiks_side;
 
+int rubiks_creation();
+int rubiks_display();
+int draw_rubiks();
+int research_side(rubiks_side *,int, int);
+int research_num(int, int);
+void rubiks_neighbour(rubiks_side *);
 
 
 #endif //RUBIKS_EFREI_STRUCTUR_RUBIKS_H
