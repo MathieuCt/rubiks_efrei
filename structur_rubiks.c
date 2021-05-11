@@ -20,36 +20,42 @@ int rubiks_creation(rubiks_side *rubiks) {
                 rubiks[face].neighbour_side[1] = 2;
                 rubiks[face].neighbour_side[2] = 3;
                 rubiks[face].neighbour_side[3] = 4;
+                rubiks[face].opposite_side = 5;
                 break;
             case ORANGE:
                 rubiks[face].neighbour_side[0] = 0;
                 rubiks[face].neighbour_side[1] = 2;
                 rubiks[face].neighbour_side[2] = 5;
                 rubiks[face].neighbour_side[3] = 4;
+                rubiks[face].opposite_side = 3;
                 break;
             case GREEN:
                 rubiks[face].neighbour_side[0] = 0;
                 rubiks[face].neighbour_side[1] = 3;
                 rubiks[face].neighbour_side[2] = 5;
                 rubiks[face].neighbour_side[3] = 1;
+                rubiks[face].opposite_side = 4;
                 break;
             case RED:
                 rubiks[face].neighbour_side[0] = 0;
                 rubiks[face].neighbour_side[1] = 4;
                 rubiks[face].neighbour_side[2] = 5;
                 rubiks[face].neighbour_side[3] = 2;
+                rubiks[face].opposite_side = 1;
                 break;
             case BLUE:
                 rubiks[face].neighbour_side[0] = 0;
                 rubiks[face].neighbour_side[1] = 1;
                 rubiks[face].neighbour_side[2] = 5;
                 rubiks[face].neighbour_side[3] = 3;
+                rubiks[face].opposite_side = 2;
                 break;
             case YELLOW:
                 rubiks[face].neighbour_side[0] = 2;
                 rubiks[face].neighbour_side[1] = 3;
                 rubiks[face].neighbour_side[2] = 4;
                 rubiks[face].neighbour_side[3] = 1;
+                rubiks[face].opposite_side = 0;
                 break;
             default:
                 printf("OUPS !!!\n");
@@ -105,12 +111,12 @@ int rubiks_creation(rubiks_side *rubiks) {
 void rubiks_neighbour(rubiks_side *rubiks) {
     // initiliser les voisins
     int face, cubie;
+    int side_relative, side_abs;
     for (face = UP; face <= DOWN; face++) {
         for (cubie = 0; cubie < 9; cubie++) {
             // si le cubie est de type edge, un seul voisin
             if (rubiks[face].cubie[cubie].type == EDGE){
                 //position relative de la face voisine, position absolu
-                int side_relative, side_abs;
                 // trouver a cote de quelle face (relative) le cubie est en fonction de ses coordonnees
                 // soit il a y = 0 (en haut)
                 if (rubiks[face].cubie[cubie].y == 0){
@@ -134,12 +140,43 @@ void rubiks_neighbour(rubiks_side *rubiks) {
                 }
 
                 side_abs = rubiks[face].neighbour_side[side_relative];
-                rubiks[face].cubie[cubie].neighbours[0].num_cubie = side_abs;
-                rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(rubiks,face, side_abs), EDGE);
+                rubiks[face].cubie[cubie].neighbours[0].num_side = side_abs;
+                rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(rubiks,face, side_abs), EDGE,0);
                 // position initiale
             }
-            if (rubiks[face].cubie[cubie].type == EDGE){
-                int a = 2;
+            if (rubiks[face].cubie[cubie].type == CORNER){
+                // 2 voisins pour un corner
+                int side_relative2, side_abs2;
+                if(rubiks[face].cubie[cubie].y == 0) {
+                    if (rubiks[face].cubie[cubie].x == 0) {
+                        side_relative = 3;
+                        side_relative2 = 0;
+                    } else {
+                        side_relative = 0;
+                        side_relative2 = 1;
+                    }
+                }
+                else{
+                    if (rubiks[face].cubie[cubie].x == 0) {
+                        side_relative = 2;
+                        side_relative2 = 3;
+                    } else {
+                        side_relative = 1;
+                        side_relative2 = 2;
+                    }
+                }
+                side_abs = rubiks[face].neighbour_side[side_relative];
+                side_abs2 = rubiks[face].neighbour_side[side_relative2];
+                rubiks[face].cubie[cubie].neighbours[0].num_side = side_abs;
+                rubiks[face].cubie[cubie].neighbours[1].num_side = side_abs2;
+                rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(rubiks,face, side_abs), CORNER,research_side(rubiks,face, side_abs2));
+                rubiks[face].cubie[cubie].neighbours[1].num_cubie = research_num(research_side(rubiks,face, side_abs2), CORNER,research_side(rubiks,face, side_abs));
+
+            }
+            if (rubiks[face].cubie[cubie].type == CENTER){
+
+                rubiks[face].cubie[cubie].neighbours[0].num_side = rubiks[face].opposite_side;
+                rubiks[face].cubie[cubie].neighbours[0].num_cubie = 4;
             }
         }
     }
@@ -158,7 +195,7 @@ int research_side(rubiks_side *rubiks,int side, int neighbour_face){
     }
 }
 //retourne le numéro du cubie selon la position relative de la face de son voisin
-int research_num( int side, int type ){
+int research_num( int side, int type, int side2 ){
     if (type == 1){
         switch (side) {
             case 0 :
@@ -174,6 +211,38 @@ int research_num( int side, int type ){
 
         }
     }
+    if(type == 0){
+        switch (side) {
+            case 0 :
+                if(side2 == 1){
+                    return 2;
+                }
+                else{
+                    return 0;
+                }
+            case 1 :
+                if(side2 == 0){
+                    return 2;
+                }
+                else{
+                    return 8;
+                }
+            case 2 :
+                if(side2 == 1){
+                    return 8;
+                }
+                else{
+                    return 6;
+                }
+            case 3 :
+                if(side2 == 2){
+                    return 6;
+                }
+                else{
+                    return 0;
+                }
+        }
+    }
 }
 
 int rubiks_display(struct rubiks_side *rubiks){
@@ -182,12 +251,16 @@ int rubiks_display(struct rubiks_side *rubiks){
         printf("\n\n\n");
         rubiks[face].side;
         for(cubie = 0 ; cubie < 9 ; cubie++){
-            printf("num :%d, x : %d, y : %d, type : %d, color : %d\n",
+            printf("num :%d, x : %d, y : %d, type : %d, color : %d, voisin(side): %d, voisin(num) : %d\n",
                    rubiks[face].cubie[cubie].num,
                    rubiks[face].cubie[cubie].x,
                    rubiks[face].cubie[cubie].y,
                    rubiks[face].cubie[cubie].type,
-                   rubiks[face].cubie[cubie].color);
+                   rubiks[face].cubie[cubie].color,
+                   rubiks[face].cubie[cubie].neighbours[0].num_side,
+                   rubiks[face].cubie[cubie].neighbours[0].num_cubie
+                   );
+
         }
     }
     return 0;

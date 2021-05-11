@@ -29,6 +29,7 @@ typedef struct cubies{
 
 typedef struct rubiks_side{
     int neighbour_side[4];
+    int opposite_side;
     T_SIDE side;
     cubies cubie[9];
 }rubiks_side;
@@ -37,7 +38,7 @@ int rubiks_creation();
 int rubiks_display();
 int draw_rubiks();
 int research_side(rubiks_side *,int, int);
-int research_num(int, int);
+int research_num(int, int, int);
 void rubiks_neighbour(rubiks_side *);
 
 
