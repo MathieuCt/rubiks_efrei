@@ -2,10 +2,11 @@
 // Created by clestrat on 06/05/2021.
 //
 #include <stdio.h>
+#include "stdlib.h"
 #include "movement_functions.h"
 #include "structur_rubiks.h"
 
-int move_side(rubiks_side *rubiks, int side){
+void move_side(rubiks_side *rubiks, int side){
     // faire tourner une face
     int tmp1, tmp2, tmp3;
     // var tmp des couleurs ecrasees
@@ -57,12 +58,12 @@ int move_side(rubiks_side *rubiks, int side){
     side[3].color = side[7].color;
     side[7].color = side[5].color;
     side[5].color = tmp; */
-    return 0;
 }
-/*
-int move_front(rubiks_side *rubiks){
-    int tmp;
-    return 0;
 
+
+void mix_rubiks(rubiks_side *rubiks){
+
+    for (int i = 0 ; i < 20 + rand() % (30 + 1 -20) ; i++){
+        move_side(rubiks,rand() % (5 + 1));
+    }
 }
- */

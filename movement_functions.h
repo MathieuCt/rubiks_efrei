@@ -6,6 +6,7 @@
 #define RUBIKS_EFREI_MOVEMENT_FUNCTIONS_H
 #include "structur_rubiks.h"
 
-int move_side(rubiks_side *, int);
+void move_side(rubiks_side *, int);
+void mix_rubiks(rubiks_side * );
 
 #endif //RUBIKS_EFREI_MOVEMENT_FUNCTIONS_H
