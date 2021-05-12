@@ -6,6 +6,7 @@
 #include <locale.h>
 #include "draw.h"
 #include "structur_rubiks.h"
+#include "movement_functions.h"
 
 int main()
 {
@@ -22,6 +23,20 @@ int main()
         rubiks_side rubiks[6];
         rubiks_creation(rubiks);
         rubiks_display(rubiks);
+        move_side(rubiks,0);
+        move_side(rubiks,0);
+        move_side(rubiks,5);
+        move_side(rubiks,5);
+        move_side(rubiks,1);
+        move_side(rubiks,1);
+        move_side(rubiks,3);
+        move_side(rubiks,3);
+        move_side(rubiks,2);
+        move_side(rubiks,2);
+        move_side(rubiks,4);
+        move_side(rubiks,4);
+
+
         draw_rubiks(rubiks);
     }
     else
