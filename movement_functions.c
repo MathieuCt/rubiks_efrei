@@ -5,6 +5,7 @@
 #include "stdlib.h"
 #include "movement_functions.h"
 #include "structur_rubiks.h"
+#include <time.h>
 
 void move_side(rubiks_side *rubiks, int side){
     // faire tourner une face
@@ -62,8 +63,9 @@ void move_side(rubiks_side *rubiks, int side){
 
 
 void mix_rubiks(rubiks_side *rubiks){
-
-    for (int i = 0 ; i < 20 + rand() % (30 + 1 -20) ; i++){
+    srand(time(NULL));
+    int nbr_mouv = 20 + rand() % (30 + 1 -20);
+    for (int i = 0 ; i < nbr_mouv; i++){
         move_side(rubiks,rand() % (5 + 1));
     }
 }
