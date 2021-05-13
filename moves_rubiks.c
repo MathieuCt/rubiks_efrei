@@ -9,11 +9,14 @@
 #include "moves_rubiks.h"
 #include "rubiks.h"
 
+/**
+ * Cette fonction permet de déplacer un coin du cube, depuis "from" vers "to"
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param side : La face du rubiks à traiter
+ * @param from : Déplacer depuis ce cubie
+ * @param to : Déplacer vers ce cubie
+ */
 void move_coin(rubiks_side *rubiks, int side, int from, int to) {
-    /*
-     * Cette fonction permet de déplacer un coin du cube, depuis "from" vers "to"
-     */
-
     // On commence par faire tourner le coin.
     rubiks[side].cubie[to].color = rubiks[side].cubie[from].color;
     // Et on fait tourner les coins voisins.
@@ -24,21 +27,25 @@ void move_coin(rubiks_side *rubiks, int side, int from, int to) {
 
 }
 
+/**
+ * Cette fonction permet de déplacer une arête depuis "from" vers "to"
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param side : La face du rubiks à traiter
+ * @param from : Déplacer depuis ce cubie
+ * @param to : Déplacer vers ce cubie
+ */
 void move_edge(rubiks_side *rubiks, int side, int from, int to) {
-    /*
-     * Cette fonction permet de déplacer une arête depuis "from" vers "to"
-     */
-
     rubiks[side].cubie[to].color = rubiks[side].cubie[from].color;
     rubiks[rubiks[side].cubie[to].neighbours[0].num_side].cubie[rubiks[side].cubie[to].neighbours[0].num_cubie].color =
             rubiks[rubiks[side].cubie[from].neighbours[0].num_side].cubie[rubiks[side].cubie[from].neighbours[0].num_cubie].color;
 }
 
+/**
+ * cette fonction permet de faire tourner la face side du cube dans le sens horaire
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param side : La face à faire tourner dans le sens horaire
+ */
 void move_side_clockwise(rubiks_side *rubiks, int side){
-    /* cette fonction permet de faire tourner la face side du cube
-     * dans le sens horaire
-     */
-
     int tmp1, tmp2, tmp3;
     // On sauvegarde les données du coin 0 pour pouvoir les utiliser à la fin de l'algorithme, pour écraser le coin 2
     // todo: renommer ces variables pour qu'elles aient un sens
@@ -104,25 +111,26 @@ void move_side_clockwise(rubiks_side *rubiks, int side){
 
 }
 
+/**
+ * Cette fonction fait tourner la face side dans le sens anti-horaire. En réalité, cela revient à tourner trois
+ * fois dans le sens horaire
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param side : La face à faire tourner dans le sens horaire
+ */
 void move_side_anticlockwise(rubiks_side *rubiks, int side){
-    /*
-     * Cette fonction fait tourner la face side dans le sens anti-horaire. En réalité, cela revient à tourner trois
-     * fois dans le sens horaire
-     */
-
+    // On appelle trois fois la fonction move_side_clockwise, plutôt que de faire une fonction inverse.
     for (int i = 0; i < 3; i++)
     {
         move_side_clockwise(rubiks, side);
     }
 }
 
-//melange le rubiks cube
+/**
+ * Cette fonction permet de mélanger le cube de manière aléatoire. Elle choisit entre 20 et 30 mouvements à réaliser
+ * tout en choisissant une face à déplacer, au hasard.
+ * @param rubiks : un pointeur vers une structure rubiks_side
+ */
 void mix_rubiks(rubiks_side *rubiks){
-    /*
-     * Cette fonction permet de mélanger le cube de manière aléatoire. Elle choisit entre 20 et 30 mouvements à réaliser
-     * tout en choisissant une face à déplacer, au hasard.
-     */
-
     // On initialise le système de hasard en fonction de l'heure
     srand(time(NULL));
 
@@ -133,11 +141,12 @@ void mix_rubiks(rubiks_side *rubiks){
         move_side_clockwise(rubiks, rand() % (5 + 1));
     }
 }
-void alternate_color(rubiks_side * rubiks){
-    /*
-     * Cette fonction permet de créer un damier de couleurs
-     */
 
+/**
+ *  Cette fonction permet de créer un damier de couleurs
+ * @param rubiks : un pointeur vers une structure rubiks_side
+ */
+void alternate_color(rubiks_side * rubiks){
     move_side_clockwise(rubiks, 0);
     move_side_clockwise(rubiks, 0);
     move_side_clockwise(rubiks, 5);
@@ -152,20 +161,20 @@ void alternate_color(rubiks_side * rubiks){
     move_side_clockwise(rubiks, 4);
 }
 
+/**
+ * Cette fonction permet de résoudre le cube.
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ */
 void solve_rubiks(rubiks_side *rubiks){
-    /*
-     * Cette fonction permet de résoudre le cube.
-     */
-
     // On commence par la résolution de la face blanche
     solve_white_side(rubiks);
 }
 
+/**
+ * Cette fonction cherche à résoudre la face blanche du Rubik's Cube
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ */
 void solve_white_side(rubiks_side * rubiks){
-    /*
-     * Cette fonction cherche à résoudre la face blanche du Rubik's Cube
-     */
-
     // todo: commenter cette fonction, elle n'est pas claire.
     // On commence par la croix blanche
     cubies cubie;
@@ -261,11 +270,17 @@ void solve_white_side(rubiks_side * rubiks){
     }
 }
 
+/**
+ * Cette fonction permet de trouver un cubie en fonction de sa couleur et celle de ses voisins
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param cubie_color : todo
+ * @param neighbour1 : todo
+ * @param neighbour2 : todo
+ * @param cubie_type : todo
+ * @return
+ */
 cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour1, T_COLOR neighbour2, T_CUBIE_TYPE cubie_type){
-    /*
-     * Cette fonction permet de trouver un cubie en fonction de sa couleur et celle de ses voisins
-     */
-
+    // todo : commenter cette fonction
     for(int face = WHITE; face <= YELLOW; face++){
         for (int cubie = 0; cubie < 9; cubie++) {
             // si la couleur et celle de son premier voisin correspondent
