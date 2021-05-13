@@ -53,8 +53,8 @@ void destroy_board(void);
 
 void detect_resize(__attribute__((unused)) int);
 
-void rubiks_display(struct rubiks_side *rubiks);
+void rubiks_display(rubiks_side *rubiks);
 
-void draw_rubiks(struct rubiks_side *rubiks);
+void draw_rubiks(rubiks_side *rubiks);
 
 #endif //RUBIKS_EFREI_DRAW_H

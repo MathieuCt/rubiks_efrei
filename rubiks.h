@@ -12,12 +12,12 @@ typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
 typedef enum {UP,  RIGHT, DOWN, LEFT} T_SIDE;
 typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
 
-typedef struct neighbour{
+typedef struct {
     T_COLOR num_side;
     int num_cubie;
-}neighbour;
+} neighbour;
 
-typedef struct cubies{
+typedef struct {
     int x;
     int y;
     int num;
@@ -25,14 +25,14 @@ typedef struct cubies{
     T_COLOR color;
     T_COLOR cubie_side;
     neighbour neighbours[2];
-}cubies;
+} cubies;
 
-typedef struct rubiks_side{
+typedef struct {
     T_COLOR neighbour_side[4];
     T_COLOR opposite_side;
     T_COLOR side;
     cubies cubie[9];
-}rubiks_side;
+} rubiks_side;
 
 int rubiks_creation(rubiks_side *rubiks);
 int research_side(rubiks_side *,int, int);

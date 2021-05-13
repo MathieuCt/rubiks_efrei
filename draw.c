@@ -182,7 +182,7 @@ void destroy_board(void)
 }
 
 
-void rubiks_display(struct rubiks_side *rubiks){
+void rubiks_display(rubiks_side *rubiks){
     int face, cubie;
     for(face = 0; face < 6 ; face++){
         printf("\n\n\n");
@@ -202,7 +202,7 @@ void rubiks_display(struct rubiks_side *rubiks){
     }
 
 }
-void draw_rubiks(struct rubiks_side *rubiks)
+void draw_rubiks(rubiks_side *rubiks)
 {
     char tabcolor[] = {'W', 'O', 'G', 'R', 'B', 'Y'};
 
