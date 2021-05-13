@@ -23,6 +23,7 @@ typedef struct cubies{
     int num;
     T_CUBIE_TYPE type;
     T_COLOR color;
+    T_COLOR cubie_side;
     neighbour neighbours[2];
 }cubies;
 

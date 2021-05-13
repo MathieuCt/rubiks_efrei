@@ -66,6 +66,8 @@ int rubiks_creation(rubiks_side *rubiks) {
         for (cubie = 0; cubie < 9; cubie++) {
             // donner a chaque cubie la couleur de sa face
             rubiks[face].cubie[cubie].color = rubiks[face].side;
+            // donner à chaque cubie la couleur de sa face
+            rubiks[face].cubie[cubie].cubie_side = rubiks[face].side;
 
             // rubiks[face].cubie[cubie].color = cubie;
             // rubiks[face].cubie[cubie].type = 1;
