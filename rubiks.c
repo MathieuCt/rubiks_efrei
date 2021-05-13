@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+
 #include "rubiks.h"
 
 

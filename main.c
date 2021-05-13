@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <locale.h>
+
 #include "draw.h"
 #include "rubiks.h"
 #include "moves_rubiks.h"

@@ -2,11 +2,12 @@
 // Created by clestrat on 06/05/2021.
 //
 #include <stdio.h>
-#include "stdlib.h"
+#include <stdlib.h>
+#include <time.h>
+
+#include "draw.h"
 #include "moves_rubiks.h"
 #include "rubiks.h"
-#include <time.h>
-#include "draw.h"
 
 void move_side(rubiks_side *rubiks, int side){
     // faire tourner une face
