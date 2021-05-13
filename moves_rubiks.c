@@ -3,8 +3,8 @@
 //
 #include <stdio.h>
 #include "stdlib.h"
-#include "movement_functions.h"
-#include "structur_rubiks.h"
+#include "moves_rubiks.h"
+#include "rubiks.h"
 #include <time.h>
 
 void move_side(rubiks_side *rubiks, int side){

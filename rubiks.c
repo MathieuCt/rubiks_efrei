@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-#include "structur_rubiks.h"
+#include "rubiks.h"
 
 
 int rubiks_creation(rubiks_side *rubiks) {
@@ -71,15 +71,12 @@ int rubiks_creation(rubiks_side *rubiks) {
             // rubiks[face].cubie[cubie].type = 1;
             if (cubie == 0 || cubie == 2 || cubie == 6 || cubie == 8) {
                 rubiks[face].cubie[cubie].type = CORNER;
-                rubiks[face].cubie[cubie].nb_neighbours = 1;
             }
             if (cubie == 4) {
                 rubiks[face].cubie[cubie].type = CENTER;
-                rubiks[face].cubie[cubie].nb_neighbours = 1;
             }
             if (cubie == 1 || cubie == 3 || cubie == 5 || cubie == 7) {
                 rubiks[face].cubie[cubie].type = EDGE;
-                rubiks[face].cubie[cubie].nb_neighbours = 2;
             }
             rubiks[face].cubie[cubie].num = cubie;
             //      rubiks[face].cubie[cubie].type = type;
@@ -186,6 +183,7 @@ int research_side(rubiks_side *rubiks,int side, int neighbour_face){
             return face ;
         }
     }
+    return 0;
 }
 //retourne le numéro du cubie selon la position relative de la face de son voisin
 int research_num( int side, int type, int side2 ){
@@ -241,45 +239,6 @@ int research_num( int side, int type, int side2 ){
                 return -1;
         }
     }
-}
-
-int rubiks_display(struct rubiks_side *rubiks){
-    int face, cubie;
-    for(face = 0; face < 6 ; face++){
-        printf("\n\n\n");
-        rubiks[face].side;
-        for(cubie = 0 ; cubie < 9 ; cubie++){
-            printf("num :%d, x : %d, y : %d, type : %d, color : %d, voisin1(side): %d, voisin1(num) : %d voisin2(side): %d, voisin2(num) : %d\n",
-                   rubiks[face].cubie[cubie].num,
-                   rubiks[face].cubie[cubie].x,
-                   rubiks[face].cubie[cubie].y,
-                   rubiks[face].cubie[cubie].type,
-                   rubiks[face].cubie[cubie].color,
-                   rubiks[face].cubie[cubie].neighbours[0].num_side,
-                   rubiks[face].cubie[cubie].neighbours[0].num_cubie,
-                   rubiks[face].cubie[cubie].neighbours[1].num_side,
-                   rubiks[face].cubie[cubie].neighbours[1].num_cubie
-                   );
-
-        }
-    }
     return 0;
 }
 
-int draw_rubiks(struct rubiks_side *rubiks)
-{
-    char tabcolor[] = {'W', 'O', 'G', 'R', 'B', 'Y'};
-
-    printf("--------------\n");
-    printf("    %c%c%c       \n", tabcolor[rubiks[0].cubie[0].color], tabcolor[rubiks[0].cubie[1].color],tabcolor[rubiks[0].cubie[2].color]);
-    printf("    %c%c%c       \n", tabcolor[rubiks[0].cubie[3].color], tabcolor[rubiks[0].cubie[4].color],tabcolor[rubiks[0].cubie[5].color]);
-    printf("    %c%c%c       \n", tabcolor[rubiks[0].cubie[6].color], tabcolor[rubiks[0].cubie[7].color],tabcolor[rubiks[0].cubie[8].color]);
-    printf("%c%c%c %c%c%c %c%c%c %c%c%c\n", tabcolor[rubiks[1].cubie[0].color], tabcolor[rubiks[1].cubie[1].color],tabcolor[rubiks[1].cubie[2].color], tabcolor[rubiks[2].cubie[0].color], tabcolor[rubiks[2].cubie[1].color],tabcolor[rubiks[2].cubie[2].color], tabcolor[rubiks[3].cubie[0].color], tabcolor[rubiks[3].cubie[1].color],tabcolor[rubiks[3].cubie[2].color], tabcolor[rubiks[4].cubie[0].color], tabcolor[rubiks[4].cubie[1].color],tabcolor[rubiks[4].cubie[2].color]);
-    printf("%c%c%c %c%c%c %c%c%c %c%c%c\n", tabcolor[rubiks[1].cubie[3].color], tabcolor[rubiks[1].cubie[4].color],tabcolor[rubiks[1].cubie[5].color], tabcolor[rubiks[2].cubie[3].color], tabcolor[rubiks[2].cubie[4].color],tabcolor[rubiks[2].cubie[5].color], tabcolor[rubiks[3].cubie[3].color], tabcolor[rubiks[3].cubie[4].color],tabcolor[rubiks[3].cubie[5].color], tabcolor[rubiks[4].cubie[3].color], tabcolor[rubiks[4].cubie[4].color],tabcolor[rubiks[4].cubie[5].color]);
-    printf("%c%c%c %c%c%c %c%c%c %c%c%c\n", tabcolor[rubiks[1].cubie[6].color], tabcolor[rubiks[1].cubie[7].color],tabcolor[rubiks[1].cubie[8].color], tabcolor[rubiks[2].cubie[6].color], tabcolor[rubiks[2].cubie[7].color],tabcolor[rubiks[2].cubie[8].color], tabcolor[rubiks[3].cubie[6].color], tabcolor[rubiks[3].cubie[7].color],tabcolor[rubiks[3].cubie[8].color], tabcolor[rubiks[4].cubie[6].color], tabcolor[rubiks[4].cubie[7].color],tabcolor[rubiks[4].cubie[8].color]);
-    printf("    %c%c%c       \n", tabcolor[rubiks[5].cubie[0].color], tabcolor[rubiks[5].cubie[1].color],tabcolor[rubiks[5].cubie[2].color]);
-    printf("    %c%c%c       \n", tabcolor[rubiks[5].cubie[3].color], tabcolor[rubiks[5].cubie[4].color],tabcolor[rubiks[5].cubie[5].color]);
-    printf("    %c%c%c       \n", tabcolor[rubiks[5].cubie[6].color], tabcolor[rubiks[5].cubie[7].color],tabcolor[rubiks[5].cubie[8].color]);
-    printf("--------------\n");
-    return 0;
-}

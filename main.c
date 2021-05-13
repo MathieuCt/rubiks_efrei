@@ -5,8 +5,8 @@
 #include <signal.h>
 #include <locale.h>
 #include "draw.h"
-#include "structur_rubiks.h"
-#include "movement_functions.h"
+#include "rubiks.h"
+#include "moves_rubiks.h"
 
 int main()
 {

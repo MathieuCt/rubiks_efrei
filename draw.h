@@ -5,6 +5,7 @@
 #ifndef RUBIKS_EFREI_DRAW_H
 #define RUBIKS_EFREI_DRAW_H
 #include <ncurses.h>
+#include "rubiks.h"
 
 // Nombre de lignes graphique pour les faces du cube (La première pour U, la troisième pour D, la deuxième pour le reste.
 #define RUBIK_LINES 3
@@ -16,7 +17,7 @@
 #define SQ_WIDTH 8
 
 // Nombre de carrés dans un Rubik's cube. A mon avis, ne servira pas.
-#define SQUARES (RUBIK_LINES * 3) * (RUBIK_COLS * 3)
+#define SQUARES ((RUBIK_LINES * 3) * (RUBIK_COLS * 3))
 
 // Nombre de couleurs gérés par le terminal, nécessaire pour faire tourner le programme.
 #define MIN_COLORS_NUMBER 256
@@ -51,5 +52,9 @@ void create_board(void);
 void destroy_board(void);
 
 void detect_resize(__attribute__((unused)) int);
+
+void rubiks_display(struct rubiks_side *rubiks);
+
+void draw_rubiks(struct rubiks_side *rubiks);
 
 #endif //RUBIKS_EFREI_DRAW_H
