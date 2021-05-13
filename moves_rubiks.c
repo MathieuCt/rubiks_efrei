@@ -109,6 +109,7 @@ void move_side_anticlockwise(rubiks_side *rubiks, int side){
      * Cette fonction fait tourner la face side dans le sens anti-horaire. En réalité, cela revient à tourner trois
      * fois dans le sens horaire
      */
+
     for (int i = 0; i < 3; i++)
     {
         move_side_clockwise(rubiks, side);
