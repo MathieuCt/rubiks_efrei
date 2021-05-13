@@ -256,19 +256,86 @@ void solve_white_side(rubiks_side * rubiks){
     }
     // Ensuite, les coins blancs Coins blancs
     // parcourir les coins blanc en fonction de leur premier voisin (suffisant pour les identifier)
-    /*for(T_COLOR i = ORANGE ; i < YELLOW ; i++ ){
+    for(T_COLOR i = ORANGE ; i < RED ; i++ ){
         // chercher la position du premier coin
         cubie = search_cubie(rubiks, WHITE, i,CORNER);
         // si le cubie est sur la 1ère couronne
-        if(cubie.y == 0 && cubie.cubie_side != WHITE){
-            if(cubie.num == 0){
-                // le mettre sur la3ème couronne
-                move_side_anticlockwise(rubiks,cubie.cubie_side);
-                //tourner la face jaune
+        if(cubie.y == 0 && cubie.cubie_side != WHITE) {
+            // cas de la position 0
+            if (cubie.num == 0) {
+                // le mettre sur la 3ème couronne
+                move_side_anticlockwise(rubiks, cubie.cubie_side);
+                //tourner la face jaune !le sens est important!
+                move_side_anticlockwise(rubiks, YELLOW);
+                // annuler le premier mouvement
+                move_side_clockwise(rubiks, cubie.cubie_side);
+                cubie = search_cubie(rubiks, WHITE, i, CORNER);
+            }
+                // cas de la position 0, seul les sens des mouvements changent
+            else {
+                // le mettre sur la 3ème couronne
+                move_side_clockwise(rubiks, cubie.cubie_side);
+                //tourner la face jaune !le sens est important!
+                move_side_clockwise(rubiks, YELLOW);
+                // annuler le premier mouvement
+                move_side_anticlockwise(rubiks, cubie.cubie_side);
+                cubie = search_cubie(rubiks, WHITE, i, CORNER);
+            }
+        }
+        // si le cubie est sur la face blanche
+        else{
+            // on tourne la face de l'un de ses voisin
+            move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side);
+            //On éloigne le cubie en tournant 2 fois la face jaune
+            move_side_clockwise(rubiks,YELLOW);
+            move_side_clockwise(rubiks,YELLOW);
+            //annuler le 1er mouvement
+            move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
+            cubie = search_cubie(rubiks, WHITE, i, CORNER);
+        }
+        // aligner le coins avec le bon angle le bon cubie
+        // cas où le cubie est sur la face jaune
+        if(cubie.cubie_side == YELLOW){
+            //ses voisins doivent être de couleurs inversées
+            while(rubiks[cubie.neighbours[0].num_side].cubie[cubie.neighbours[0].num_side].color != rubiks[cubie.neighbours[1].num_side].side) {
+                move_side_clockwise(rubiks, YELLOW);
+                cubie = search_cubie(rubiks, WHITE, i, CORNER);
+            }
+            cubie = search_cubie(rubiks, WHITE, i, CORNER);
+            //tourner 1 fois la face de son voisin 2
+            move_side_anticlockwise(rubiks,rubiks[cubie.neighbours[1].num_side].side);
+            // tourner 2 fois la face jaune
+            move_side_anticlockwise(rubiks,YELLOW);
+            move_side_anticlockwise(rubiks,YELLOW);
+            //remonter une fois la fasse du voisin 1
+            move_side_clockwise(rubiks,rubiks[cubie.neighbours[1].num_side].side);
+            move_side_clockwise(rubiks,YELLOW);
+            // le cubie n'est maintenant plus sur la face jaune mais toujours sur le boin coin
+            cubie = search_cubie(rubiks, WHITE, i, CORNER);
+
+        }
+        else{
+            //un de ses voisin doit être sur la bonne couleur
+            while(rubiks[cubie.neighbours[0].num_side].cubie[cubie.neighbours[0].num_cubie].color != rubiks[cubie.neighbours[0].num_side].side || rubiks[cubie.neighbours[0].num_side].cubie[cubie.neighbours[0].num_cubie].color != rubiks[cubie.neighbours[0].num_side].side){
+                move_side_clockwise(rubiks,YELLOW);
+                cubie = search_cubie(rubiks, WHITE, i, CORNER);
 
             }
         }
-    }*/
+        // positionner correctement le coin, 2 algo selon le voisin bien placé
+        if(rubiks[cubie.neighbours[0].num_side].cubie[cubie.neighbours[0].num_cubie].color == rubiks[cubie.neighbours[0].num_side].side) {
+            move_side_clockwise(rubiks, YELLOW);
+            move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
+            move_side_anticlockwise(rubiks, YELLOW);
+            move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
+        }
+        else{
+            move_side_anticlockwise(rubiks, YELLOW);
+            move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[1].num_side].side);
+            move_side_clockwise(rubiks, YELLOW);
+            move_side_clockwise(rubiks, rubiks[cubie.neighbours[1].num_side].side);
+        }
+    }
 }
 
 /**
