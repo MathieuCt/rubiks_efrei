@@ -23,9 +23,10 @@ int main()
         rubiks_side rubiks[6];
         rubiks_creation(rubiks);
         rubiks_display(rubiks);
+        mix_rubiks(rubiks);
 
         // alterner les couleurs
-        move_side(rubiks,0);
+        /*move_side(rubiks,0);
         move_side(rubiks,0);
         move_side(rubiks,5);
         move_side(rubiks,5);
@@ -36,8 +37,8 @@ int main()
         move_side(rubiks,2);
         move_side(rubiks,2);
         move_side(rubiks,4);
-        move_side(rubiks,4);
-        //mix_rubiks(rubiks);
+        move_side(rubiks,4);*/
+
         draw_rubiks(rubiks);
     }
     else
