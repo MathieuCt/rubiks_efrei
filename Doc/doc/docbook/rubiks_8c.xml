@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_rubiks_8c" xml:lang="en-US">
+<title>rubiks.c File Reference</title>
+<indexterm><primary>rubiks.c</primary></indexterm>
+<programlisting>#include &lt;stdio.h&gt;
+#include &quot;rubiks.h&quot;
+</programlisting>Include dependency graph for rubiks.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_rubiks_8c_1acf98c40c9281734415ab7b5bf46a188f">rubiks_creation</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+            <listitem><para>void <link linkend="_rubiks_8c_1a1ef9b66b32521e9c1ef2c3055306e8d8">rubiks_neighbour</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+            <listitem><para>int <link linkend="_rubiks_8c_1a6f9f514473b39e5edc33bb8227e7e138">research_side</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks, int side, int neighbour_face)</para>
+</listitem>
+            <listitem><para>int <link linkend="_rubiks_8c_1a5a06208470c480f952ae8ac89c1a4e90">research_num</link> (int side, int type, int side2)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_rubiks_8c_1a5a06208470c480f952ae8ac89c1a4e90"/>    <section>
+    <title>research_num()</title>
+<indexterm><primary>research_num</primary><secondary>rubiks.c</secondary></indexterm>
+<indexterm><primary>rubiks.c</primary><secondary>research_num</secondary></indexterm>
+<para><computeroutput>int research_num (int side, int type, int side2)</computeroutput></para><para>
+Definition at line 189 of file rubiks.c.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8c_a5a06208470c480f952ae8ac89c1a4e90_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_rubiks_8c_1a6f9f514473b39e5edc33bb8227e7e138"/>    <section>
+    <title>research_side()</title>
+<indexterm><primary>research_side</primary><secondary>rubiks.c</secondary></indexterm>
+<indexterm><primary>rubiks.c</primary><secondary>research_side</secondary></indexterm>
+<para><computeroutput>int research_side (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks, int side, int neighbour_face)</computeroutput></para><para>
+Definition at line 176 of file rubiks.c.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8c_a6f9f514473b39e5edc33bb8227e7e138_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_rubiks_8c_1acf98c40c9281734415ab7b5bf46a188f"/>    <section>
+    <title>rubiks_creation()</title>
+<indexterm><primary>rubiks_creation</primary><secondary>rubiks.c</secondary></indexterm>
+<indexterm><primary>rubiks.c</primary><secondary>rubiks_creation</secondary></indexterm>
+<para><computeroutput>void rubiks_creation (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para><para>
+Definition at line 10 of file rubiks.c.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8c_acf98c40c9281734415ab7b5bf46a188f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8c_acf98c40c9281734415ab7b5bf46a188f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_rubiks_8c_1a1ef9b66b32521e9c1ef2c3055306e8d8"/>    <section>
+    <title>rubiks_neighbour()</title>
+<indexterm><primary>rubiks_neighbour</primary><secondary>rubiks.c</secondary></indexterm>
+<indexterm><primary>rubiks.c</primary><secondary>rubiks_neighbour</secondary></indexterm>
+<para><computeroutput>void rubiks_neighbour (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para><para>
+Definition at line 92 of file rubiks.c.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8c_a1ef9b66b32521e9c1ef2c3055306e8d8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8c_a1ef9b66b32521e9c1ef2c3055306e8d8_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

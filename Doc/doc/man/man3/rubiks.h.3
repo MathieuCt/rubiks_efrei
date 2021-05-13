@@ -1,0 +1,120 @@
+.TH "rubiks.h" 3 "Thu May 13 2021" "Rubik's Cube EFREI" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rubiks.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBneighbour\fP"
+.br
+.ti -1c
+.RI "struct \fBcubies\fP"
+.br
+.ti -1c
+.RI "struct \fBrubiks_side\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBT_COLOR\fP { \fBWHITE\fP, \fBORANGE\fP, \fBGREEN\fP, \fBRED\fP, \fBBLUE\fP, \fBYELLOW\fP }"
+.br
+.ti -1c
+.RI "enum \fBT_SIDE\fP { \fBUP\fP, \fBRIGHT\fP, \fBDOWN\fP, \fBLEFT\fP }"
+.br
+.ti -1c
+.RI "enum \fBT_CUBIE_TYPE\fP { \fBCORNER\fP, \fBEDGE\fP, \fBCENTER\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBrubiks_creation\fP (\fBrubiks_side\fP *rubiks)"
+.br
+.ti -1c
+.RI "int \fBresearch_side\fP (\fBrubiks_side\fP *, int, int)"
+.br
+.ti -1c
+.RI "int \fBresearch_num\fP (int, int, int)"
+.br
+.ti -1c
+.RI "void \fBrubiks_neighbour\fP (\fBrubiks_side\fP *)"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBT_COLOR\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIWHITE \fP\fP
+.TP
+\fB\fIORANGE \fP\fP
+.TP
+\fB\fIGREEN \fP\fP
+.TP
+\fB\fIRED \fP\fP
+.TP
+\fB\fIBLUE \fP\fP
+.TP
+\fB\fIYELLOW \fP\fP
+.PP
+Definition at line 11 of file rubiks\&.h\&.
+.SS "enum \fBT_CUBIE_TYPE\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICORNER \fP\fP
+.TP
+\fB\fIEDGE \fP\fP
+.TP
+\fB\fICENTER \fP\fP
+.PP
+Definition at line 13 of file rubiks\&.h\&.
+.SS "enum \fBT_SIDE\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUP \fP\fP
+.TP
+\fB\fIRIGHT \fP\fP
+.TP
+\fB\fIDOWN \fP\fP
+.TP
+\fB\fILEFT \fP\fP
+.PP
+Definition at line 12 of file rubiks\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int research_num (int side, int type, int side2)"
+
+.PP
+Definition at line 189 of file rubiks\&.c\&.
+.SS "int research_side (\fBrubiks_side\fP * rubiks, int side, int neighbour_face)"
+
+.PP
+Definition at line 176 of file rubiks\&.c\&.
+.SS "void rubiks_creation (\fBrubiks_side\fP * rubiks)"
+
+.PP
+Definition at line 10 of file rubiks\&.c\&.
+.SS "void rubiks_neighbour (\fBrubiks_side\fP * rubiks)"
+
+.PP
+Definition at line 92 of file rubiks\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Rubik's Cube EFREI from the source code\&.

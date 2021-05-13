@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_rubiks_8h" xml:lang="en-US">
+<title>rubiks.h File Reference</title>
+<indexterm><primary>rubiks.h</primary></indexterm>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8h__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Data Structures    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structneighbour">neighbour</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structcubies">cubies</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structrubiks__side">rubiks_side</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> { 
+<link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</link>
+, <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4">ORANGE</link>
+, <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca">GREEN</link>
+, <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88">RED</link>
+, 
+<link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79">BLUE</link>
+, <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</link>
+ }</para>
+</listitem>
+            <listitem><para>enum <link linkend="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fcc">T_SIDE</link> { <link linkend="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa">UP</link>
+, <link linkend="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38">RIGHT</link>
+, <link linkend="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da">DOWN</link>
+, <link linkend="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065">LEFT</link>
+ }</para>
+</listitem>
+            <listitem><para>enum <link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9">T_CUBIE_TYPE</link> { <link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea">CORNER</link>
+, <link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9aa622cbc12b78e3e883dd7b3217088a66">EDGE</link>
+, <link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9a2159ffbd3a68037511ab5ab4dd35ace7">CENTER</link>
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_rubiks_8h_1acf98c40c9281734415ab7b5bf46a188f">rubiks_creation</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+            <listitem><para>int <link linkend="_rubiks_8h_1ae15ed7b17a403dd051f93e6c3789c7e6">research_side</link> (<link linkend="_structrubiks__side">rubiks_side</link> *, int, int)</para>
+</listitem>
+            <listitem><para>int <link linkend="_rubiks_8h_1a0af93c7da68e020113f5b6232db44842">research_num</link> (int, int, int)</para>
+</listitem>
+            <listitem><para>void <link linkend="_rubiks_8h_1aa15f0fe60c7fa2da0b0a6f7f9ef10014">rubiks_neighbour</link> (<link linkend="_structrubiks__side">rubiks_side</link> *)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1"/>    <section>
+    <title>T_COLOR</title>
+<indexterm><primary>T_COLOR</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>T_COLOR</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>WHITE</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>WHITE</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50"/>WHITE</entry><entry></entry></row><row><entry><indexterm><primary>ORANGE</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>ORANGE</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4"/>ORANGE</entry><entry></entry></row><row><entry><indexterm><primary>GREEN</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>GREEN</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca"/>GREEN</entry><entry></entry></row><row><entry><indexterm><primary>RED</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>RED</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88"/>RED</entry><entry></entry></row><row><entry><indexterm><primary>BLUE</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>BLUE</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79"/>BLUE</entry><entry></entry></row><row><entry><indexterm><primary>YELLOW</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>YELLOW</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2"/>YELLOW</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 11 of file rubiks.h.</para>
+    </section><anchor xml:id="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9"/>    <section>
+    <title>T_CUBIE_TYPE</title>
+<indexterm><primary>T_CUBIE_TYPE</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>T_CUBIE_TYPE</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9">T_CUBIE_TYPE</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>CORNER</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>CORNER</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea"/>CORNER</entry><entry></entry></row><row><entry><indexterm><primary>EDGE</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>EDGE</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9aa622cbc12b78e3e883dd7b3217088a66"/>EDGE</entry><entry></entry></row><row><entry><indexterm><primary>CENTER</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>CENTER</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9a2159ffbd3a68037511ab5ab4dd35ace7"/>CENTER</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 13 of file rubiks.h.</para>
+    </section><anchor xml:id="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fcc"/>    <section>
+    <title>T_SIDE</title>
+<indexterm><primary>T_SIDE</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>T_SIDE</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fcc">T_SIDE</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>UP</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>UP</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa"/>UP</entry><entry></entry></row><row><entry><indexterm><primary>RIGHT</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>RIGHT</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38"/>RIGHT</entry><entry></entry></row><row><entry><indexterm><primary>DOWN</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>DOWN</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da"/>DOWN</entry><entry></entry></row><row><entry><indexterm><primary>LEFT</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>LEFT</secondary></indexterm>
+<anchor xml:id="_rubiks_8h_1a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065"/>LEFT</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 12 of file rubiks.h.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_rubiks_8h_1a0af93c7da68e020113f5b6232db44842"/>    <section>
+    <title>research_num()</title>
+<indexterm><primary>research_num</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>research_num</secondary></indexterm>
+<para><computeroutput>int research_num (int side, int type, int side2)</computeroutput></para><para>
+Definition at line 189 of file rubiks.c.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8h_a0af93c7da68e020113f5b6232db44842_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_rubiks_8h_1ae15ed7b17a403dd051f93e6c3789c7e6"/>    <section>
+    <title>research_side()</title>
+<indexterm><primary>research_side</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>research_side</secondary></indexterm>
+<para><computeroutput>int research_side (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks, int side, int neighbour_face)</computeroutput></para><para>
+Definition at line 176 of file rubiks.c.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8h_ae15ed7b17a403dd051f93e6c3789c7e6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_rubiks_8h_1acf98c40c9281734415ab7b5bf46a188f"/>    <section>
+    <title>rubiks_creation()</title>
+<indexterm><primary>rubiks_creation</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>rubiks_creation</secondary></indexterm>
+<para><computeroutput>void rubiks_creation (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para><para>
+Definition at line 10 of file rubiks.c.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8h_acf98c40c9281734415ab7b5bf46a188f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8h_acf98c40c9281734415ab7b5bf46a188f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_rubiks_8h_1aa15f0fe60c7fa2da0b0a6f7f9ef10014"/>    <section>
+    <title>rubiks_neighbour()</title>
+<indexterm><primary>rubiks_neighbour</primary><secondary>rubiks.h</secondary></indexterm>
+<indexterm><primary>rubiks.h</primary><secondary>rubiks_neighbour</secondary></indexterm>
+<para><computeroutput>void rubiks_neighbour (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para><para>
+Definition at line 92 of file rubiks.c.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8h_aa15f0fe60c7fa2da0b0a6f7f9ef10014_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="rubiks_8h_aa15f0fe60c7fa2da0b0a6f7f9ef10014_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

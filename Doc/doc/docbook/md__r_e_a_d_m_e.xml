@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_md__r_e_a_d_m_e" xml:lang="en-US">
+
+<para><itemizedlist>
+<listitem>
+<para>Formation C OpenClassRoom : <link xlink:href="https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c">https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c</link></para>
+</listitem><listitem>
+<para>Gestion des conflits de variables dans fichier .h : <link xlink:href="https://openclassrooms.com/forum/sujet/probleme-de-definitions-multiples">https://openclassrooms.com/forum/sujet/probleme-de-definitions-multiples</link></para>
+</listitem><listitem>
+<para>Nous développons sous Linux, en utilisant la librairie ncurses. De base, Clion ne peut pas debugger des programmes C utilisant ncurses :<itemizedlist>
+<listitem>
+<para><link xlink:href="https://youtrack.jetbrains.com/issue/CPP-822">https://youtrack.jetbrains.com/issue/CPP-822</link></para>
+</listitem><listitem>
+<para><link xlink:href="https://youtu.be/2R3OSGmUmoU?t=2015">https://youtu.be/2R3OSGmUmoU?t=2015</link></para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>Documentation pour debugger et utiliser ncurses dans Clion est dans le répertoire Doc 
+<literallayout>&#160;&#xa;</literallayout>
+</para>
+</listitem><listitem>
+<para>Comment ajouter des librairies dans Clion pour pouvoir compiler : <link xlink:href="https://stackoverflow.com/questions/40710903/undefined-reference-during-linking-using-ncurses-and-cmake">https://stackoverflow.com/questions/40710903/undefined-reference-during-linking-using-ncurses-and-cmake</link> 
+<literallayout>&#160;&#xa;</literallayout>
+</para>
+</listitem><listitem>
+<para>Dans notre cas, pour l&apos;instant, le fichier CMakeLists.txt doit contenir, si le nom du projet est XXXX : 
+<literallayout>&#160;&#xa;</literallayout>
+ cmake_minimum_required(VERSION 3.20) 
+<literallayout>&#160;&#xa;</literallayout>
+ project(XXXX C) 
+<literallayout>&#160;&#xa;</literallayout>
+ set(CMAKE_C_STANDARD 99) 
+<literallayout>&#160;&#xa;</literallayout>
+ add_executable(XXXX <link linkend="_main_8c">main.c</link>) 
+<literallayout>&#160;&#xa;</literallayout>
+ target_link_libraries(XXXX curses) 
+<literallayout>&#160;&#xa;</literallayout>
+ target_link_libraries(XXXX menu) 
+<literallayout>&#160;&#xa;</literallayout>
+</para>
+</listitem><listitem>
+<para>Librairie standard pour gérer des menus (basée sur ncurses) : <link xlink:href="https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/menus.html">https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/menus.html</link> </para>
+</listitem></itemizedlist>
+</para>
+</section>

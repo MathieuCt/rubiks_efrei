@@ -1,0 +1,50 @@
+.TH "rubiks.c" 3 "Thu May 13 2021" "Rubik's Cube EFREI" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rubiks.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include 'rubiks\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBrubiks_creation\fP (\fBrubiks_side\fP *rubiks)"
+.br
+.ti -1c
+.RI "void \fBrubiks_neighbour\fP (\fBrubiks_side\fP *rubiks)"
+.br
+.ti -1c
+.RI "int \fBresearch_side\fP (\fBrubiks_side\fP *rubiks, int side, int neighbour_face)"
+.br
+.ti -1c
+.RI "int \fBresearch_num\fP (int side, int type, int side2)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int research_num (int side, int type, int side2)"
+
+.PP
+Definition at line 189 of file rubiks\&.c\&.
+.SS "int research_side (\fBrubiks_side\fP * rubiks, int side, int neighbour_face)"
+
+.PP
+Definition at line 176 of file rubiks\&.c\&.
+.SS "void rubiks_creation (\fBrubiks_side\fP * rubiks)"
+
+.PP
+Definition at line 10 of file rubiks\&.c\&.
+.SS "void rubiks_neighbour (\fBrubiks_side\fP * rubiks)"
+
+.PP
+Definition at line 92 of file rubiks\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Rubik's Cube EFREI from the source code\&.
