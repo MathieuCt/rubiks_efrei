@@ -175,128 +175,118 @@ void solve_rubiks(rubiks_side *rubiks){
  * @param rubiks : Un pointeur vers une structure rubiks_side
  */
 void solve_white_side(rubiks_side * rubiks){
-    // todo: commenter cette fonction, elle n'est pas claire.
     // On commence par la croix blanche
+    // l'idée est de déplacer une arête blanche sur la face jaune, l'aligner avec sa couleur et la mettre sur la face blanche
+    // cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
     cubies cubie;
-    // boucle sur les arêtes blanches
+    // boucle sur les arêtes blanches, on les identifie par la couleur de leur voisin
     for (T_COLOR i = ORANGE ; i < YELLOW ; i++ ){
-        cubie = search_cubie(rubiks, WHITE, i, WHITE, EDGE);
+        // On cherche la position de la combinaison couleur, couleur du voisin, type)
+        cubie = search_cubie(rubiks, WHITE, i, EDGE);
 
         // le mettre sur la face jaune
-        //si le cubie se trouve sur la 1ER
-        if ((cubie.num == 7) && (cubie.cubie_side > WHITE && cubie.cubie_side < YELLOW)){
+        //si le cubie se trouve sur la  3ème couronne
+        if ((cubie.num == 7 ) && (cubie.cubie_side > WHITE && cubie.cubie_side < YELLOW)){
+            // le déplacer sur la face jaune
             move_side_clockwise(rubiks, cubie.cubie_side);
             move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT]);
+            // annuler le premier mouvement
             move_side_anticlockwise(rubiks, cubie.cubie_side);
-            /*
-            move_side_clockwise(rubiks, cubie.cubie_side);
-            move_side_clockwise(rubiks, cubie.cubie_side);
-            move_side_clockwise(rubiks, cubie.cubie_side);
-            */
+            //tourner la face jaune pour pouvoir annuler le 2nd mouvement sans revenir en arrière
             move_side_clockwise(rubiks, YELLOW);
+            // annuler le 2nd mouvement
             move_side_anticlockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT]);
-            /*
-            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT]);
-            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT]);
-            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT]);
-            */
-            // todo: ne surtout pas faire de draw dans cette fonction !
-            draw_rubiks(rubiks);
-            cubie = search_cubie(rubiks, WHITE, i, WHITE, EDGE);
+            // rechercher la nouvelle position du cubie après déplacement
+            cubie = search_cubie(rubiks, WHITE, i, EDGE);
         }
-        //si le cubie est sur la 1eme couronne
+        //si le cubie est sur la 1ère couronne
         else if ((cubie.num == 1) && (cubie.cubie_side > WHITE && cubie.cubie_side < YELLOW)){
+            // le déplacer sur la face jaune
             move_side_clockwise(rubiks, cubie.cubie_side);
             move_side_anticlockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT]);
-            /*
-            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT]);
-            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT]);
-            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT]);
-            */
+            // je crois qu'annuler le premier mouvement ne sert à rien dans ce cas (aucun bon cubie ne peut occuper cette place)
+            //move_side_anticlockwise(rubiks, cubie.cubie_side);
+            //tourner la face jaune pour pouvoir annuler le 2nd mouvement sans revenir en arrière
             move_side_clockwise(rubiks, YELLOW);
+            // annuler le 2nd mouvement
             move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT]);
-            move_side_anticlockwise(rubiks, cubie.cubie_side);
-            /*
-            move_side_clockwise(rubiks, cubie.cubie_side);
-            move_side_clockwise(rubiks, cubie.cubie_side);
-            move_side_clockwise(rubiks, cubie.cubie_side);
-            */
-            cubie = search_cubie(rubiks, WHITE, i, WHITE, EDGE);
+            // rechercher la nouvelle position du cubie après déplacement
+            cubie = search_cubie(rubiks, WHITE, i, EDGE);
         }
-        // si le cubie se trouve sur une arête de la seconde couronne
+        // si le cubie se trouve sur une arête de la 2nd couronne
         else if ((cubie.num == 3 || cubie.num == 5) && (cubie.cubie_side > WHITE && cubie.cubie_side < YELLOW)){
             // un mouvement pour arriver sur le jaune
             if( cubie.num == 5) {
+                // aller sur le jaune
                 move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side);
-                /*
-                move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
-                move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
-                move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
-                */
+                // tourner le jaune
                 move_side_clockwise(rubiks, YELLOW);
+                // annuler le premier mouvement
                 move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
             }
             else {
-                // 3 mouvements pour arriver sur le jaune
+                // aller sur le jaune
                 move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
+                //tourner le jaune
                 move_side_clockwise(rubiks, YELLOW);
+                // annuler le premier mouvement
                 move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side);
-                /*
-                move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
-                move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
-                move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
-                 */
             }
-            cubie = search_cubie(rubiks, WHITE, i, WHITE, EDGE);
+            // rechercher la nouvelle position du cubie après déplacement
+            cubie = search_cubie(rubiks, WHITE, i, EDGE);
         }
+        // si le cubie est déjà sur la face blanche il n'est peut-être pas à la bonne place
         else if (cubie.cubie_side == WHITE) {
+            // aller sur la face jaune
             move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
             move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
             // trouver sa nouvelle position
-            cubie = search_cubie(rubiks, WHITE, i, WHITE, EDGE);
+            cubie = search_cubie(rubiks, WHITE, i, EDGE);
         }
-
         // tant que le voisin n'est pas sur la bonne face
        while(cubie.neighbours[0].num_side != i ){
+           //tourner la face jaune jusqu'à ce que le cubie à placer soit aligné avec la bonne couleur
            move_side_clockwise(rubiks, YELLOW);
-            cubie = search_cubie(rubiks, WHITE, i, WHITE, EDGE);
+           //rechercher sa nouvelle position
+           cubie = search_cubie(rubiks, WHITE, i,EDGE);
         }
+       // placer le cubie une fois aligé sur la face jaune, sur la face blanche
         move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
         move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
     }
-    // Coins blancs
-    for(T_COLOR i = ORANGE ; i < YELLOW ; i++ ){
+    // Ensuite, les coins blancs Coins blancs
+    // parcourir les coins blanc en fonction de leur premier voisin (suffisant pour les identifier)
+    /*for(T_COLOR i = ORANGE ; i < YELLOW ; i++ ){
+        // chercher la position du premier coin
+        cubie = search_cubie(rubiks, WHITE, i,CORNER);
+        // si le cubie est sur la 1ère couronne
+        if(cubie.y == 0 && cubie.cubie_side != WHITE){
+            if(cubie.num == 0){
+                // le mettre sur la3ème couronne
+                move_side_anticlockwise(rubiks,cubie.cubie_side);
+                //tourner la face jaune
 
-    }
+            }
+        }
+    }*/
 }
 
 /**
  * Cette fonction permet de trouver un cubie en fonction de sa couleur et celle de ses voisins
  * @param rubiks : Un pointeur vers une structure rubiks_side
- * @param cubie_color : todo
- * @param neighbour1 : todo
- * @param neighbour2 : todo
- * @param cubie_type : todo
- * @return
+ * @param cubie_color : couleur du cubie que l'on cherche
+ * @param neighbour1 : couleur du premier voisin du cubie recherché
+ * @param cubie_type : type du cubie recherché
+ * @return toutes les information sur un cubie une fois qu'il a été trouvé
  */
-cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour1, T_COLOR neighbour2, T_CUBIE_TYPE cubie_type){
-    // todo : commenter cette fonction
+cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour1, T_CUBIE_TYPE cubie_type){
+    // parcours tous les cubies du rubiks jusqu'à identifier le bon
     for(int face = WHITE; face <= YELLOW; face++){
         for (int cubie = 0; cubie < 9; cubie++) {
-            // si la couleur et celle de son premier voisin correspondent
-            if(cubie_color == rubiks[face].cubie[cubie].color && neighbour1 == rubiks[rubiks[face].cubie[cubie].neighbours[0].num_side].cubie[rubiks[face].cubie[cubie].neighbours[0].num_cubie].color){
-                // si le cubie est une arête un cas possible
-                if(cubie_type == rubiks[face].cubie[cubie].type) {
-
-                    return rubiks[face].cubie[cubie] ;
-                }
-                // si le cubie est un coin, contrôle du 2em voisin
-                /*else if (cubie_type == rubiks[face].cubie[cubie].type){
-                    if(neighbour2 == rubiks[rubiks[face].cubie[cubie].neighbours[1].num_side].cubie[rubiks[face].cubie[cubie].neighbours[1].num_cubie].color){
-                        return rubiks[face].cubie[cubie];
-                    }
-                }*/
-
+            // si la couleur du cubie recherché correspond et si celle de son premier voisin correspondent et si le type correspond
+            if(cubie_color == rubiks[face].cubie[cubie].color && neighbour1 == rubiks[rubiks[face].cubie[cubie].neighbours[0].num_side].cubie[rubiks[face].cubie[cubie].neighbours[0].num_cubie].color && cubie_type == rubiks[face].cubie[cubie].type){
+                //même pour un corner qui a 2 voisins, le contrôle du premier voisin est suffisant
+                return rubiks[face].cubie[cubie] ;
             }
         }
     }
