@@ -7,7 +7,7 @@
 #include "rubiks.h"
 
 
-int rubiks_creation(rubiks_side *rubiks) {
+void rubiks_creation(rubiks_side *rubiks) {
 //    char side;
 //    char type;
 //    char color;
@@ -60,9 +60,7 @@ int rubiks_creation(rubiks_side *rubiks) {
                 rubiks[face].opposite_side = WHITE;
                 break;
             default:
-                printf("OUPS !!!\n");
-                return -1;
-
+                break;
         }
         for (cubie = 0; cubie < 9; cubie++) {
             // donner a chaque cubie la couleur de sa face
@@ -89,7 +87,6 @@ int rubiks_creation(rubiks_side *rubiks) {
         }
     }
     rubiks_neighbour(rubiks);
-    return 0;
 }
 
 void rubiks_neighbour(rubiks_side *rubiks) {

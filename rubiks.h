@@ -34,7 +34,7 @@ typedef struct {
     cubies cubie[9];
 } rubiks_side;
 
-int rubiks_creation(rubiks_side *rubiks);
+void rubiks_creation(rubiks_side *rubiks);
 int research_side(rubiks_side *,int, int);
 int research_num(int, int, int);
 void rubiks_neighbour(rubiks_side *);
