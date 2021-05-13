@@ -9,7 +9,7 @@
 
 
 typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
-typedef enum {UP, LEFT, FRONT, RIGHT, BACK, DOWN} T_SIDE;
+typedef enum {UP,  RIGHT, DOWN, LEFT} T_SIDE;
 typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
 
 typedef struct neighbour{
@@ -28,9 +28,9 @@ typedef struct cubies{
 }cubies;
 
 typedef struct rubiks_side{
-    int neighbour_side[4];
-    int opposite_side;
-    T_SIDE side;
+    T_COLOR neighbour_side[4];
+    T_COLOR opposite_side;
+    T_COLOR side;
     cubies cubie[9];
 }rubiks_side;
 

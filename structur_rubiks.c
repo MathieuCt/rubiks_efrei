@@ -12,50 +12,51 @@ int rubiks_creation(rubiks_side *rubiks) {
 //    char color;
     int face, cubie;
 
-    for (face = UP; face <= DOWN; face++) {
+    for (face = WHITE; face <= YELLOW; face++) {
         rubiks[face].side = face;
+        // donner a chaque face ses voisins (image en annexe)
         switch (face) {
             case WHITE:
-                rubiks[face].neighbour_side[0] = 4;
-                rubiks[face].neighbour_side[1] = 3;
-                rubiks[face].neighbour_side[2] = 2;
-                rubiks[face].neighbour_side[3] = 1;
-                rubiks[face].opposite_side = 5;
+                rubiks[face].neighbour_side[UP] = BLUE;
+                rubiks[face].neighbour_side[RIGHT] = RED;
+                rubiks[face].neighbour_side[DOWN] = GREEN;
+                rubiks[face].neighbour_side[LEFT] = ORANGE;
+                rubiks[face].opposite_side = YELLOW;
                 break;
             case ORANGE:
-                rubiks[face].neighbour_side[0] = 0;
-                rubiks[face].neighbour_side[1] = 2;
-                rubiks[face].neighbour_side[2] = 5;
-                rubiks[face].neighbour_side[3] = 4;
-                rubiks[face].opposite_side = 3;
+                rubiks[face].neighbour_side[UP] = WHITE;
+                rubiks[face].neighbour_side[RIGHT] = GREEN;
+                rubiks[face].neighbour_side[DOWN] = YELLOW;
+                rubiks[face].neighbour_side[LEFT] = BLUE;
+                rubiks[face].opposite_side = RED;
                 break;
             case GREEN:
-                rubiks[face].neighbour_side[0] = 0;
-                rubiks[face].neighbour_side[1] = 3;
-                rubiks[face].neighbour_side[2] = 5;
-                rubiks[face].neighbour_side[3] = 1;
-                rubiks[face].opposite_side = 4;
+                rubiks[face].neighbour_side[UP] = WHITE;
+                rubiks[face].neighbour_side[RIGHT] = RED;
+                rubiks[face].neighbour_side[DOWN] = YELLOW;
+                rubiks[face].neighbour_side[LEFT] = ORANGE;
+                rubiks[face].opposite_side = BLUE;
                 break;
             case RED:
-                rubiks[face].neighbour_side[0] = 0;
-                rubiks[face].neighbour_side[1] = 4;
-                rubiks[face].neighbour_side[2] = 5;
-                rubiks[face].neighbour_side[3] = 2;
-                rubiks[face].opposite_side = 1;
+                rubiks[face].neighbour_side[UP] = WHITE;
+                rubiks[face].neighbour_side[RIGHT] = BLUE;
+                rubiks[face].neighbour_side[DOWN] = YELLOW;
+                rubiks[face].neighbour_side[LEFT] = GREEN;
+                rubiks[face].opposite_side = ORANGE;
                 break;
             case BLUE:
-                rubiks[face].neighbour_side[0] = 0;
-                rubiks[face].neighbour_side[1] = 1;
-                rubiks[face].neighbour_side[2] = 5;
-                rubiks[face].neighbour_side[3] = 3;
-                rubiks[face].opposite_side = 2;
+                rubiks[face].neighbour_side[UP] = WHITE;
+                rubiks[face].neighbour_side[RIGHT] = ORANGE;
+                rubiks[face].neighbour_side[DOWN] = YELLOW;
+                rubiks[face].neighbour_side[LEFT] = RED;
+                rubiks[face].opposite_side = GREEN;
                 break;
             case YELLOW:
-                rubiks[face].neighbour_side[0] = 2;
-                rubiks[face].neighbour_side[1] = 3;
-                rubiks[face].neighbour_side[2] = 4;
-                rubiks[face].neighbour_side[3] = 1;
-                rubiks[face].opposite_side = 0;
+                rubiks[face].neighbour_side[UP] = GREEN;
+                rubiks[face].neighbour_side[RIGHT] = RED;
+                rubiks[face].neighbour_side[DOWN] = BLUE;
+                rubiks[face].neighbour_side[LEFT] = ORANGE;
+                rubiks[face].opposite_side = WHITE;
                 break;
             default:
                 printf("OUPS !!!\n");
@@ -63,26 +64,9 @@ int rubiks_creation(rubiks_side *rubiks) {
 
         }
         for (cubie = 0; cubie < 9; cubie++) {
-            switch (rubiks[face].side) {
-                case UP:
-                    rubiks[face].cubie[cubie].color = WHITE;
-                    break;
-                case LEFT:
-                    rubiks[face].cubie[cubie].color = ORANGE;
-                    break;
-                case FRONT:
-                    rubiks[face].cubie[cubie].color = GREEN;
-                    break;
-                case RIGHT:
-                    rubiks[face].cubie[cubie].color = RED;
-                    break;
-                case BACK:
-                    rubiks[face].cubie[cubie].color = BLUE;
-                    break;
-                case DOWN:
-                    rubiks[face].cubie[cubie].color = YELLOW;
-                    break;
-            }
+            // donner a chaque cubie la couleur de sa face
+            rubiks[face].cubie[cubie].color = rubiks[face].side;
+
             // rubiks[face].cubie[cubie].color = cubie;
             // rubiks[face].cubie[cubie].type = 1;
             if (cubie == 0 || cubie == 2 || cubie == 6 || cubie == 8) {
@@ -112,7 +96,7 @@ void rubiks_neighbour(rubiks_side *rubiks) {
     // initiliser les voisins
     int face, cubie;
     int side_relative, side_abs;
-    for (face = UP; face <= DOWN; face++) {
+    for (face = WHITE; face <= YELLOW; face++) {
         for (cubie = 0; cubie < 9; cubie++) {
             // si le cubie est de type edge, un seul voisin
             if (rubiks[face].cubie[cubie].type == EDGE){

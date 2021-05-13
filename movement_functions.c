@@ -10,13 +10,13 @@
 void move_side(rubiks_side *rubiks, int side){
     // faire tourner une face
     int tmp1, tmp2, tmp3;
-    // var tmp des couleurs ecrasees
+    // var tmp des couleurs ecrasees pour faire tourner les arretes
     tmp1 = rubiks[side].cubie[0].color;
     tmp2 = rubiks[rubiks[side].cubie[0].neighbours[0].num_side].cubie[rubiks[side].cubie[0].neighbours[0].num_cubie].color;
     tmp3 = rubiks[rubiks[side].cubie[0].neighbours[1].num_side].cubie[rubiks[side].cubie[0].neighbours[1].num_cubie].color;
     // faire tourner les coins
     rubiks[side].cubie[0].color = rubiks[side].cubie[6].color;
-    //printf(" side :%d nm:%d",)
+    // faire tourner les voisins des coins
     rubiks[rubiks[side].cubie[0].neighbours[0].num_side].cubie[rubiks[side].cubie[0].neighbours[0].num_cubie].color = rubiks[rubiks[side].cubie[6].neighbours[0].num_side].cubie[rubiks[side].cubie[6].neighbours[0].num_cubie].color ;
     rubiks[rubiks[side].cubie[0].neighbours[1].num_side].cubie[rubiks[side].cubie[0].neighbours[1].num_cubie].color = rubiks[rubiks[side].cubie[6].neighbours[1].num_side].cubie[rubiks[side].cubie[6].neighbours[1].num_cubie].color ;
 
@@ -31,11 +31,13 @@ void move_side(rubiks_side *rubiks, int side){
     rubiks[side].cubie[2].color = tmp1;
     rubiks[rubiks[side].cubie[2].neighbours[0].num_side].cubie[rubiks[side].cubie[2].neighbours[0].num_cubie].color = tmp2 ;
     rubiks[rubiks[side].cubie[2].neighbours[1].num_side].cubie[rubiks[side].cubie[2].neighbours[1].num_cubie].color = tmp3 ;
-
+    // faire tourner les arretes
+    // recuperer les couleurs ecrasees
     tmp1 = rubiks[side].cubie[1].color;
     tmp2 = rubiks[rubiks[side].cubie[1].neighbours[0].num_side].cubie[rubiks[side].cubie[1].neighbours[0].num_cubie].color;
-
+    // faire tourner le voisin
     rubiks[rubiks[side].cubie[1].neighbours[0].num_side].cubie[rubiks[side].cubie[1].neighbours[0].num_cubie].color = rubiks[rubiks[side].cubie[3].neighbours[0].num_side].cubie[rubiks[side].cubie[3].neighbours[0].num_cubie].color ;
+    //faire tourner l'arrete
     rubiks[side].cubie[1].color = rubiks[side].cubie[3].color;
 
     rubiks[rubiks[side].cubie[3].neighbours[0].num_side].cubie[rubiks[side].cubie[3].neighbours[0].num_cubie].color = rubiks[rubiks[side].cubie[7].neighbours[0].num_side].cubie[rubiks[side].cubie[7].neighbours[0].num_cubie].color ;
@@ -47,25 +49,16 @@ void move_side(rubiks_side *rubiks, int side){
     rubiks[rubiks[side].cubie[5].neighbours[0].num_side].cubie[rubiks[side].cubie[5].neighbours[0].num_cubie].color = tmp2;
     rubiks[side].cubie[5].color = tmp1;
 
-    // corner donc 2 voisins
-    /*rubiks[side].cubie[0].color = side[6].color;
-
-    side[6].color = side[8].color;
-    side[8].color = side[2].color;
-    side[2].color = tmp;
-    //edge donc 1 voisin
-    tmp = side[1].color;
-    side[1].color = side[3].color;
-    side[3].color = side[7].color;
-    side[7].color = side[5].color;
-    side[5].color = tmp; */
 }
 
-
+//melange le rubiks cube
 void mix_rubiks(rubiks_side *rubiks){
+    // initialiser le hasard en fonction de l'heure
     srand(time(NULL));
+    // choisir un nombre de mouvement entre 20 et 30
     int nbr_mouv = 20 + rand() % (30 + 1 -20);
     for (int i = 0 ; i < nbr_mouv; i++){
+        // realiser nbr_mouv nombre de mouvement aleatoire
         move_side(rubiks,rand() % (5 + 1));
     }
 }
