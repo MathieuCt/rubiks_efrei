@@ -2,7 +2,7 @@
  * @file draw.h
  * @author Mathieu CHANTOT et Clément LE STRAT
  * @date 7 Mai 2021
- * @brief Dans ce fichier, on trouve Headers utilisées dans draw.c.
+ * @brief Dans ce fichier, on trouve Headers utilisés dans draw.c.
  */
 
 #ifndef RUBIKS_EFREI_DRAW_H

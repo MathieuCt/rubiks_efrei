@@ -30,7 +30,7 @@ void detect_resize(__attribute__((unused)) int dummy)
 }
 
 /**
- * Définition des couleurs pour nCurses
+ * Définitions des couleurs pour nCurses
  */
 void set_colors(void)
 {
@@ -77,6 +77,17 @@ int check_and_set_term(void)
     return 0;
 }
 
+/**
+ * Fonction de test pour nCurses, qui permet de déplacer une couleur à partir de :
+ * - line, col coordonnées du cube à modifier dans la matrice de l'écran
+ * - cube_x, cube_y coordonnées x, y du cube à modifier
+ * - color : Nouvelle couleur à appliquer
+ * @param line Ligne de la matrices nCurses
+ * @param col Colonne de la matrice nCurses
+ * @param cube_x Coordonnée X du cube à modifier
+ * @param cube_y Coordonnée Y du cube à modifier
+ * @param color Nouvelle couleur à appliquer
+ */
 void change_color(short line, short col, short cube_x, short cube_y, short color)
 {
     WINDOW *sub[3 * 3];
@@ -99,6 +110,13 @@ void change_color(short line, short col, short cube_x, short cube_y, short color
     }
 }
 
+/**
+ * Fonction de test pour créer la face uniforme d'un cube dans une couleur donnée
+ * @param line Ligne de la matrice nCurses dans laquelle dessiner le cube
+ * @param col Colonne de la matrice nCurses dans laquelle dessiner le cube
+ * @param color Couleur à appliquer sur le cube
+ * @param name Nom de la face, à afficher dans le cubie central
+ */
 void create_rubik_side(short line, short col, short color, char name)
 {
     int x, y, i, j;
@@ -138,6 +156,9 @@ void create_rubik_side(short line, short col, short color, char name)
 //    wrefresh(test);
 }
 
+/**
+ * Fonction de test qui permet d'afficher diverses choses sur l'écran nCurses
+ */
 void create_board(void)
 {
     int i;
@@ -184,6 +205,10 @@ void create_board(void)
     }
 }
 
+/**
+ * Fonction de test liée à create_board, qui permet de libérer les ressources et la mémoire.
+ * <br><em><b>Attention, cette fonction n'est pas à jour</b></em>
+ */
 void destroy_board(void)
 {
     int i;
@@ -196,7 +221,10 @@ void destroy_board(void)
     }
 }
 
-
+/**
+ * Fonction de débuggage, permet d'afficher les positions après des mouvements.
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ */
 void rubiks_display(rubiks_side *rubiks){
     int face, cubie;
     for(face = 0; face < 6 ; face++){
