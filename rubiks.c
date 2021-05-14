@@ -115,7 +115,7 @@ void rubiks_neighbour(rubiks_side *rubiks) {
             // si le cubie est de type edge, un seul voisin
             if (rubiks[face].cubie[cubie].type == EDGE){
                 //position relative de la face voisine, position absolu
-                // trouver a cote de quelle face (relative) le cubie est en fonction de ses coordonnees
+                // trouver à côté de quelle face (relative) le cubie est en fonction de ses coordonnées
                 // soit il a y = 0 (en haut)
                 if (rubiks[face].cubie[cubie].y == 0){
                     side_relative = 0;
@@ -125,7 +125,7 @@ void rubiks_neighbour(rubiks_side *rubiks) {
                     side_relative = 2;
 
                 }
-                    // au milieu : 2 possibilites
+                    // au milieu : 2 possibilités
                 else{
                     // il est a gauche
                     if(rubiks[face].cubie[cubie].x == 0){
