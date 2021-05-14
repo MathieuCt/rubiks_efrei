@@ -19,7 +19,6 @@ typedef enum {UP, RIGHT, DOWN, LEFT} T_SIDE;
  */
 typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
 
-//todo : commenter toutes les structures et à quoi servent chacun des membres
 /**
  * @brief Définition des adjacents à un cubie
  * @param num_side Face de rattachement du voisin
