@@ -1,21 +1,32 @@
-//
-// Created by clestrat on 04/05/2021.
-//
-
+/**
+ * Dans ce fichier, on gère toutes les propriétés du Rubik's Cube, depuis sa création, la gestion des faces
+ * adjacentes, et les recherches associées (recherche par couleur, ou depuis la couleur).
+ */
 #include <stdio.h>
 
 #include "rubiks.h"
 
-
+/**
+ * Initialisation du rubik's cube. Au départ, il est résolu.<br><br>
+ * Dans cette fonction, et dans toutes celles qui en découle, on considère que la face en cours de traitement est face
+ * à nous. Puis on se réfère au fichier ./doc/reference_rubiks_excel.png pour déterminer les adjacents.
+ * \Exemple
+ * Si on prend la face blanche en exemple :<br>
+ * - La face au dessus est la face bleue<br>
+ * - La face à sa droite est la face rouge<br>
+ * - La face à sa gauche est la face orange<br>
+ * - La face sous-elle est la face verte<br>
+ * - La face opposée ne change jamais, dans le cas de la blanche, il s'agit de la face jaune.
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ */
 void rubiks_creation(rubiks_side *rubiks) {
-//    char side;
-//    char type;
-//    char color;
     int face, cubie;
 
+    // On va former chacune des faces et à chaque fois définir ses voisins et son opposé
     for (face = WHITE; face <= YELLOW; face++) {
         rubiks[face].side = face;
-        // donner a chaque face ses voisins (image en annexe)
+        // On considère que la face en cours de création est face à nous.
+        // Et à chaque fois on détermine les adjacents de la face en cours de traitement, ainsi que sa face opposée
         switch (face) {
             case WHITE:
                 rubiks[face].neighbour_side[UP] = BLUE;
@@ -62,6 +73,7 @@ void rubiks_creation(rubiks_side *rubiks) {
             default:
                 break;
         }
+        // todo : commenter plus précisément cette partie
         for (cubie = 0; cubie < 9; cubie++) {
             // donner a chaque cubie la couleur de sa face
             rubiks[face].cubie[cubie].color = rubiks[face].side;
@@ -86,11 +98,16 @@ void rubiks_creation(rubiks_side *rubiks) {
 
         }
     }
+    // Et enfin on défini les faces adjacentes
     rubiks_neighbour(rubiks);
 }
 
+/**
+ * todo : explications
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ */
 void rubiks_neighbour(rubiks_side *rubiks) {
-    // initiliser les voisins
+    // initialiser les voisins
     int face, cubie;
     int side_relative, side_abs;
     for (face = WHITE; face <= YELLOW; face++) {
@@ -170,13 +187,19 @@ void rubiks_neighbour(rubiks_side *rubiks) {
             }
         }
     }
-
 }
 
-int research_side(rubiks_side *rubiks,int side, int neighbour_face){
+/**
+ * todo : expliquer
+ * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param side : La face principale qui nous sert de référence pour la recherche
+ * @param neighbour_face : todo : expliquer
+ * @return : Renvoi l'indice de la face trouvée ou 0 en cas d'échec de la recherche
+ */
+int research_side(rubiks_side *rubiks, int side, int neighbour_face){
     // neighbour_face ( pos abs de la face voisine)
     // side : face principale
-    // face : variable locale pour parcourirs la liste de voisin de neighbour side
+    // face : variable locale pour parcourir la liste de voisin de neighbour side
     for(int face = 0 ; face < 4 ; face++){
 
         if (rubiks[neighbour_face].neighbour_side[face] == side) {
@@ -185,7 +208,14 @@ int research_side(rubiks_side *rubiks,int side, int neighbour_face){
     }
     return 0;
 }
-//retourne le numéro du cubie selon la position relative de la face de son voisin
+//
+/**
+ * Cette fonction retourne le numéro du cubie selon la position relative de la face de son voisin
+ * @param side : todo expliquer
+ * @param type : todo expliquer
+ * @param side2 : todo expliquer et probablement renommer
+ * @return : Renvoi l'indice de lu cubie trouvé, -1 en cas d'erreur, ou 0 en cas d'échec de la recherche
+ */
 int research_num( int side, int type, int side2 ){
     // pour une arrete
     if (type == EDGE){
