@@ -13,16 +13,20 @@
 #include "rubiks.h"
 #include "moves_rubiks.h"
 
+/**
+ * Définie si nous réalisons les affichages en mode texte (true) ou en mode nCurses (false)
+ */
+#define PRINT_TEXT_ONLY true
+
 int main()
 {
     int term_error_type;
     int detected_nb_lines, detected_nb_cols, detected_color_pairs;
-    bool print_text_only = true;
 
     signal(SIGWINCH, detect_resize); // Détection du changement de taille du terminal
     setlocale(LC_ALL, "fr_FR.UTF-8"); // Gestion des caractères accentués
 
-    if (print_text_only)
+    if (PRINT_TEXT_ONLY)
     {
         printf("Mode non graphique\n");
         rubiks_side rubiks[6];
