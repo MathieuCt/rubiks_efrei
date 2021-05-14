@@ -23,7 +23,7 @@ int main()
         printf("Mode non graphique\n");
         rubiks_side rubiks[6];
         rubiks_creation(rubiks);
-        rubiks_display(rubiks);
+        //rubiks_display(rubiks);
 
         // alterner les couleurs
         //alternate_color(rubiks);
