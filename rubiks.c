@@ -12,14 +12,12 @@
 /**
  * Initialisation du rubik's cube. Au départ, il est résolu.<br><br>
  * Dans cette fonction, et dans toutes celles qui en découlent, on considère que la face en cours de traitement est face
- * à nous. Puis on se réfère au fichier ./doc/reference_rubiks_excel.png pour déterminer les adjacents.
- * todo : remplacer Exemple. Pas supporté par Doxygen
- * \Exemple
- * Si on prend la face blanche en exemple :<br>
- * - La face au dessus est la face bleue<br>
- * - La face à sa droite est la face rouge<br>
- * - La face à sa gauche est la face orange<br>
- * - La face sous-elle est la face verte<br>
+ * à nous. Puis on se réfère au fichier ./Doc/reference_rubiks_excel.png pour déterminer les adjacents.
+ * <br>Si on prend la face blanche en exemple :
+ * - La face au dessus est la face bleue
+ * - La face à sa droite est la face rouge
+ * - La face à sa gauche est la face orange
+ * - La face sous-elle est la face verte
  * - La face opposée ne change jamais, dans le cas de la blanche, il s'agit de la face jaune.
  * @param rubiks : Un pointeur vers une structure rubiks_side
  */
