@@ -2,7 +2,7 @@
  * @file moves_rubiks.h
  * @author Mathieu CHANTOT et Clément LE STRAT
  * @date 7 Mai 2021
- * @brief Dans ce fichier, on trouve les Headers utilisées partout dans le code. Définitions dans moves_rubiks.c.
+ * @brief Dans ce fichier, on trouve les Headers utilisés partout dans le code. Définitions dans moves_rubiks.c.
  */
 
 #ifndef RUBIKS_EFREI_MOVES_RUBIKS_H
@@ -11,7 +11,7 @@
 
 void move_side_clockwise(rubiks_side *rubiks, int side);
 void move_side_anticlockwise(rubiks_side *rubiks, int side);
-void move_coin(rubiks_side *rubiks, int side, int from, int to);
+void move_corner(rubiks_side *rubiks, int side, int from, int to);
 void move_edge(rubiks_side *rubiks, int side, int from, int to);
 void mix_rubiks(rubiks_side * );
 void alternate_color(rubiks_side * );
