@@ -11,7 +11,7 @@
 
 void move_side_clockwise(rubiks_side *rubiks, int side);
 void move_side_anticlockwise(rubiks_side *rubiks, int side);
-void move_coin(rubiks_side *rubiks, int side, int from, int to);
+void move_corner(rubiks_side *rubiks, int side, int from, int to);
 void move_edge(rubiks_side *rubiks, int side, int from, int to);
 void mix_rubiks(rubiks_side * );
 void alternate_color(rubiks_side * );

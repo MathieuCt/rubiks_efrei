@@ -20,7 +20,7 @@
  * @param from Déplacer depuis ce cubie
  * @param to Déplacer vers ce cubie
  */
-void move_coin(rubiks_side *rubiks, int side, int from, int to) {
+void move_corner(rubiks_side *rubiks, int side, int from, int to) {
     // On commence par faire tourner le coin.
     rubiks[side].cubie[to].color = rubiks[side].cubie[from].color;
     // Et on fait tourner les coins voisins.
@@ -57,9 +57,9 @@ void move_side_clockwise(rubiks_side *rubiks, int side){
     tmp2 = rubiks[rubiks[side].cubie[0].neighbours[0].num_side].cubie[rubiks[side].cubie[0].neighbours[0].num_cubie].color;
     tmp3 = rubiks[rubiks[side].cubie[0].neighbours[1].num_side].cubie[rubiks[side].cubie[0].neighbours[1].num_cubie].color;
     // On commence par faire tourner les coins.
-    move_coin(rubiks, side, 6, 0);
-    move_coin(rubiks, side, 8, 6);
-    move_coin(rubiks, side, 2, 8);
+    move_corner(rubiks, side, 6, 0);
+    move_corner(rubiks, side, 8, 6);
+    move_corner(rubiks, side, 2, 8);
 
     /*    rubiks[side].cubie[0].color = rubiks[side].cubie[6].color;
     // faire tourner les voisins des coins
