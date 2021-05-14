@@ -8,7 +8,7 @@
 
 /**
  * Initialisation du rubik's cube. Au départ, il est résolu.<br><br>
- * Dans cette fonction, et dans toutes celles qui en découle, on considère que la face en cours de traitement est face
+ * Dans cette fonction, et dans toutes celles qui en découlent, on considère que la face en cours de traitement est face
  * à nous. Puis on se réfère au fichier ./doc/reference_rubiks_excel.png pour déterminer les adjacents.
  * \Exemple
  * Si on prend la face blanche en exemple :<br>
