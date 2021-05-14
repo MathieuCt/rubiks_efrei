@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_draw_8c" xml:lang="fr">
+<title>Référence du fichier draw.c</title>
+<indexterm><primary>draw.c</primary></indexterm>
+<programlisting>#include &quot;draw.h&quot;
+#include &quot;rubiks.h&quot;
+</programlisting>Graphe des dépendances par inclusion de draw.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Fonctions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_draw_8c_1a1d1a41aa9da5e3ff2d0751c5763775d0">detect_resize</link> (__attribute__((unused)) int dummy)</para>
+</listitem>
+            <listitem><para>void <link linkend="_draw_8c_1a97eeb2f2bd7dfb50249ab0cf4db972cd">set_colors</link> (void)</para>
+</listitem>
+            <listitem><para>int <link linkend="_draw_8c_1a5bf54e86153f8acde61d4a8fe9a9a9a6">check_and_set_term</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_draw_8c_1a365b27572e307c810728d8f5df37bba2">change_color</link> (short line, short col, short cube_x, short cube_y, short color)</para>
+</listitem>
+            <listitem><para>void <link linkend="_draw_8c_1a3a9e1534a95c942e206d33e3a2f27fad">create_rubik_side</link> (short line, short col, short color, char name)</para>
+</listitem>
+            <listitem><para>void <link linkend="_draw_8c_1a2956bbe5873ab0022f8c1a9bd985e198">create_board</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_draw_8c_1ae47e21a11f8a8b2f413ae5568bdd7c0c">destroy_board</link> (void)</para>
+</listitem>
+            <listitem><para>void <link linkend="_draw_8c_1a2fe2bc96e4d9a876686cc6aa3f7a8ac5">rubiks_display</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+            <listitem><para>void <link linkend="_draw_8c_1af57da7cd152b7ad8fb46988a05d7e6ec">draw_rubiks</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>WINDOW * <link linkend="_draw_8c_1a0372ee409cd9d0076678495aa5f421e5">BOARD</link> [<link linkend="_draw_8h_1a7fade7363ac979586113d8813d65826b">SQUARES</link>]</para>
+</listitem>
+            <listitem><para>const short <link linkend="_draw_8c_1a79cb5b2a35315a50c6f20cb5e5e7e596">BLACK_ON_WHITE</link> = 1</para>
+</listitem>
+            <listitem><para>const short <link linkend="_draw_8c_1ae83969edd701df2c96b959de95306c75">BLACK_ON_ORANGE</link> = 2</para>
+</listitem>
+            <listitem><para>const short <link linkend="_draw_8c_1a1fa84266cf31ca300eea64c16fc581f0">BLACK_ON_GREEN</link> = 3</para>
+</listitem>
+            <listitem><para>const short <link linkend="_draw_8c_1a4b5d90960b545479ae859ab88c10909a">BLACK_ON_RED</link> = 4</para>
+</listitem>
+            <listitem><para>const short <link linkend="_draw_8c_1a61b7a025d95ea6792c8518f7c4c59585">BLACK_ON_BLUE</link> = 5</para>
+</listitem>
+            <listitem><para>const short <link linkend="_draw_8c_1a55617142db49bbff90cefd7ee8f91667">BLACK_ON_YELLOW</link> = 6</para>
+</listitem>
+            <listitem><para>short <link linkend="_draw_8c_1a05006631523e042b76590ff0f00d9232">NB_LINES</link></para>
+</listitem>
+            <listitem><para>short <link linkend="_draw_8c_1ae48b6e52709a6f251d2ce1557fe1c30f">NB_COLS</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Documentation des fonctions</title>
+<anchor xml:id="_draw_8c_1a365b27572e307c810728d8f5df37bba2"/>    <section>
+    <title>change_color()</title>
+<indexterm><primary>change_color</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>change_color</secondary></indexterm>
+<para><computeroutput>void change_color (short line, short col, short cube_x, short cube_y, short color)</computeroutput></para><para>
+Définition à la ligne 65 du fichier draw.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a365b27572e307c810728d8f5df37bba2_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_draw_8c_1a5bf54e86153f8acde61d4a8fe9a9a9a6"/>    <section>
+    <title>check_and_set_term()</title>
+<indexterm><primary>check_and_set_term</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>check_and_set_term</secondary></indexterm>
+<para><computeroutput>int check_and_set_term (void )</computeroutput></para><para>
+Définition à la ligne 35 du fichier draw.c.</para>
+Voici le graphe d&apos;appel pour cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a5bf54e86153f8acde61d4a8fe9a9a9a6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a5bf54e86153f8acde61d4a8fe9a9a9a6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_draw_8c_1a2956bbe5873ab0022f8c1a9bd985e198"/>    <section>
+    <title>create_board()</title>
+<indexterm><primary>create_board</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>create_board</secondary></indexterm>
+<para><computeroutput>void create_board (void )</computeroutput></para><para>
+Définition à la ligne 126 du fichier draw.c.</para>
+Voici le graphe d&apos;appel pour cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a2956bbe5873ab0022f8c1a9bd985e198_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a2956bbe5873ab0022f8c1a9bd985e198_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_draw_8c_1a3a9e1534a95c942e206d33e3a2f27fad"/>    <section>
+    <title>create_rubik_side()</title>
+<indexterm><primary>create_rubik_side</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>create_rubik_side</secondary></indexterm>
+<para><computeroutput>void create_rubik_side (short line, short col, short color, char name)</computeroutput></para><para>
+Définition à la ligne 87 du fichier draw.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a3a9e1534a95c942e206d33e3a2f27fad_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_draw_8c_1ae47e21a11f8a8b2f413ae5568bdd7c0c"/>    <section>
+    <title>destroy_board()</title>
+<indexterm><primary>destroy_board</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>destroy_board</secondary></indexterm>
+<para><computeroutput>void destroy_board (void )</computeroutput></para><para>
+Définition à la ligne 172 du fichier draw.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_ae47e21a11f8a8b2f413ae5568bdd7c0c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_draw_8c_1a1d1a41aa9da5e3ff2d0751c5763775d0"/>    <section>
+    <title>detect_resize()</title>
+<indexterm><primary>detect_resize</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>detect_resize</secondary></indexterm>
+<para><computeroutput>void detect_resize (__attribute__((unused)) int dummy)</computeroutput></para><para>
+Définition à la ligne 19 du fichier draw.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a1d1a41aa9da5e3ff2d0751c5763775d0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_draw_8c_1af57da7cd152b7ad8fb46988a05d7e6ec"/>    <section>
+    <title>draw_rubiks()</title>
+<indexterm><primary>draw_rubiks</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>draw_rubiks</secondary></indexterm>
+<para><computeroutput>void draw_rubiks (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para><para>
+Définition à la ligne 205 du fichier draw.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_af57da7cd152b7ad8fb46988a05d7e6ec_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_draw_8c_1a2fe2bc96e4d9a876686cc6aa3f7a8ac5"/>    <section>
+    <title>rubiks_display()</title>
+<indexterm><primary>rubiks_display</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>rubiks_display</secondary></indexterm>
+<para><computeroutput>void rubiks_display (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para><para>
+Définition à la ligne 185 du fichier draw.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a2fe2bc96e4d9a876686cc6aa3f7a8ac5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_draw_8c_1a97eeb2f2bd7dfb50249ab0cf4db972cd"/>    <section>
+    <title>set_colors()</title>
+<indexterm><primary>set_colors</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>set_colors</secondary></indexterm>
+<para><computeroutput>void set_colors (void )</computeroutput></para><para>
+Définition à la ligne 24 du fichier draw.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="draw_8c_a97eeb2f2bd7dfb50249ab0cf4db972cd_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Documentation des variables</title>
+<anchor xml:id="_draw_8c_1a61b7a025d95ea6792c8518f7c4c59585"/>    <section>
+    <title>BLACK_ON_BLUE</title>
+<indexterm><primary>BLACK_ON_BLUE</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>BLACK_ON_BLUE</secondary></indexterm>
+<para><computeroutput>const short BLACK_ON_BLUE = 5</computeroutput></para><para>
+Définition à la ligne 13 du fichier draw.c.</para>
+    </section><anchor xml:id="_draw_8c_1a1fa84266cf31ca300eea64c16fc581f0"/>    <section>
+    <title>BLACK_ON_GREEN</title>
+<indexterm><primary>BLACK_ON_GREEN</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>BLACK_ON_GREEN</secondary></indexterm>
+<para><computeroutput>const short BLACK_ON_GREEN = 3</computeroutput></para><para>
+Définition à la ligne 11 du fichier draw.c.</para>
+    </section><anchor xml:id="_draw_8c_1ae83969edd701df2c96b959de95306c75"/>    <section>
+    <title>BLACK_ON_ORANGE</title>
+<indexterm><primary>BLACK_ON_ORANGE</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>BLACK_ON_ORANGE</secondary></indexterm>
+<para><computeroutput>const short BLACK_ON_ORANGE = 2</computeroutput></para><para>
+Définition à la ligne 10 du fichier draw.c.</para>
+    </section><anchor xml:id="_draw_8c_1a4b5d90960b545479ae859ab88c10909a"/>    <section>
+    <title>BLACK_ON_RED</title>
+<indexterm><primary>BLACK_ON_RED</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>BLACK_ON_RED</secondary></indexterm>
+<para><computeroutput>const short BLACK_ON_RED = 4</computeroutput></para><para>
+Définition à la ligne 12 du fichier draw.c.</para>
+    </section><anchor xml:id="_draw_8c_1a79cb5b2a35315a50c6f20cb5e5e7e596"/>    <section>
+    <title>BLACK_ON_WHITE</title>
+<indexterm><primary>BLACK_ON_WHITE</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>BLACK_ON_WHITE</secondary></indexterm>
+<para><computeroutput>const short BLACK_ON_WHITE = 1</computeroutput></para><para>
+Définition à la ligne 9 du fichier draw.c.</para>
+    </section><anchor xml:id="_draw_8c_1a55617142db49bbff90cefd7ee8f91667"/>    <section>
+    <title>BLACK_ON_YELLOW</title>
+<indexterm><primary>BLACK_ON_YELLOW</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>BLACK_ON_YELLOW</secondary></indexterm>
+<para><computeroutput>const short BLACK_ON_YELLOW = 6</computeroutput></para><para>
+Définition à la ligne 14 du fichier draw.c.</para>
+    </section><anchor xml:id="_draw_8c_1a0372ee409cd9d0076678495aa5f421e5"/>    <section>
+    <title>BOARD</title>
+<indexterm><primary>BOARD</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>BOARD</secondary></indexterm>
+<para><computeroutput>WINDOW* BOARD[<link linkend="_draw_8h_1a7fade7363ac979586113d8813d65826b">SQUARES</link>]</computeroutput></para><para>
+Définition à la ligne 8 du fichier draw.c.</para>
+    </section><anchor xml:id="_draw_8c_1ae48b6e52709a6f251d2ce1557fe1c30f"/>    <section>
+    <title>NB_COLS</title>
+<indexterm><primary>NB_COLS</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>NB_COLS</secondary></indexterm>
+<para><computeroutput>short NB_COLS</computeroutput></para><para>
+Définition à la ligne 17 du fichier draw.c.</para>
+    </section><anchor xml:id="_draw_8c_1a05006631523e042b76590ff0f00d9232"/>    <section>
+    <title>NB_LINES</title>
+<indexterm><primary>NB_LINES</primary><secondary>draw.c</secondary></indexterm>
+<indexterm><primary>draw.c</primary><secondary>NB_LINES</secondary></indexterm>
+<para><computeroutput>short NB_LINES</computeroutput></para><para>
+Définition à la ligne 16 du fichier draw.c.</para>
+</section>
+</section>
+</section>

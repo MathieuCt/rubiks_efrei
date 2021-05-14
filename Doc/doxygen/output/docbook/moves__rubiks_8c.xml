@@ -1,0 +1,504 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_moves__rubiks_8c" xml:lang="fr">
+<title>Référence du fichier moves_rubiks.c</title>
+<indexterm><primary>moves_rubiks.c</primary></indexterm>
+<programlisting>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+#include &quot;draw.h&quot;
+#include &quot;moves_rubiks.h&quot;
+#include &quot;rubiks.h&quot;
+</programlisting>Graphe des dépendances par inclusion de moves_rubiks.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Fonctions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_moves__rubiks_8c_1ada31225bb91ba495bafacabe73dc2423">move_coin</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks, int side, int from, int to)</para>
+</listitem>
+            <listitem><para>void <link linkend="_moves__rubiks_8c_1a3fd5c6f295cc3d8a62f3c8b0521b6bd6">move_edge</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks, int side, int from, int to)</para>
+</listitem>
+            <listitem><para>void <link linkend="_moves__rubiks_8c_1a957f94373fa2ddb6015afe2127df7a97">move_side_clockwise</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks, int side)</para>
+</listitem>
+            <listitem><para>void <link linkend="_moves__rubiks_8c_1ad20f5a4d85826a3aa50d5b28134a0b99">move_side_anticlockwise</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks, int side)</para>
+</listitem>
+            <listitem><para>void <link linkend="_moves__rubiks_8c_1adb54fc4745196d782c93f8cf6f6a2e35">mix_rubiks</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+            <listitem><para>void <link linkend="_moves__rubiks_8c_1a31ae530f818f62bbd1d07879103a5521">alternate_color</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+            <listitem><para>void <link linkend="_moves__rubiks_8c_1a0687652569c403b87263cae0fbe97409">solve_rubiks</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+            <listitem><para>void <link linkend="_moves__rubiks_8c_1a542eddf10b24a60df64a3cfb3430f597">solve_white_side</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks)</para>
+</listitem>
+            <listitem><para><link linkend="_structcubies">cubies</link> <link linkend="_moves__rubiks_8c_1a212d77a9314126273fa8eb2b870b49f6">search_cubie</link> (<link linkend="_structrubiks__side">rubiks_side</link> *rubiks, <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> cubie_color, <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> neighbour1, <link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9">T_CUBIE_TYPE</link> cubie_type)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Documentation des fonctions</title>
+<anchor xml:id="_moves__rubiks_8c_1a31ae530f818f62bbd1d07879103a5521"/>    <section>
+    <title>alternate_color()</title>
+<indexterm><primary>alternate_color</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>alternate_color</secondary></indexterm>
+<para><computeroutput>void alternate_color (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para>
+<para>Cette fonction permet de créer un damier de couleurs 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 149 du fichier moves_rubiks.c.</para>
+Voici le graphe d&apos;appel pour cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a31ae530f818f62bbd1d07879103a5521_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_moves__rubiks_8c_1adb54fc4745196d782c93f8cf6f6a2e35"/>    <section>
+    <title>mix_rubiks()</title>
+<indexterm><primary>mix_rubiks</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>mix_rubiks</secondary></indexterm>
+<para><computeroutput>void mix_rubiks (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para>
+<para>Cette fonction permet de mélanger le cube de manière aléatoire. Elle choisit entre 20 et 30 mouvements à réaliser tout en choisissant une face à déplacer, au hasard. 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 133 du fichier moves_rubiks.c.</para>
+Voici le graphe d&apos;appel pour cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_adb54fc4745196d782c93f8cf6f6a2e35_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_adb54fc4745196d782c93f8cf6f6a2e35_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_moves__rubiks_8c_1ada31225bb91ba495bafacabe73dc2423"/>    <section>
+    <title>move_coin()</title>
+<indexterm><primary>move_coin</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>move_coin</secondary></indexterm>
+<para><computeroutput>void move_coin (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks, int side, int from, int to)</computeroutput></para>
+<para>Cette fonction permet de déplacer un coin du cube, depuis &quot;from&quot; vers &quot;to&quot; 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: Un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>side</entry>
+                                <entry>
+<para>: La face du rubiks à traiter </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>from</entry>
+                                <entry>
+<para>: Déplacer depuis ce cubie </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>to</entry>
+                                <entry>
+<para>: Déplacer vers ce cubie </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 19 du fichier moves_rubiks.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_ada31225bb91ba495bafacabe73dc2423_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_moves__rubiks_8c_1a3fd5c6f295cc3d8a62f3c8b0521b6bd6"/>    <section>
+    <title>move_edge()</title>
+<indexterm><primary>move_edge</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>move_edge</secondary></indexterm>
+<para><computeroutput>void move_edge (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks, int side, int from, int to)</computeroutput></para>
+<para>Cette fonction permet de déplacer une arête depuis &quot;from&quot; vers &quot;to&quot; 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: Un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>side</entry>
+                                <entry>
+<para>: La face du rubiks à traiter </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>from</entry>
+                                <entry>
+<para>: Déplacer depuis ce cubie </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>to</entry>
+                                <entry>
+<para>: Déplacer vers ce cubie </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 37 du fichier moves_rubiks.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a3fd5c6f295cc3d8a62f3c8b0521b6bd6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_moves__rubiks_8c_1ad20f5a4d85826a3aa50d5b28134a0b99"/>    <section>
+    <title>move_side_anticlockwise()</title>
+<indexterm><primary>move_side_anticlockwise</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>move_side_anticlockwise</secondary></indexterm>
+<para><computeroutput>void move_side_anticlockwise (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks, int side)</computeroutput></para>
+<para>Cette fonction fait tourner la face side dans le sens anti-horaire. En réalité, cela revient à tourner trois fois dans le sens horaire 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: Un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>side</entry>
+                                <entry>
+<para>: La face à faire tourner dans le sens horaire </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 120 du fichier moves_rubiks.c.</para>
+Voici le graphe d&apos;appel pour cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_ad20f5a4d85826a3aa50d5b28134a0b99_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_ad20f5a4d85826a3aa50d5b28134a0b99_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_moves__rubiks_8c_1a957f94373fa2ddb6015afe2127df7a97"/>    <section>
+    <title>move_side_clockwise()</title>
+<indexterm><primary>move_side_clockwise</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>move_side_clockwise</secondary></indexterm>
+<para><computeroutput>void move_side_clockwise (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks, int side)</computeroutput></para>
+<para>cette fonction permet de faire tourner la face side du cube dans le sens horaire 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: Un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>side</entry>
+                                <entry>
+<para>: La face à faire tourner dans le sens horaire </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 48 du fichier moves_rubiks.c.</para>
+Voici le graphe d&apos;appel pour cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a957f94373fa2ddb6015afe2127df7a97_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a957f94373fa2ddb6015afe2127df7a97_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_moves__rubiks_8c_1a212d77a9314126273fa8eb2b870b49f6"/>    <section>
+    <title>search_cubie()</title>
+<indexterm><primary>search_cubie</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>search_cubie</secondary></indexterm>
+<para><computeroutput><link linkend="_structcubies">cubies</link> search_cubie (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks, <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> cubie_color, <link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> neighbour1, <link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9">T_CUBIE_TYPE</link> cubie_type)</computeroutput></para>
+<para>Cette fonction permet de trouver un cubie en fonction de sa couleur et celle de ses voisins 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: Un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>cubie_color</entry>
+                                <entry>
+<para>: couleur du cubie que l&apos;on cherche </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>neighbour1</entry>
+                                <entry>
+<para>: couleur du premier voisin du cubie recherché </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>cubie_type</entry>
+                                <entry>
+<para>: type du cubie recherché </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Renvoie</title>
+
+<para>toutes les information sur un cubie une fois qu&apos;il a été trouvé </para>
+</formalpara>
+</para>
+<para>
+Définition à la ligne 349 du fichier moves_rubiks.c.</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a212d77a9314126273fa8eb2b870b49f6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_moves__rubiks_8c_1a0687652569c403b87263cae0fbe97409"/>    <section>
+    <title>solve_rubiks()</title>
+<indexterm><primary>solve_rubiks</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>solve_rubiks</secondary></indexterm>
+<para><computeroutput>void solve_rubiks (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para>
+<para>Cette fonction permet de résoudre le cube. 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: Un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 168 du fichier moves_rubiks.c.</para>
+Voici le graphe d&apos;appel pour cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a0687652569c403b87263cae0fbe97409_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a0687652569c403b87263cae0fbe97409_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_moves__rubiks_8c_1a542eddf10b24a60df64a3cfb3430f597"/>    <section>
+    <title>solve_white_side()</title>
+<indexterm><primary>solve_white_side</primary><secondary>moves_rubiks.c</secondary></indexterm>
+<indexterm><primary>moves_rubiks.c</primary><secondary>solve_white_side</secondary></indexterm>
+<para><computeroutput>void solve_white_side (<link linkend="_structrubiks__side">rubiks_side</link> * rubiks)</computeroutput></para>
+<para>Cette fonction cherche à résoudre la face blanche du Rubik&apos;s Cube 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>rubiks</entry>
+                                <entry>
+<para>: Un pointeur vers une structure <link linkend="_structrubiks__side">rubiks_side</link> </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 177 du fichier moves_rubiks.c.</para>
+Voici le graphe d&apos;appel pour cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a542eddf10b24a60df64a3cfb3430f597_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Voici le graphe des appelants de cette fonction :<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="moves__rubiks_8c_a542eddf10b24a60df64a3cfb3430f597_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

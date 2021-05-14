@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structneighbour" xml:lang="fr">
+<title>Référence de la structure neighbour</title>
+<indexterm><primary>neighbour</primary></indexterm>
+<para>
+<computeroutput>#include &lt;rubiks.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Champs de données    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> <link linkend="_structneighbour_1a819a8983128c236ed375533bd7b3c2cb">num_side</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_structneighbour_1a42eac631ad1547827bb817fc58630cbb">num_cubie</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Description détaillée</title>
+
+<para>Définition des adjacents à un cubie 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>num_side</entry>
+                                <entry>
+<para>: Face de rattachement du voisin </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>num_cubie</entry>
+                                <entry>
+<para>: Numéro du cubie dans sa face de rattachement. De 0 à 8. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 18 du fichier rubiks.h.</para>
+</section>
+<section>
+<title>Documentation des champs</title>
+<anchor xml:id="_structneighbour_1a42eac631ad1547827bb817fc58630cbb"/>    <section>
+    <title>num_cubie</title>
+<indexterm><primary>num_cubie</primary><secondary>neighbour</secondary></indexterm>
+<indexterm><primary>neighbour</primary><secondary>num_cubie</secondary></indexterm>
+<para><computeroutput>int num_cubie</computeroutput></para><para>
+Définition à la ligne 20 du fichier rubiks.h.</para>
+    </section><anchor xml:id="_structneighbour_1a819a8983128c236ed375533bd7b3c2cb"/>    <section>
+    <title>num_side</title>
+<indexterm><primary>num_side</primary><secondary>neighbour</secondary></indexterm>
+<indexterm><primary>neighbour</primary><secondary>num_side</secondary></indexterm>
+<para><computeroutput><link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> num_side</computeroutput></para><para>
+Définition à la ligne 19 du fichier rubiks.h.</para>
+</section>
+<para>
+La documentation de cette structure a été générée à partir du fichier suivant :</para>
+<link linkend="_rubiks_8h">rubiks.h</link></section>
+</section>

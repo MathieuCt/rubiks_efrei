@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structcubies" xml:lang="fr">
+<title>Référence de la structure cubies</title>
+<indexterm><primary>cubies</primary></indexterm>
+<para>
+<computeroutput>#include &lt;rubiks.h&gt;</computeroutput>
+</para>
+Graphe de collaboration de cubies:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="structcubies__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Champs de données    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_structcubies_1a6150e0515f7202e2fb518f7206ed97dc">x</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_structcubies_1a0a2f84ed7838f07779ae24c5a9086d33">y</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_structcubies_1a86cf672daa4e0ad11ad10efc894d19c8">num</link></para>
+</listitem>
+            <listitem><para><link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9">T_CUBIE_TYPE</link> <link linkend="_structcubies_1acf511a024691b62d2b3c55e785c30e73">type</link></para>
+</listitem>
+            <listitem><para><link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> <link linkend="_structcubies_1a49e9cbc5b9c8b22f557f93668e540861">color</link></para>
+</listitem>
+            <listitem><para><link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> <link linkend="_structcubies_1a0fbf15c0cf39016f52109c35f6e90440">cubie_side</link></para>
+</listitem>
+            <listitem><para><link linkend="_structneighbour">neighbour</link> <link linkend="_structcubies_1ad2af505fc55f5268b2380547c24c539c">neighbours</link> [2]</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Description détaillée</title>
+
+<para>Définition des cubies, qui sont les petits cubes de couleur rattachées à une face 
+                <formalpara>
+                    <title>
+Paramètres                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>x</entry>
+                                <entry>
+<para>: coordonnée horizontale du cubie </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>y</entry>
+                                <entry>
+<para>: coordonnée verticale du cubie </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>num</entry>
+                                <entry>
+<para>: Numéro du cubie dans la face : de 0 à 8 </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>type</entry>
+                                <entry>
+<para>: Type de cubie, CORNER, EDGE ou CENTER </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>color</entry>
+                                <entry>
+<para>: Couleur du cubie </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>cubie_side</entry>
+                                <entry>
+<para>: Face de rattachement du cubie </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>neighbours[2]</entry>
+                                <entry>
+<para>: Définition des faces adjacentes au cubie. Il peut y en avoir 2 pour un CORNER et 1 pour un EDGE </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Définition à la ligne 33 du fichier rubiks.h.</para>
+</section>
+<section>
+<title>Documentation des champs</title>
+<anchor xml:id="_structcubies_1a49e9cbc5b9c8b22f557f93668e540861"/>    <section>
+    <title>color</title>
+<indexterm><primary>color</primary><secondary>cubies</secondary></indexterm>
+<indexterm><primary>cubies</primary><secondary>color</secondary></indexterm>
+<para><computeroutput><link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> color</computeroutput></para><para>
+Définition à la ligne 38 du fichier rubiks.h.</para>
+    </section><anchor xml:id="_structcubies_1a0fbf15c0cf39016f52109c35f6e90440"/>    <section>
+    <title>cubie_side</title>
+<indexterm><primary>cubie_side</primary><secondary>cubies</secondary></indexterm>
+<indexterm><primary>cubies</primary><secondary>cubie_side</secondary></indexterm>
+<para><computeroutput><link linkend="_rubiks_8h_1a0c81736dcbdca8c09395ec08d7f198a1">T_COLOR</link> cubie_side</computeroutput></para><para>
+Définition à la ligne 39 du fichier rubiks.h.</para>
+    </section><anchor xml:id="_structcubies_1ad2af505fc55f5268b2380547c24c539c"/>    <section>
+    <title>neighbours</title>
+<indexterm><primary>neighbours</primary><secondary>cubies</secondary></indexterm>
+<indexterm><primary>cubies</primary><secondary>neighbours</secondary></indexterm>
+<para><computeroutput><link linkend="_structneighbour">neighbour</link> neighbours[2]</computeroutput></para><para>
+Définition à la ligne 40 du fichier rubiks.h.</para>
+    </section><anchor xml:id="_structcubies_1a86cf672daa4e0ad11ad10efc894d19c8"/>    <section>
+    <title>num</title>
+<indexterm><primary>num</primary><secondary>cubies</secondary></indexterm>
+<indexterm><primary>cubies</primary><secondary>num</secondary></indexterm>
+<para><computeroutput>int num</computeroutput></para><para>
+Définition à la ligne 36 du fichier rubiks.h.</para>
+    </section><anchor xml:id="_structcubies_1acf511a024691b62d2b3c55e785c30e73"/>    <section>
+    <title>type</title>
+<indexterm><primary>type</primary><secondary>cubies</secondary></indexterm>
+<indexterm><primary>cubies</primary><secondary>type</secondary></indexterm>
+<para><computeroutput><link linkend="_rubiks_8h_1a495dfa40e670a9d2022d28afe2f40cf9">T_CUBIE_TYPE</link> type</computeroutput></para><para>
+Définition à la ligne 37 du fichier rubiks.h.</para>
+    </section><anchor xml:id="_structcubies_1a6150e0515f7202e2fb518f7206ed97dc"/>    <section>
+    <title>x</title>
+<indexterm><primary>x</primary><secondary>cubies</secondary></indexterm>
+<indexterm><primary>cubies</primary><secondary>x</secondary></indexterm>
+<para><computeroutput>int x</computeroutput></para><para>
+Définition à la ligne 34 du fichier rubiks.h.</para>
+    </section><anchor xml:id="_structcubies_1a0a2f84ed7838f07779ae24c5a9086d33"/>    <section>
+    <title>y</title>
+<indexterm><primary>y</primary><secondary>cubies</secondary></indexterm>
+<indexterm><primary>cubies</primary><secondary>y</secondary></indexterm>
+<para><computeroutput>int y</computeroutput></para><para>
+Définition à la ligne 35 du fichier rubiks.h.</para>
+</section>
+<para>
+La documentation de cette structure a été générée à partir du fichier suivant :</para>
+<link linkend="_rubiks_8h">rubiks.h</link></section>
+</section>

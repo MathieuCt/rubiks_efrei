@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Rubiks Cube EFREI:  Fichier source de rubiks.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Rubiks Cube EFREI
+   &#160;<span id="projectnumber">Mathieu et Clément</span>
+   </div>
+   <div id="projectbrief">Projet première année EFREI : Résolution d&#39;un Rubik&#39;s Cube</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">rubiks.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="rubiks_8c.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rubiks_8h.html">rubiks.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="rubiks_8c.html#acf98c40c9281734415ab7b5bf46a188f">   22</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="rubiks_8c.html#acf98c40c9281734415ab7b5bf46a188f">rubiks_creation</a>(<a class="code" href="structrubiks__side.html">rubiks_side</a> *rubiks) {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">int</span> face, cubie;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// On va former chacune des faces et à chaque fois définir ses voisins et son opposé</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">for</span> (face = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a>; face &lt;= <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a>; face++) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        rubiks[face].<a class="code" href="structrubiks__side.html#a543e33c1a828f4647890e707281bf2e1">side</a> = face;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="comment">// On considère que la face en cours de création est face à nous.</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="comment">// Et à chaque fois on détermine les adjacents de la face en cours de traitement, ainsi que sa face opposée</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">switch</span> (face) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79">BLUE</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88">RED</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca">GREEN</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065">LEFT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4">ORANGE</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#ae957b20fa93b66a45869a8d1f0bd4fbd">opposite_side</a> = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4">ORANGE</a>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca">GREEN</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065">LEFT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79">BLUE</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#ae957b20fa93b66a45869a8d1f0bd4fbd">opposite_side</a> = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88">RED</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca">GREEN</a>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88">RED</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065">LEFT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4">ORANGE</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#ae957b20fa93b66a45869a8d1f0bd4fbd">opposite_side</a> = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79">BLUE</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88">RED</a>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79">BLUE</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065">LEFT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca">GREEN</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#ae957b20fa93b66a45869a8d1f0bd4fbd">opposite_side</a> = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4">ORANGE</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79">BLUE</a>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4">ORANGE</a>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065">LEFT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88">RED</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#ae957b20fa93b66a45869a8d1f0bd4fbd">opposite_side</a> = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca">GREEN</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca">GREEN</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88">RED</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79">BLUE</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[<a class="code" href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065">LEFT</a>] = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4">ORANGE</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#ae957b20fa93b66a45869a8d1f0bd4fbd">opposite_side</a> = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="comment">// Initialisation des cubies de la face en cours de traitement. On parcourt donc le tableau de 0 à 8</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">for</span> (cubie = 0; cubie &lt; 9; cubie++) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="comment">// donner a chaque cubie la couleur de sa face</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#a49e9cbc5b9c8b22f557f93668e540861">color</a> = rubiks[face].<a class="code" href="structrubiks__side.html#a543e33c1a828f4647890e707281bf2e1">side</a>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="comment">// donner à chaque cubie la couleur de sa face</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="comment">// On sauvegarde la face de rattachement du cubie en cours</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#a0fbf15c0cf39016f52109c35f6e90440">cubie_side</a> = rubiks[face].<a class="code" href="structrubiks__side.html#a543e33c1a828f4647890e707281bf2e1">side</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="comment">// On défini le type de cubie en cours de traitement, c&#39;est soit un coin, soit un côté, soit un centre</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">if</span> (cubie == 0 || cubie == 2 || cubie == 6 || cubie == 8) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#acf511a024691b62d2b3c55e785c30e73">type</a> = <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea">CORNER</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordflow">if</span> (cubie == 4) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#acf511a024691b62d2b3c55e785c30e73">type</a> = <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a2159ffbd3a68037511ab5ab4dd35ace7">CENTER</a>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">if</span> (cubie == 1 || cubie == 3 || cubie == 5 || cubie == 7) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#acf511a024691b62d2b3c55e785c30e73">type</a> = <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9aa622cbc12b78e3e883dd7b3217088a66">EDGE</a>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="comment">// On sauvegarde le numéro de cubie</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#a86cf672daa4e0ad11ad10efc894d19c8">num</a> = cubie;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="comment">// Et enfin, on défini ses coordonnées car elles nous servirons aux rendus à l&#39;écran</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#a6150e0515f7202e2fb518f7206ed97dc">x</a> = rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#a86cf672daa4e0ad11ad10efc894d19c8">num</a> % 3;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#a0a2f84ed7838f07779ae24c5a9086d33">y</a> = (rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#a86cf672daa4e0ad11ad10efc894d19c8">num</a> - rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#a6150e0515f7202e2fb518f7206ed97dc">x</a>) / 3;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// Et enfin on défini les faces adjacentes</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="rubiks_8c.html#a1ef9b66b32521e9c1ef2c3055306e8d8">rubiks_neighbour</a>(rubiks);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="rubiks_8c.html#a1ef9b66b32521e9c1ef2c3055306e8d8">  111</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="rubiks_8c.html#a1ef9b66b32521e9c1ef2c3055306e8d8">rubiks_neighbour</a>(<a class="code" href="structrubiks__side.html">rubiks_side</a> *rubiks) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">// initialiser les voisins</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">int</span> face, cubie;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">int</span> side_relative, side_abs;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">for</span> (face = <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a>; face &lt;= <a class="code" href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a>; face++) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">for</span> (cubie = 0; cubie &lt; 9; cubie++) {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="comment">// si le cubie est de type edge, un seul voisin</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordflow">if</span> (rubiks[face].cubie[cubie].type == <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9aa622cbc12b78e3e883dd7b3217088a66">EDGE</a>){</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <span class="comment">//position relative de la face voisine, position absolu</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                <span class="comment">// trouver à côté de quelle face (relative) le cubie est en fonction de ses coordonnées</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                <span class="comment">// soit il a y = 0 (en haut)</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <span class="keywordflow">if</span> (rubiks[face].cubie[cubie].y == 0){</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    side_relative = 0;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <span class="comment">// en bas</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span>(rubiks[face].cubie[cubie].y == 2){</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                    side_relative = 2;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                    <span class="comment">// au milieu : 2 possibilités</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                    <span class="comment">// il est a gauche</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                    <span class="keywordflow">if</span>(rubiks[face].cubie[cubie].x == 0){</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                        side_relative = 3;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                        <span class="comment">// il est a droite</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                    <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                        side_relative = 1 ;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                <span class="comment">// recuperer la side absolu</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                side_abs = rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[side_relative];</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                <span class="comment">// on met la side absolu comme side voisine du cubie</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[0].<a class="code" href="structneighbour.html#a819a8983128c236ed375533bd7b3c2cb">num_side</a> = side_abs;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                <span class="comment">// recuperer le num du cubie voisin</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[0].<a class="code" href="structneighbour.html#a42eac631ad1547827bb817fc58630cbb">num_cubie</a> = <a class="code" href="rubiks_8c.html#a5a06208470c480f952ae8ac89c1a4e90">research_num</a>(<a class="code" href="rubiks_8c.html#a6f9f514473b39e5edc33bb8227e7e138">research_side</a>(rubiks,face, side_abs), <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9aa622cbc12b78e3e883dd7b3217088a66">EDGE</a>,0);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <span class="comment">// mise a -1 du 2nd voisin</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[1].<a class="code" href="structneighbour.html#a819a8983128c236ed375533bd7b3c2cb">num_side</a> = -1;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[1].<a class="code" href="structneighbour.html#a42eac631ad1547827bb817fc58630cbb">num_cubie</a> = -1;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="comment">// position initiale</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">if</span> (rubiks[face].cubie[cubie].type == <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea">CORNER</a>){</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                <span class="comment">// 2 voisins pour un corner</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                <span class="keywordtype">int</span> side_relative2, side_abs2;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <span class="keywordflow">if</span>(rubiks[face].cubie[cubie].y == 0) {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                    <span class="keywordflow">if</span> (rubiks[face].cubie[cubie].x == 0) {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                        side_relative = 3;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                        side_relative2 = 0;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                        side_relative = 0;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                        side_relative2 = 1;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    <span class="keywordflow">if</span> (rubiks[face].cubie[cubie].x == 0) {</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                        side_relative = 2;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                        side_relative2 = 3;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                        side_relative = 1;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                        side_relative2 = 2;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                    }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                side_abs = rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[side_relative];</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                side_abs2 = rubiks[face].<a class="code" href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">neighbour_side</a>[side_relative2];</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[0].<a class="code" href="structneighbour.html#a819a8983128c236ed375533bd7b3c2cb">num_side</a> = side_abs;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[1].<a class="code" href="structneighbour.html#a819a8983128c236ed375533bd7b3c2cb">num_side</a> = side_abs2;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[0].<a class="code" href="structneighbour.html#a42eac631ad1547827bb817fc58630cbb">num_cubie</a> = <a class="code" href="rubiks_8c.html#a5a06208470c480f952ae8ac89c1a4e90">research_num</a>(<a class="code" href="rubiks_8c.html#a6f9f514473b39e5edc33bb8227e7e138">research_side</a>(rubiks,face, side_abs), <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea">CORNER</a>,<a class="code" href="rubiks_8c.html#a6f9f514473b39e5edc33bb8227e7e138">research_side</a>(rubiks,side_abs2, side_abs));</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[1].<a class="code" href="structneighbour.html#a42eac631ad1547827bb817fc58630cbb">num_cubie</a> = <a class="code" href="rubiks_8c.html#a5a06208470c480f952ae8ac89c1a4e90">research_num</a>(<a class="code" href="rubiks_8c.html#a6f9f514473b39e5edc33bb8227e7e138">research_side</a>(rubiks,face, side_abs2), <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea">CORNER</a>,<a class="code" href="rubiks_8c.html#a6f9f514473b39e5edc33bb8227e7e138">research_side</a>(rubiks,side_abs, side_abs2));</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <span class="keywordflow">if</span> (rubiks[face].cubie[cubie].type == <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a2159ffbd3a68037511ab5ab4dd35ace7">CENTER</a>){</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[0].<a class="code" href="structneighbour.html#a819a8983128c236ed375533bd7b3c2cb">num_side</a> = rubiks[face].<a class="code" href="structrubiks__side.html#ae957b20fa93b66a45869a8d1f0bd4fbd">opposite_side</a>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[0].<a class="code" href="structneighbour.html#a42eac631ad1547827bb817fc58630cbb">num_cubie</a> = 4;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                <span class="comment">// mise a -1 du 2nd voisin</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[1].<a class="code" href="structneighbour.html#a819a8983128c236ed375533bd7b3c2cb">num_side</a> = -1;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                rubiks[face].<a class="code" href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">cubie</a>[cubie].<a class="code" href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">neighbours</a>[1].<a class="code" href="structneighbour.html#a42eac631ad1547827bb817fc58630cbb">num_cubie</a> = -1;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;}</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="rubiks_8c.html#a6f9f514473b39e5edc33bb8227e7e138">  201</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="rubiks_8c.html#a6f9f514473b39e5edc33bb8227e7e138">research_side</a>(<a class="code" href="structrubiks__side.html">rubiks_side</a> *rubiks, <span class="keywordtype">int</span> side, <span class="keywordtype">int</span> neighbour_face){</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="comment">// neighbour_face ( pos abs de la face voisine)</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="comment">// side : face principale</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="comment">// face : variable locale pour parcourir la liste de voisin de neighbour side</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> face = 0 ; face &lt; 4 ; face++){</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">if</span> (rubiks[neighbour_face].neighbour_side[face] == side) {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">return</span> face ;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    }</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="rubiks_8c.html#a5a06208470c480f952ae8ac89c1a4e90">  221</a></span>&#160;<span class="comment"></span><span class="keywordtype">int</span> <a class="code" href="rubiks_8c.html#a5a06208470c480f952ae8ac89c1a4e90">research_num</a>( <span class="keywordtype">int</span> side, <span class="keywordtype">int</span> type, <span class="keywordtype">int</span> side2 ){</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="comment">// pour une arrete</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">if</span> (type == <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9aa622cbc12b78e3e883dd7b3217088a66">EDGE</a>){</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keywordflow">switch</span> (side) {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <span class="keywordflow">case</span> 0 :</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keywordflow">case</span> 1 :</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                <span class="keywordflow">return</span> 5;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="keywordflow">case</span> 2 :</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="keywordflow">return</span> 7 ;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <span class="keywordflow">case</span> 3 :</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                <span class="keywordflow">return</span> 3;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        }</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    }</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="comment">//pour un coin, besoin de 2 faces pour définir le num</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordflow">if</span>(type == <a class="code" href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea">CORNER</a>){</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keywordflow">switch</span> (side) {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="comment">//cas du top</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <span class="keywordflow">case</span> 0 :</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                <span class="keywordflow">if</span>(side2 == 1){</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                    <span class="keywordflow">return</span> 2;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                }</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordflow">case</span> 1 :</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                <span class="keywordflow">if</span>(side2 == 0){</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                    <span class="keywordflow">return</span> 2;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                    <span class="keywordflow">return</span> 8;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <span class="keywordflow">case</span> 2 :</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                <span class="keywordflow">if</span>(side2 == 1){</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                    <span class="keywordflow">return</span> 8;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                }</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                    <span class="keywordflow">return</span> 6;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="keywordflow">case</span> 3 :</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                <span class="keywordflow">if</span>(side2 == 2){</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                    <span class="keywordflow">return</span> 6;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                }</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    }</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;}</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
+<div class="ttc" id="arubiks_8c_html_a1ef9b66b32521e9c1ef2c3055306e8d8"><div class="ttname"><a href="rubiks_8c.html#a1ef9b66b32521e9c1ef2c3055306e8d8">rubiks_neighbour</a></div><div class="ttdeci">void rubiks_neighbour(rubiks_side *rubiks)</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8c_source.html#l00111">rubiks.c:111</a></div></div>
+<div class="ttc" id="arubiks_8c_html_a5a06208470c480f952ae8ac89c1a4e90"><div class="ttname"><a href="rubiks_8c.html#a5a06208470c480f952ae8ac89c1a4e90">research_num</a></div><div class="ttdeci">int research_num(int side, int type, int side2)</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8c_source.html#l00221">rubiks.c:221</a></div></div>
+<div class="ttc" id="arubiks_8c_html_a6f9f514473b39e5edc33bb8227e7e138"><div class="ttname"><a href="rubiks_8c.html#a6f9f514473b39e5edc33bb8227e7e138">research_side</a></div><div class="ttdeci">int research_side(rubiks_side *rubiks, int side, int neighbour_face)</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8c_source.html#l00201">rubiks.c:201</a></div></div>
+<div class="ttc" id="arubiks_8c_html_acf98c40c9281734415ab7b5bf46a188f"><div class="ttname"><a href="rubiks_8c.html#acf98c40c9281734415ab7b5bf46a188f">rubiks_creation</a></div><div class="ttdeci">void rubiks_creation(rubiks_side *rubiks)</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8c_source.html#l00022">rubiks.c:22</a></div></div>
+<div class="ttc" id="arubiks_8h_html"><div class="ttname"><a href="rubiks_8h.html">rubiks.h</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50"><div class="ttname"><a href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a283fc479650da98250635b9c3c0e7e50">WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00008">rubiks.h:8</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79"><div class="ttname"><a href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1a35d6719cb4d7577c031b3d79057a1b79">BLUE</a></div><div class="ttdeci">@ BLUE</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00008">rubiks.h:8</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca"><div class="ttname"><a href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1aa60bd322f93178d68184e30e162571ca">GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00008">rubiks.h:8</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4"><div class="ttname"><a href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ace9ee4c1a6b777940c7f3a766a9a88d4">ORANGE</a></div><div class="ttdeci">@ ORANGE</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00008">rubiks.h:8</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2"><div class="ttname"><a href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1ae735a848bf82163a19236ead1c3ef2d2">YELLOW</a></div><div class="ttdeci">@ YELLOW</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00008">rubiks.h:8</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88"><div class="ttname"><a href="rubiks_8h.html#a0c81736dcbdca8c09395ec08d7f198a1af80f9a890089d211842d59625e561f88">RED</a></div><div class="ttdeci">@ RED</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00008">rubiks.h:8</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a495dfa40e670a9d2022d28afe2f40cf9a2159ffbd3a68037511ab5ab4dd35ace7"><div class="ttname"><a href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a2159ffbd3a68037511ab5ab4dd35ace7">CENTER</a></div><div class="ttdeci">@ CENTER</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00010">rubiks.h:10</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea"><div class="ttname"><a href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9a91c566614c1c87c437ab3d686408e9ea">CORNER</a></div><div class="ttdeci">@ CORNER</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00010">rubiks.h:10</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a495dfa40e670a9d2022d28afe2f40cf9aa622cbc12b78e3e883dd7b3217088a66"><div class="ttname"><a href="rubiks_8h.html#a495dfa40e670a9d2022d28afe2f40cf9aa622cbc12b78e3e883dd7b3217088a66">EDGE</a></div><div class="ttdeci">@ EDGE</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00010">rubiks.h:10</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da"><div class="ttname"><a href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fcca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a></div><div class="ttdeci">@ DOWN</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00009">rubiks.h:9</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa"><div class="ttname"><a href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaba595d8bca8bc5e67c37c0a9d89becfa">UP</a></div><div class="ttdeci">@ UP</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00009">rubiks.h:9</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065"><div class="ttname"><a href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccadb45120aafd37a973140edee24708065">LEFT</a></div><div class="ttdeci">@ LEFT</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00009">rubiks.h:9</a></div></div>
+<div class="ttc" id="arubiks_8h_html_a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38"><div class="ttname"><a href="rubiks_8h.html#a78dddd55a99bd1513938709ea9e02fccaec8379af7490bb9eaaf579cf17876f38">RIGHT</a></div><div class="ttdeci">@ RIGHT</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00009">rubiks.h:9</a></div></div>
+<div class="ttc" id="astructcubies_html_a0a2f84ed7838f07779ae24c5a9086d33"><div class="ttname"><a href="structcubies.html#a0a2f84ed7838f07779ae24c5a9086d33">cubies::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00035">rubiks.h:35</a></div></div>
+<div class="ttc" id="astructcubies_html_a0fbf15c0cf39016f52109c35f6e90440"><div class="ttname"><a href="structcubies.html#a0fbf15c0cf39016f52109c35f6e90440">cubies::cubie_side</a></div><div class="ttdeci">T_COLOR cubie_side</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00039">rubiks.h:39</a></div></div>
+<div class="ttc" id="astructcubies_html_a49e9cbc5b9c8b22f557f93668e540861"><div class="ttname"><a href="structcubies.html#a49e9cbc5b9c8b22f557f93668e540861">cubies::color</a></div><div class="ttdeci">T_COLOR color</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00038">rubiks.h:38</a></div></div>
+<div class="ttc" id="astructcubies_html_a6150e0515f7202e2fb518f7206ed97dc"><div class="ttname"><a href="structcubies.html#a6150e0515f7202e2fb518f7206ed97dc">cubies::x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00034">rubiks.h:34</a></div></div>
+<div class="ttc" id="astructcubies_html_a86cf672daa4e0ad11ad10efc894d19c8"><div class="ttname"><a href="structcubies.html#a86cf672daa4e0ad11ad10efc894d19c8">cubies::num</a></div><div class="ttdeci">int num</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00036">rubiks.h:36</a></div></div>
+<div class="ttc" id="astructcubies_html_acf511a024691b62d2b3c55e785c30e73"><div class="ttname"><a href="structcubies.html#acf511a024691b62d2b3c55e785c30e73">cubies::type</a></div><div class="ttdeci">T_CUBIE_TYPE type</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00037">rubiks.h:37</a></div></div>
+<div class="ttc" id="astructcubies_html_ad2af505fc55f5268b2380547c24c539c"><div class="ttname"><a href="structcubies.html#ad2af505fc55f5268b2380547c24c539c">cubies::neighbours</a></div><div class="ttdeci">neighbour neighbours[2]</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00040">rubiks.h:40</a></div></div>
+<div class="ttc" id="astructneighbour_html_a42eac631ad1547827bb817fc58630cbb"><div class="ttname"><a href="structneighbour.html#a42eac631ad1547827bb817fc58630cbb">neighbour::num_cubie</a></div><div class="ttdeci">int num_cubie</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00020">rubiks.h:20</a></div></div>
+<div class="ttc" id="astructneighbour_html_a819a8983128c236ed375533bd7b3c2cb"><div class="ttname"><a href="structneighbour.html#a819a8983128c236ed375533bd7b3c2cb">neighbour::num_side</a></div><div class="ttdeci">T_COLOR num_side</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00019">rubiks.h:19</a></div></div>
+<div class="ttc" id="astructrubiks__side_html"><div class="ttname"><a href="structrubiks__side.html">rubiks_side</a></div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00050">rubiks.h:50</a></div></div>
+<div class="ttc" id="astructrubiks__side_html_a197e23fdec0fc2d081a55e62b696ab48"><div class="ttname"><a href="structrubiks__side.html#a197e23fdec0fc2d081a55e62b696ab48">rubiks_side::neighbour_side</a></div><div class="ttdeci">T_COLOR neighbour_side[4]</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00051">rubiks.h:51</a></div></div>
+<div class="ttc" id="astructrubiks__side_html_a543e33c1a828f4647890e707281bf2e1"><div class="ttname"><a href="structrubiks__side.html#a543e33c1a828f4647890e707281bf2e1">rubiks_side::side</a></div><div class="ttdeci">T_COLOR side</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00053">rubiks.h:53</a></div></div>
+<div class="ttc" id="astructrubiks__side_html_aaa9a9a8d6cb90845b5fefd010dfd9724"><div class="ttname"><a href="structrubiks__side.html#aaa9a9a8d6cb90845b5fefd010dfd9724">rubiks_side::cubie</a></div><div class="ttdeci">cubies cubie[9]</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00054">rubiks.h:54</a></div></div>
+<div class="ttc" id="astructrubiks__side_html_ae957b20fa93b66a45869a8d1f0bd4fbd"><div class="ttname"><a href="structrubiks__side.html#ae957b20fa93b66a45869a8d1f0bd4fbd">rubiks_side::opposite_side</a></div><div class="ttdeci">T_COLOR opposite_side</div><div class="ttdef"><b>Definition:</b> <a href="rubiks_8h_source.html#l00052">rubiks.h:52</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
