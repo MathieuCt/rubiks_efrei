@@ -1,6 +1,10 @@
-//
-// Created by clestrat on 19/04/2021.
-//
+/**
+* @file main.c
+* @author Mathieu CHANTOT et Clément LE STRAT
+* @date 7 Mai 2021
+* @brief Programme principal qui gère le projet EFREI Rubik's Cube
+*/
+
 #include <stdlib.h>
 #include <signal.h>
 #include <locale.h>
