@@ -232,8 +232,6 @@ void right_move(rubiks_side *rubiks, cubies cubie){
      move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
      move_side_anticlockwise(rubiks, YELLOW);
      move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
-
-
 }
 /**
  * Cette fontion permet de déplacer une arète correctement positionné de la 3ème couronne à la 2ème couronne
