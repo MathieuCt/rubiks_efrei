@@ -1,5 +1,8 @@
 /**
- * Dans ce fichier, on gère toutes les propriétés du Rubik's Cube, depuis sa création, la gestion des faces
+ * @file rubiks.c
+ * @author Mathieu CHANTOT et Clément LE STRAT
+ * @date 7 Mai 2021
+ * @brief Dans ce fichier, on gère toutes les propriétés du Rubik's Cube, depuis sa création, la gestion des faces
  * adjacentes, et les recherches associées (recherche par couleur, ou depuis la couleur).
  */
 #include <stdio.h>
@@ -10,6 +13,7 @@
  * Initialisation du rubik's cube. Au départ, il est résolu.<br><br>
  * Dans cette fonction, et dans toutes celles qui en découlent, on considère que la face en cours de traitement est face
  * à nous. Puis on se réfère au fichier ./doc/reference_rubiks_excel.png pour déterminer les adjacents.
+ * todo : remplacer Exemple. Pas supporté par Doxygen
  * \Exemple
  * Si on prend la face blanche en exemple :<br>
  * - La face au dessus est la face bleue<br>
