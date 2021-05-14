@@ -12,19 +12,37 @@
 // Nombre de colonnes. La deuxième ligne comporte 4 faces.
 #define RUBIK_COLS 4
 
-// Taille d'un carré du Rubik's cube
+/** @def SQ_HEIGHT
+    @brief Hauteur en nombre de caractères d'un cubie avec nCurses
+*/
 #define SQ_HEIGHT 4
+/** @def SQ_WIDTH
+    @brief Largeur en nombre de caractères d'un cubie avec nCurses
+*/
 #define SQ_WIDTH 8
 
-// Nombre de carrés dans un Rubik's cube. A mon avis, ne servira pas.
+/** @def SQUARES
+     @brief Nombre de carrés dans un Rubik's cube. A mon avis, ne servira pas.
+*/
 #define SQUARES ((RUBIK_LINES * 3) * (RUBIK_COLS * 3))
 
-// Nombre de couleurs gérés par le terminal, nécessaire pour faire tourner le programme.
+/** @def MIN_COLORS_NUMBER
+    @brief Nombre de couleurs gérés par le terminal, nécessaire pour faire tourner le programme.
+*/
 #define MIN_COLORS_NUMBER 256
 
 // Les erreurs possibles lors de la vérification du terminal.
+/** @def TERM_NOT_BIG_ENOUGH
+    @brief Le terminal n'est pas assez grand pour afficher le Rubik's cube avec nCurses
+*/
 #define TERM_NOT_BIG_ENOUGH 1
+/** @def TERM_HAS_NO_COLORS
+    @brief Le terminal ne gère pas les couleurs.
+*/
 #define TERM_HAS_NO_COLORS 2
+/** @def TERM_HAS_NOT_ENOUGH_COLORS
+    @brief Le terminal ne gère pas assez de couleurs.
+*/
 #define TERM_HAS_NOT_ENOUGH_COLORS 3
 
 // Ne servira probablement pas, c'est juste un test.
