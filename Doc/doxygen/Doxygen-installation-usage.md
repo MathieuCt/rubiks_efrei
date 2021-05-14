@@ -26,3 +26,4 @@
 * [Using Doxygen](https://lugatgt.org/2002/05/30/using-doxygen/)
 * [Liens vers divers articles](https://www.doxygen.nl/articles.html)
 * [Examples de documentation](https://wiki.scilab.org/Doxygen%20documentation%20Examples)
+* [Documentation du code avec Doxygen](http://tvaira.free.fr/projets/activites/activite-documentation-doxygen.html)
