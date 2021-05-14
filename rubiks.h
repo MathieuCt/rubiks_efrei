@@ -6,14 +6,22 @@
  */
 #ifndef RUBIKS_EFREI_RUBIKS_H
 #define RUBIKS_EFREI_RUBIKS_H
-
+/**
+ * @brief Définition des couleurs des faces et des cubies.
+ */
 typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
+/**
+ * @brief Définition des faces adjacentes à une face du Rubik's Cube.
+ */
 typedef enum {UP, RIGHT, DOWN, LEFT} T_SIDE;
+/**
+ * @brief Définition des types de chaque cubie.
+ */
 typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
 
 //todo : commenter toutes les structures et à quoi servent chacun des membres
 /**
- * Définition des adjacents à un cubie
+ * @brief Définition des adjacents à un cubie
  * @param num_side Face de rattachement du voisin
  * @param num_cubie Numéro du cubie dans sa face de rattachement. De 0 à 8.
  */
@@ -23,7 +31,7 @@ typedef struct {
 } neighbour; //todo : probablement à renommer
 
 /**
- * Définition des cubies, qui sont les petits cubes de couleur rattachés à une face
+ * @brief Définition des cubies, qui sont les petits cubes de couleur rattachés à une face
  * @param x coordonnée horizontale du cubie
  * @param y coordonnée verticale du cubie
  * @param num Numéro du cubie dans la face : de 0 à 8
@@ -39,11 +47,11 @@ typedef struct {
     T_CUBIE_TYPE type;
     T_COLOR color;
     T_COLOR cubie_side;
-    neighbour neighbours[2];
+    neighbour neighbours[2]; /**< Il peut y avoir 1 ou deux cubies adjacent. */
 } cubies;
 
 /**
- * Définition d'une face du Rubik's Cube
+ * @brief Définition d'une face du Rubik's Cube
  * @param neighbour_side[4] Une face a 4 faces adjacentes, UP, DOWN, LEFT, et RIGHT.
  * @param opposite_side Définition de la face opposée.
  * @param side Définition du numéro et couleur de la face. Soir WHITE, ORANGE, GREEN, RED, BLUE, ou YELLOW
@@ -53,7 +61,7 @@ typedef struct {
     T_COLOR neighbour_side[4];
     T_COLOR opposite_side;
     T_COLOR side;
-    cubies cubie[9];
+    cubies cubie[9]; /**< 9 cubies par face. */
 } rubiks_side;
 
 void rubiks_creation(rubiks_side *rubiks);
