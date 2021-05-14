@@ -73,15 +73,15 @@ void rubiks_creation(rubiks_side *rubiks) {
             default:
                 break;
         }
-        // todo : commenter plus précisément cette partie
+        // Initialisation des cubies de la face en cours de traitement. On parcourt donc le tableau de 0 à 8
         for (cubie = 0; cubie < 9; cubie++) {
             // donner a chaque cubie la couleur de sa face
             rubiks[face].cubie[cubie].color = rubiks[face].side;
             // donner à chaque cubie la couleur de sa face
+            // todo : je ne comprends pas cela :
             rubiks[face].cubie[cubie].cubie_side = rubiks[face].side;
 
-            // rubiks[face].cubie[cubie].color = cubie;
-            // rubiks[face].cubie[cubie].type = 1;
+            // On défini le type de cubie en cours de traitement, c'est soit un coin, soit un côté, soit un centre
             if (cubie == 0 || cubie == 2 || cubie == 6 || cubie == 8) {
                 rubiks[face].cubie[cubie].type = CORNER;
             }
@@ -91,8 +91,9 @@ void rubiks_creation(rubiks_side *rubiks) {
             if (cubie == 1 || cubie == 3 || cubie == 5 || cubie == 7) {
                 rubiks[face].cubie[cubie].type = EDGE;
             }
+            // On sauvegarde le numéro de cubie
             rubiks[face].cubie[cubie].num = cubie;
-            //      rubiks[face].cubie[cubie].type = type;
+            // Et enfin, on défini ses coordonnées car elles nous servirons aux rendus à l'écran
             rubiks[face].cubie[cubie].x = rubiks[face].cubie[cubie].num % 3;
             rubiks[face].cubie[cubie].y = (rubiks[face].cubie[cubie].num - rubiks[face].cubie[cubie].x) / 3;
 
@@ -103,7 +104,7 @@ void rubiks_creation(rubiks_side *rubiks) {
 }
 
 /**
- * todo : explications
+ * todo : explications à réaliser
  * @param rubiks : Un pointeur vers une structure rubiks_side
  */
 void rubiks_neighbour(rubiks_side *rubiks) {
