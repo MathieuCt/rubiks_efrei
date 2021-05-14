@@ -21,7 +21,7 @@
   * La commande va sortir des logs, dont potentiellement des erreurs. Il est important de vérifier.
   * Elle est, pour le moment, aux formats HTML, RTF, Docbook, et Latex.
   * Pour lire, par exemple, la documentation au format HTML, il suffit d'aller dans le répertoire ./Doc/doxygen/Ouput/html et d'ouvrir le fichier index.html. Le résultat va s'ouvrir dans votre navigateur par défaut.
-  * Pour générer une documentation PDF, aller dans le répertoire ```cd Doc/doxygen/output/latex``` et lancer la commande ```pdflatex refman.tex```. Il suffira d'ouvrir le fichier refman.pdf généré dans ce même répertoire.
+  * Pour générer une documentation PDF, aller dans le répertoire ```cd Doc/doxygen/output/latex``` et lancer la commande ```pdflatex refman.tex``` ou mieux ```make```. Il suffira d'ouvrir le fichier refman.pdf généré dans ce même répertoire.
 ## Références
 * [Using Doxygen](https://lugatgt.org/2002/05/30/using-doxygen/)
 * [Liens vers divers articles](https://www.doxygen.nl/articles.html)
