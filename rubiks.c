@@ -78,7 +78,7 @@ void rubiks_creation(rubiks_side *rubiks) {
             // donner a chaque cubie la couleur de sa face
             rubiks[face].cubie[cubie].color = rubiks[face].side;
             // donner à chaque cubie la couleur de sa face
-            // todo : je ne comprends pas cela :
+            // On sauvegarde la face de rattachement du cubie en cours
             rubiks[face].cubie[cubie].cubie_side = rubiks[face].side;
 
             // On défini le type de cubie en cours de traitement, c'est soit un coin, soit un côté, soit un centre
@@ -99,6 +99,7 @@ void rubiks_creation(rubiks_side *rubiks) {
 
         }
     }
+
     // Et enfin on défini les faces adjacentes
     rubiks_neighbour(rubiks);
 }
