@@ -15,10 +15,10 @@
 
 /**
  * Cette fonction permet de déplacer un coin du cube, depuis "from" vers "to"
- * @param rubiks : Un pointeur vers une structure rubiks_side
- * @param side : La face du rubiks à traiter
- * @param from : Déplacer depuis ce cubie
- * @param to : Déplacer vers ce cubie
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ * @param side La face du rubiks à traiter
+ * @param from Déplacer depuis ce cubie
+ * @param to Déplacer vers ce cubie
  */
 void move_coin(rubiks_side *rubiks, int side, int from, int to) {
     // On commence par faire tourner le coin.
@@ -33,10 +33,10 @@ void move_coin(rubiks_side *rubiks, int side, int from, int to) {
 
 /**
  * Cette fonction permet de déplacer une arête depuis "from" vers "to"
- * @param rubiks : Un pointeur vers une structure rubiks_side
- * @param side : La face du rubiks à traiter
- * @param from : Déplacer depuis ce cubie
- * @param to : Déplacer vers ce cubie
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ * @param side La face du rubiks à traiter
+ * @param from Déplacer depuis ce cubie
+ * @param to Déplacer vers ce cubie
  */
 void move_edge(rubiks_side *rubiks, int side, int from, int to) {
     rubiks[side].cubie[to].color = rubiks[side].cubie[from].color;
@@ -46,8 +46,8 @@ void move_edge(rubiks_side *rubiks, int side, int from, int to) {
 
 /**
  * cette fonction permet de faire tourner la face side du cube dans le sens horaire
- * @param rubiks : Un pointeur vers une structure rubiks_side
- * @param side : La face à faire tourner dans le sens horaire
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ * @param side La face à faire tourner dans le sens horaire
  */
 void move_side_clockwise(rubiks_side *rubiks, int side){
     int tmp1, tmp2, tmp3;
@@ -118,8 +118,8 @@ void move_side_clockwise(rubiks_side *rubiks, int side){
 /**
  * Cette fonction fait tourner la face side dans le sens anti-horaire. En réalité, cela revient à tourner trois
  * fois dans le sens horaire
- * @param rubiks : Un pointeur vers une structure rubiks_side
- * @param side : La face à faire tourner dans le sens horaire
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ * @param side La face à faire tourner dans le sens horaire
  */
 void move_side_anticlockwise(rubiks_side *rubiks, int side){
     // On appelle trois fois la fonction move_side_clockwise, plutôt que de faire une fonction inverse.
@@ -132,7 +132,7 @@ void move_side_anticlockwise(rubiks_side *rubiks, int side){
 /**
  * Cette fonction permet de mélanger le cube de manière aléatoire. Elle choisit entre 20 et 30 mouvements à réaliser
  * tout en choisissant une face à déplacer, au hasard.
- * @param rubiks : un pointeur vers une structure rubiks_side
+ * @param rubiks un pointeur vers une structure rubiks_side
  */
 void mix_rubiks(rubiks_side *rubiks){
     // On initialise le système de hasard en fonction de l'heure
@@ -148,7 +148,7 @@ void mix_rubiks(rubiks_side *rubiks){
 
 /**
  *  Cette fonction permet de créer un damier de couleurs
- * @param rubiks : un pointeur vers une structure rubiks_side
+ * @param rubiks un pointeur vers une structure rubiks_side
  */
 void alternate_color(rubiks_side * rubiks){
     move_side_clockwise(rubiks, 0);
@@ -167,7 +167,7 @@ void alternate_color(rubiks_side * rubiks){
 
 /**
  * Cette fonction permet de résoudre le cube.
- * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void solve_rubiks(rubiks_side *rubiks){
     // On commence par la résolution de la face blanche
@@ -176,7 +176,7 @@ void solve_rubiks(rubiks_side *rubiks){
 
 /**
  * Cette fonction cherche à résoudre la face blanche du Rubik's Cube
- * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void solve_white_side(rubiks_side * rubiks){
     // On commence par la croix blanche
@@ -344,10 +344,10 @@ void solve_white_side(rubiks_side * rubiks){
 
 /**
  * Cette fonction permet de trouver un cubie en fonction de sa couleur et celle de ses voisins
- * @param rubiks : Un pointeur vers une structure rubiks_side
- * @param cubie_color : couleur du cubie que l'on cherche
- * @param neighbour1 : couleur du premier voisin du cubie recherché
- * @param cubie_type : type du cubie recherché
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ * @param cubie_color couleur du cubie que l'on cherche
+ * @param neighbour1 couleur du premier voisin du cubie recherché
+ * @param cubie_type type du cubie recherché
  * @return toutes les information sur un cubie une fois qu'il a été trouvé
  */
 cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour1, T_CUBIE_TYPE cubie_type){

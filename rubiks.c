@@ -19,7 +19,7 @@
  * - La face à sa gauche est la face orange
  * - La face sous-elle est la face verte
  * - La face opposée ne change jamais, dans le cas de la blanche, il s'agit de la face jaune.
- * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void rubiks_creation(rubiks_side *rubiks) {
     int face, cubie;
@@ -108,7 +108,7 @@ void rubiks_creation(rubiks_side *rubiks) {
 
 /**
  * todo : explications à réaliser
- * @param rubiks : Un pointeur vers une structure rubiks_side
+ * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void rubiks_neighbour(rubiks_side *rubiks) {
     // initialiser les voisins
@@ -195,10 +195,10 @@ void rubiks_neighbour(rubiks_side *rubiks) {
 
 /**
  * todo : expliquer
- * @param rubiks : Un pointeur vers une structure rubiks_side
- * @param side : La face principale qui nous sert de référence pour la recherche
- * @param neighbour_face : todo : expliquer
- * @return : Renvoi l'indice de la face trouvée ou 0 en cas d'échec de la recherche
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ * @param side La face principale qui nous sert de référence pour la recherche
+ * @param neighbour_face todo : expliquer
+ * @return Renvoi l'indice de la face trouvée ou 0 en cas d'échec de la recherche
  */
 int research_side(rubiks_side *rubiks, int side, int neighbour_face){
     // neighbour_face ( pos abs de la face voisine)
@@ -215,10 +215,10 @@ int research_side(rubiks_side *rubiks, int side, int neighbour_face){
 //
 /**
  * Cette fonction retourne le numéro du cubie selon la position relative de la face de son voisin
- * @param side : todo expliquer
- * @param type : todo expliquer
- * @param side2 : todo expliquer et probablement renommer
- * @return : Renvoi l'indice de lu cubie trouvé, -1 en cas d'erreur, ou 0 en cas d'échec de la recherche
+ * @param side todo expliquer
+ * @param type todo expliquer
+ * @param side2 todo expliquer et probablement renommer
+ * @return Renvoi l'indice de lu cubie trouvé, -1 en cas d'erreur, ou 0 en cas d'échec de la recherche
  */
 int research_num( int side, int type, int side2 ){
     // pour une arrete
