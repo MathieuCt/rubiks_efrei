@@ -1,6 +1,9 @@
-//
-// Created by clestrat on 26/04/2021.
-//
+/**
+ * @file draw.h
+ * @author Mathieu CHANTOT et Clément LE STRAT
+ * @date 7 Mai 2021
+ * @brief Dans ce fichier, on trouve Headers et structures utilisées dans draw.c
+ */
 
 #ifndef RUBIKS_EFREI_DRAW_H
 #define RUBIKS_EFREI_DRAW_H
@@ -8,8 +11,16 @@
 #include "rubiks.h"
 
 // Nombre de lignes graphique pour les faces du cube (La première pour U, la troisième pour D, la deuxième pour le reste.
+/**
+ * @def RUBIK_LINES
+ * @brief Permet de déterminer le nombre de lignes dans la grande matrice nCurses. Il y a trois lignes.
+ */
 #define RUBIK_LINES 3
 // Nombre de colonnes. La deuxième ligne comporte 4 faces.
+/**
+ * @def RUBIK_COLS
+ * @brief Permet de déterminer le nombre de colonnes dans la grande matrice nCurses. Il y a quatre colonnes.
+ */
 #define RUBIK_COLS 4
 
 /** @def SQ_HEIGHT

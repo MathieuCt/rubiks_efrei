@@ -1,6 +1,9 @@
-//
-// Created by clestrat on 26/04/2021.
-//
+/**
+* @file draw.c
+* @author Mathieu CHANTOT et Clément LE STRAT
+* @date 7 Mai 2021
+* @brief Dans ce fichier, on gère les différents affichages du Rubik's Cube.
+*/
 #include "draw.h"
 #include "rubiks.h"
 
@@ -16,11 +19,18 @@ const short BLACK_ON_YELLOW = 6;
 short NB_LINES;
 short NB_COLS;
 
+/**
+ * Détection de l'événement de changement de taille d'une fenêtre. Pas certains de pouvoir gérer ça.
+ * @param dummy Paramètre inutilisé. Il est passé par la fonction d'appel des évenements sur une fenêtre
+ */
 void detect_resize(__attribute__((unused)) int dummy)
 {
     printf("Resized...\n");
 }
 
+/**
+ * Définition des couleurs pour nCurses
+ */
 void set_colors(void)
 {
     /* Création des couleurs écriture, couleur background */
@@ -32,6 +42,10 @@ void set_colors(void)
     init_pair(BLACK_ON_YELLOW, COLOR_BLACK, 226); // Le COLOR_YELLOW n'est pas du jaune...
 }
 
+/**
+ * Vérification du terminal, pour voir si il pourra faire tourner le programme avec nCurses
+ * @return 0 si OK, sinon retourne une erreur différente de 0
+ */
 int check_and_set_term(void)
 {
     // Il faudra vérifier que l'on calcule correctement la taille de la fenêtre que nous attendons.
@@ -202,6 +216,11 @@ void rubiks_display(rubiks_side *rubiks){
     }
 
 }
+
+/**
+ * Dessine le rubik's Cube au format texte, pas au format nCurses
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ */
 void draw_rubiks(rubiks_side *rubiks)
 {
     char tabcolor[] = {'W', 'O', 'G', 'R', 'B', 'Y'};
