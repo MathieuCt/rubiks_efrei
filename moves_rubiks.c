@@ -257,7 +257,6 @@ void solve_white_side(rubiks_side * rubiks){
     // Ensuite, les coins blancs Coins blancs
     // parcourir les coins blanc en fonction de leur premier voisin (suffisant pour les identifier)
     for(T_COLOR i = ORANGE ; i < YELLOW ; i++ ){
-        draw_rubiks(rubiks);
         // chercher la position du premier coin
         cubie = search_cubie(rubiks, WHITE, i,CORNER);
         // si le cubie est sur la 1ère couronne
@@ -318,7 +317,6 @@ void solve_white_side(rubiks_side * rubiks){
         else{
             //un de ses voisin doit être sur la bonne couleur
             while(rubiks[cubie.neighbours[0].num_side].cubie[cubie.neighbours[0].num_cubie].color != rubiks[cubie.neighbours[0].num_side].side && rubiks[cubie.neighbours[1].num_side].cubie[cubie.neighbours[1].num_cubie].color != rubiks[cubie.neighbours[1].num_side].side){
-                draw_rubiks(rubiks);
                 move_side_clockwise(rubiks,YELLOW);
                 cubie = search_cubie(rubiks, WHITE, i, CORNER);
 
