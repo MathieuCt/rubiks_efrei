@@ -1,0 +1,25 @@
+
+\begin{DoxyItemize}
+\item Formation C Open\+Class\+Room \+: \href{https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c}{\texttt{ https\+://openclassrooms.\+com/fr/courses/19980-\/apprenez-\/a-\/programmer-\/en-\/c}}
+\item Gestion des conflits de variables dans fichier .h \+: \href{https://openclassrooms.com/forum/sujet/probleme-de-definitions-multiples}{\texttt{ https\+://openclassrooms.\+com/forum/sujet/probleme-\/de-\/definitions-\/multiples}}
+\item Nous développons sous Linux, en utilisant la librairie ncurses. De base, Clion ne peut pas debugger des programmes C utilisant ncurses \+:
+\begin{DoxyItemize}
+\item \href{https://youtrack.jetbrains.com/issue/CPP-822}{\texttt{ https\+://youtrack.\+jetbrains.\+com/issue/\+CPP-\/822}}
+\item \href{https://youtu.be/2R3OSGmUmoU?t=2015}{\texttt{ https\+://youtu.\+be/2\+R3\+OSGm\+Umo\+U?t=2015}}
+\end{DoxyItemize}
+\item Documentation pour debugger et utiliser ncurses dans Clion est dans le répertoire Doc ~\newline
+
+\item Comment ajouter des librairies dans Clion pour pouvoir compiler \+: \href{https://stackoverflow.com/questions/40710903/undefined-reference-during-linking-using-ncurses-and-cmake}{\texttt{ https\+://stackoverflow.\+com/questions/40710903/undefined-\/reference-\/during-\/linking-\/using-\/ncurses-\/and-\/cmake}} ~\newline
+
+\item Dans notre cas, pour l\textquotesingle{}instant, le fichier CMake\+Lists.\+txt doit contenir, si le nom du projet est XXXX \+: ~\newline
+ cmake\+\_\+minimum\+\_\+required(VERSION 3.\+20) ~\newline
+ project(\+XXXX C) ~\newline
+ set(\+CMAKE\+\_\+\+C\+\_\+\+STANDARD 99) ~\newline
+ add\+\_\+executable(XXXX \mbox{\hyperlink{main_8c}{main.\+c}}) ~\newline
+ target\+\_\+link\+\_\+libraries(\+XXXX curses) ~\newline
+ target\+\_\+link\+\_\+libraries(\+XXXX menu) ~\newline
+
+\item Librairie standard pour gérer des menus (basée sur ncurses) \+: \href{https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/menus.html}{\texttt{ https\+://tldp.\+org/\+HOWTO/\+NCURSES-\/\+Programming-\/\+HOWTO/menus.\+html}}
+\item Comment documenter son code, avec Doxygen dans Clion \+: \href{https://blog.jetbrains.com/clion/2016/05/keep-your-code-documented/}{\texttt{ https\+://blog.\+jetbrains.\+com/clion/2016/05/keep-\/your-\/code-\/documented/}}
+\item Comment utiliser Doxygen pour générer de la documentation \+: \href{https://lugatgt.org/2002/05/30/using-doxygen/}{\texttt{ https\+://lugatgt.\+org/2002/05/30/using-\/doxygen/}} et \href{https://www.doxygen.nl/articles.html}{\texttt{ https\+://www.\+doxygen.\+nl/articles.\+html}} 
+\end{DoxyItemize}

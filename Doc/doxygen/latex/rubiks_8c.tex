@@ -1,0 +1,155 @@
+\hypertarget{rubiks_8c}{}\doxysection{/home/hlestrat/dev/github.com/rubiks\+\_\+efrei/rubiks.c File Reference}
+\label{rubiks_8c}\index{/home/hlestrat/dev/github.com/rubiks\_efrei/rubiks.c@{/home/hlestrat/dev/github.com/rubiks\_efrei/rubiks.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}rubiks.\+h\char`\"{}}\newline
+Include dependency graph for rubiks.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{rubiks_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{rubiks_8c_acf98c40c9281734415ab7b5bf46a188f}{rubiks\+\_\+creation}} (\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$rubiks)
+\item 
+void \mbox{\hyperlink{rubiks_8c_a1ef9b66b32521e9c1ef2c3055306e8d8}{rubiks\+\_\+neighbour}} (\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$rubiks)
+\item 
+int \mbox{\hyperlink{rubiks_8c_a6f9f514473b39e5edc33bb8227e7e138}{research\+\_\+side}} (\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$rubiks, int side, int neighbour\+\_\+face)
+\item 
+int \mbox{\hyperlink{rubiks_8c_a5a06208470c480f952ae8ac89c1a4e90}{research\+\_\+num}} (int side, int type, int side2)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{rubiks_8c_a5a06208470c480f952ae8ac89c1a4e90}\label{rubiks_8c_a5a06208470c480f952ae8ac89c1a4e90}} 
+\index{rubiks.c@{rubiks.c}!research\_num@{research\_num}}
+\index{research\_num@{research\_num}!rubiks.c@{rubiks.c}}
+\doxysubsubsection{\texorpdfstring{research\_num()}{research\_num()}}
+{\footnotesize\ttfamily int research\+\_\+num (\begin{DoxyParamCaption}\item[{int}]{side,  }\item[{int}]{type,  }\item[{int}]{side2 }\end{DoxyParamCaption})}
+
+Cette fonction retourne le numéro du cubie selon la position relative de la face de son voisin 
+\begin{DoxyParams}{Parameters}
+{\em side} & \+: todo expliquer \\
+\hline
+{\em type} & \+: todo expliquer \\
+\hline
+{\em side2} & \+: todo expliquer et probablement renommer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Renvoi l\textquotesingle{}indice de lu cubie trouvé, -\/1 en cas d\textquotesingle{}erreur, ou 0 en cas d\textquotesingle{}échec de la recherche 
+\end{DoxyReturn}
+
+
+Definition at line 221 of file rubiks.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rubiks_8c_a5a06208470c480f952ae8ac89c1a4e90_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rubiks_8c_a6f9f514473b39e5edc33bb8227e7e138}\label{rubiks_8c_a6f9f514473b39e5edc33bb8227e7e138}} 
+\index{rubiks.c@{rubiks.c}!research\_side@{research\_side}}
+\index{research\_side@{research\_side}!rubiks.c@{rubiks.c}}
+\doxysubsubsection{\texorpdfstring{research\_side()}{research\_side()}}
+{\footnotesize\ttfamily int research\+\_\+side (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$}]{rubiks,  }\item[{int}]{side,  }\item[{int}]{neighbour\+\_\+face }\end{DoxyParamCaption})}
+
+todo \+: expliquer 
+\begin{DoxyParams}{Parameters}
+{\em rubiks} & \+: Un pointeur vers une structure \mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} \\
+\hline
+{\em side} & \+: La face principale qui nous sert de référence pour la recherche \\
+\hline
+{\em neighbour\+\_\+face} & \+: todo \+: expliquer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Renvoi l\textquotesingle{}indice de la face trouvée ou 0 en cas d\textquotesingle{}échec de la recherche 
+\end{DoxyReturn}
+
+
+Definition at line 201 of file rubiks.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rubiks_8c_a6f9f514473b39e5edc33bb8227e7e138_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rubiks_8c_acf98c40c9281734415ab7b5bf46a188f}\label{rubiks_8c_acf98c40c9281734415ab7b5bf46a188f}} 
+\index{rubiks.c@{rubiks.c}!rubiks\_creation@{rubiks\_creation}}
+\index{rubiks\_creation@{rubiks\_creation}!rubiks.c@{rubiks.c}}
+\doxysubsubsection{\texorpdfstring{rubiks\_creation()}{rubiks\_creation()}}
+{\footnotesize\ttfamily void rubiks\+\_\+creation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$}]{rubiks }\end{DoxyParamCaption})}
+
+Dans ce fichier, on gère toutes les propriétés du Rubik\textquotesingle{}s Cube, depuis sa création, la gestion des faces adjacentes, et les recherches associées (recherche par couleur, ou depuis la couleur). Initialisation du rubik\textquotesingle{}s cube. Au départ, il est résolu.~\newline
+~\newline
+ Dans cette fonction, et dans toutes celles qui en découlent, on considère que la face en cours de traitement est face à nous. Puis on se réfère au fichier ./doc/reference\+\_\+rubiks\+\_\+excel.png pour déterminer les adjacents. \textbackslash{}\+Exemple Si on prend la face blanche en exemple \+:~\newline
+
+\begin{DoxyItemize}
+\item La face au dessus est la face bleue~\newline
+
+\item La face à sa droite est la face rouge~\newline
+
+\item La face à sa gauche est la face orange~\newline
+
+\item La face sous-\/elle est la face verte~\newline
+
+\item La face opposée ne change jamais, dans le cas de la blanche, il s\textquotesingle{}agit de la face jaune. 
+\begin{DoxyParams}{Parameters}
+{\em rubiks} & \+: Un pointeur vers une structure \mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}
+
+Definition at line 22 of file rubiks.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rubiks_8c_acf98c40c9281734415ab7b5bf46a188f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{rubiks_8c_acf98c40c9281734415ab7b5bf46a188f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rubiks_8c_a1ef9b66b32521e9c1ef2c3055306e8d8}\label{rubiks_8c_a1ef9b66b32521e9c1ef2c3055306e8d8}} 
+\index{rubiks.c@{rubiks.c}!rubiks\_neighbour@{rubiks\_neighbour}}
+\index{rubiks\_neighbour@{rubiks\_neighbour}!rubiks.c@{rubiks.c}}
+\doxysubsubsection{\texorpdfstring{rubiks\_neighbour()}{rubiks\_neighbour()}}
+{\footnotesize\ttfamily void rubiks\+\_\+neighbour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$}]{rubiks }\end{DoxyParamCaption})}
+
+todo \+: explications à réaliser 
+\begin{DoxyParams}{Parameters}
+{\em rubiks} & \+: Un pointeur vers une structure \mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 111 of file rubiks.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{rubiks_8c_a1ef9b66b32521e9c1ef2c3055306e8d8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rubiks_8c_a1ef9b66b32521e9c1ef2c3055306e8d8_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,316 @@
+\hypertarget{draw_8c}{}\doxysection{/home/hlestrat/dev/github.com/rubiks\+\_\+efrei/draw.c File Reference}
+\label{draw_8c}\index{/home/hlestrat/dev/github.com/rubiks\_efrei/draw.c@{/home/hlestrat/dev/github.com/rubiks\_efrei/draw.c}}
+{\ttfamily \#include \char`\"{}draw.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rubiks.\+h\char`\"{}}\newline
+Include dependency graph for draw.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{draw_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{draw_8c_a1d1a41aa9da5e3ff2d0751c5763775d0}{detect\+\_\+resize}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) int dummy)
+\item 
+void \mbox{\hyperlink{draw_8c_a97eeb2f2bd7dfb50249ab0cf4db972cd}{set\+\_\+colors}} (void)
+\item 
+int \mbox{\hyperlink{draw_8c_a5bf54e86153f8acde61d4a8fe9a9a9a6}{check\+\_\+and\+\_\+set\+\_\+term}} (void)
+\item 
+void \mbox{\hyperlink{draw_8c_a365b27572e307c810728d8f5df37bba2}{change\+\_\+color}} (short line, short col, short cube\+\_\+x, short cube\+\_\+y, short color)
+\item 
+void \mbox{\hyperlink{draw_8c_a3a9e1534a95c942e206d33e3a2f27fad}{create\+\_\+rubik\+\_\+side}} (short line, short col, short color, char name)
+\item 
+void \mbox{\hyperlink{draw_8c_a2956bbe5873ab0022f8c1a9bd985e198}{create\+\_\+board}} (void)
+\item 
+void \mbox{\hyperlink{draw_8c_ae47e21a11f8a8b2f413ae5568bdd7c0c}{destroy\+\_\+board}} (void)
+\item 
+void \mbox{\hyperlink{draw_8c_a2fe2bc96e4d9a876686cc6aa3f7a8ac5}{rubiks\+\_\+display}} (\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$rubiks)
+\item 
+void \mbox{\hyperlink{draw_8c_af57da7cd152b7ad8fb46988a05d7e6ec}{draw\+\_\+rubiks}} (\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$rubiks)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+WINDOW $\ast$ \mbox{\hyperlink{draw_8c_a0372ee409cd9d0076678495aa5f421e5}{BOARD}} \mbox{[}\mbox{\hyperlink{draw_8h_a7fade7363ac979586113d8813d65826b}{SQUARES}}\mbox{]}
+\item 
+const short \mbox{\hyperlink{draw_8c_a79cb5b2a35315a50c6f20cb5e5e7e596}{BLACK\+\_\+\+ON\+\_\+\+WHITE}} = 1
+\item 
+const short \mbox{\hyperlink{draw_8c_ae83969edd701df2c96b959de95306c75}{BLACK\+\_\+\+ON\+\_\+\+ORANGE}} = 2
+\item 
+const short \mbox{\hyperlink{draw_8c_a1fa84266cf31ca300eea64c16fc581f0}{BLACK\+\_\+\+ON\+\_\+\+GREEN}} = 3
+\item 
+const short \mbox{\hyperlink{draw_8c_a4b5d90960b545479ae859ab88c10909a}{BLACK\+\_\+\+ON\+\_\+\+RED}} = 4
+\item 
+const short \mbox{\hyperlink{draw_8c_a61b7a025d95ea6792c8518f7c4c59585}{BLACK\+\_\+\+ON\+\_\+\+BLUE}} = 5
+\item 
+const short \mbox{\hyperlink{draw_8c_a55617142db49bbff90cefd7ee8f91667}{BLACK\+\_\+\+ON\+\_\+\+YELLOW}} = 6
+\item 
+short \mbox{\hyperlink{draw_8c_a05006631523e042b76590ff0f00d9232}{NB\+\_\+\+LINES}}
+\item 
+short \mbox{\hyperlink{draw_8c_ae48b6e52709a6f251d2ce1557fe1c30f}{NB\+\_\+\+COLS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{draw_8c_a365b27572e307c810728d8f5df37bba2}\label{draw_8c_a365b27572e307c810728d8f5df37bba2}} 
+\index{draw.c@{draw.c}!change\_color@{change\_color}}
+\index{change\_color@{change\_color}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{change\_color()}{change\_color()}}
+{\footnotesize\ttfamily void change\+\_\+color (\begin{DoxyParamCaption}\item[{short}]{line,  }\item[{short}]{col,  }\item[{short}]{cube\+\_\+x,  }\item[{short}]{cube\+\_\+y,  }\item[{short}]{color }\end{DoxyParamCaption})}
+
+
+
+Definition at line 65 of file draw.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{draw_8c_a365b27572e307c810728d8f5df37bba2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{draw_8c_a5bf54e86153f8acde61d4a8fe9a9a9a6}\label{draw_8c_a5bf54e86153f8acde61d4a8fe9a9a9a6}} 
+\index{draw.c@{draw.c}!check\_and\_set\_term@{check\_and\_set\_term}}
+\index{check\_and\_set\_term@{check\_and\_set\_term}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{check\_and\_set\_term()}{check\_and\_set\_term()}}
+{\footnotesize\ttfamily int check\+\_\+and\+\_\+set\+\_\+term (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 35 of file draw.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{draw_8c_a5bf54e86153f8acde61d4a8fe9a9a9a6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{draw_8c_a5bf54e86153f8acde61d4a8fe9a9a9a6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{draw_8c_a2956bbe5873ab0022f8c1a9bd985e198}\label{draw_8c_a2956bbe5873ab0022f8c1a9bd985e198}} 
+\index{draw.c@{draw.c}!create\_board@{create\_board}}
+\index{create\_board@{create\_board}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{create\_board()}{create\_board()}}
+{\footnotesize\ttfamily void create\+\_\+board (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 126 of file draw.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{draw_8c_a2956bbe5873ab0022f8c1a9bd985e198_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{draw_8c_a2956bbe5873ab0022f8c1a9bd985e198_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{draw_8c_a3a9e1534a95c942e206d33e3a2f27fad}\label{draw_8c_a3a9e1534a95c942e206d33e3a2f27fad}} 
+\index{draw.c@{draw.c}!create\_rubik\_side@{create\_rubik\_side}}
+\index{create\_rubik\_side@{create\_rubik\_side}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{create\_rubik\_side()}{create\_rubik\_side()}}
+{\footnotesize\ttfamily void create\+\_\+rubik\+\_\+side (\begin{DoxyParamCaption}\item[{short}]{line,  }\item[{short}]{col,  }\item[{short}]{color,  }\item[{char}]{name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 87 of file draw.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{draw_8c_a3a9e1534a95c942e206d33e3a2f27fad_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{draw_8c_ae47e21a11f8a8b2f413ae5568bdd7c0c}\label{draw_8c_ae47e21a11f8a8b2f413ae5568bdd7c0c}} 
+\index{draw.c@{draw.c}!destroy\_board@{destroy\_board}}
+\index{destroy\_board@{destroy\_board}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{destroy\_board()}{destroy\_board()}}
+{\footnotesize\ttfamily void destroy\+\_\+board (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 172 of file draw.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{draw_8c_ae47e21a11f8a8b2f413ae5568bdd7c0c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{draw_8c_a1d1a41aa9da5e3ff2d0751c5763775d0}\label{draw_8c_a1d1a41aa9da5e3ff2d0751c5763775d0}} 
+\index{draw.c@{draw.c}!detect\_resize@{detect\_resize}}
+\index{detect\_resize@{detect\_resize}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{detect\_resize()}{detect\_resize()}}
+{\footnotesize\ttfamily void detect\+\_\+resize (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) int}]{dummy }\end{DoxyParamCaption})}
+
+
+
+Definition at line 19 of file draw.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{draw_8c_a1d1a41aa9da5e3ff2d0751c5763775d0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{draw_8c_af57da7cd152b7ad8fb46988a05d7e6ec}\label{draw_8c_af57da7cd152b7ad8fb46988a05d7e6ec}} 
+\index{draw.c@{draw.c}!draw\_rubiks@{draw\_rubiks}}
+\index{draw\_rubiks@{draw\_rubiks}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{draw\_rubiks()}{draw\_rubiks()}}
+{\footnotesize\ttfamily void draw\+\_\+rubiks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$}]{rubiks }\end{DoxyParamCaption})}
+
+
+
+Definition at line 205 of file draw.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{draw_8c_af57da7cd152b7ad8fb46988a05d7e6ec_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{draw_8c_a2fe2bc96e4d9a876686cc6aa3f7a8ac5}\label{draw_8c_a2fe2bc96e4d9a876686cc6aa3f7a8ac5}} 
+\index{draw.c@{draw.c}!rubiks\_display@{rubiks\_display}}
+\index{rubiks\_display@{rubiks\_display}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{rubiks\_display()}{rubiks\_display()}}
+{\footnotesize\ttfamily void rubiks\+\_\+display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrubiks__side}{rubiks\+\_\+side}} $\ast$}]{rubiks }\end{DoxyParamCaption})}
+
+
+
+Definition at line 185 of file draw.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{draw_8c_a2fe2bc96e4d9a876686cc6aa3f7a8ac5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{draw_8c_a97eeb2f2bd7dfb50249ab0cf4db972cd}\label{draw_8c_a97eeb2f2bd7dfb50249ab0cf4db972cd}} 
+\index{draw.c@{draw.c}!set\_colors@{set\_colors}}
+\index{set\_colors@{set\_colors}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{set\_colors()}{set\_colors()}}
+{\footnotesize\ttfamily void set\+\_\+colors (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file draw.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{draw_8c_a97eeb2f2bd7dfb50249ab0cf4db972cd_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{draw_8c_a61b7a025d95ea6792c8518f7c4c59585}\label{draw_8c_a61b7a025d95ea6792c8518f7c4c59585}} 
+\index{draw.c@{draw.c}!BLACK\_ON\_BLUE@{BLACK\_ON\_BLUE}}
+\index{BLACK\_ON\_BLUE@{BLACK\_ON\_BLUE}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{BLACK\_ON\_BLUE}{BLACK\_ON\_BLUE}}
+{\footnotesize\ttfamily const short BLACK\+\_\+\+ON\+\_\+\+BLUE = 5}
+
+
+
+Definition at line 13 of file draw.\+c.
+
+\mbox{\Hypertarget{draw_8c_a1fa84266cf31ca300eea64c16fc581f0}\label{draw_8c_a1fa84266cf31ca300eea64c16fc581f0}} 
+\index{draw.c@{draw.c}!BLACK\_ON\_GREEN@{BLACK\_ON\_GREEN}}
+\index{BLACK\_ON\_GREEN@{BLACK\_ON\_GREEN}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{BLACK\_ON\_GREEN}{BLACK\_ON\_GREEN}}
+{\footnotesize\ttfamily const short BLACK\+\_\+\+ON\+\_\+\+GREEN = 3}
+
+
+
+Definition at line 11 of file draw.\+c.
+
+\mbox{\Hypertarget{draw_8c_ae83969edd701df2c96b959de95306c75}\label{draw_8c_ae83969edd701df2c96b959de95306c75}} 
+\index{draw.c@{draw.c}!BLACK\_ON\_ORANGE@{BLACK\_ON\_ORANGE}}
+\index{BLACK\_ON\_ORANGE@{BLACK\_ON\_ORANGE}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{BLACK\_ON\_ORANGE}{BLACK\_ON\_ORANGE}}
+{\footnotesize\ttfamily const short BLACK\+\_\+\+ON\+\_\+\+ORANGE = 2}
+
+
+
+Definition at line 10 of file draw.\+c.
+
+\mbox{\Hypertarget{draw_8c_a4b5d90960b545479ae859ab88c10909a}\label{draw_8c_a4b5d90960b545479ae859ab88c10909a}} 
+\index{draw.c@{draw.c}!BLACK\_ON\_RED@{BLACK\_ON\_RED}}
+\index{BLACK\_ON\_RED@{BLACK\_ON\_RED}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{BLACK\_ON\_RED}{BLACK\_ON\_RED}}
+{\footnotesize\ttfamily const short BLACK\+\_\+\+ON\+\_\+\+RED = 4}
+
+
+
+Definition at line 12 of file draw.\+c.
+
+\mbox{\Hypertarget{draw_8c_a79cb5b2a35315a50c6f20cb5e5e7e596}\label{draw_8c_a79cb5b2a35315a50c6f20cb5e5e7e596}} 
+\index{draw.c@{draw.c}!BLACK\_ON\_WHITE@{BLACK\_ON\_WHITE}}
+\index{BLACK\_ON\_WHITE@{BLACK\_ON\_WHITE}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{BLACK\_ON\_WHITE}{BLACK\_ON\_WHITE}}
+{\footnotesize\ttfamily const short BLACK\+\_\+\+ON\+\_\+\+WHITE = 1}
+
+
+
+Definition at line 9 of file draw.\+c.
+
+\mbox{\Hypertarget{draw_8c_a55617142db49bbff90cefd7ee8f91667}\label{draw_8c_a55617142db49bbff90cefd7ee8f91667}} 
+\index{draw.c@{draw.c}!BLACK\_ON\_YELLOW@{BLACK\_ON\_YELLOW}}
+\index{BLACK\_ON\_YELLOW@{BLACK\_ON\_YELLOW}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{BLACK\_ON\_YELLOW}{BLACK\_ON\_YELLOW}}
+{\footnotesize\ttfamily const short BLACK\+\_\+\+ON\+\_\+\+YELLOW = 6}
+
+
+
+Definition at line 14 of file draw.\+c.
+
+\mbox{\Hypertarget{draw_8c_a0372ee409cd9d0076678495aa5f421e5}\label{draw_8c_a0372ee409cd9d0076678495aa5f421e5}} 
+\index{draw.c@{draw.c}!BOARD@{BOARD}}
+\index{BOARD@{BOARD}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{BOARD}{BOARD}}
+{\footnotesize\ttfamily WINDOW$\ast$ BOARD\mbox{[}\mbox{\hyperlink{draw_8h_a7fade7363ac979586113d8813d65826b}{SQUARES}}\mbox{]}}
+
+
+
+Definition at line 8 of file draw.\+c.
+
+\mbox{\Hypertarget{draw_8c_ae48b6e52709a6f251d2ce1557fe1c30f}\label{draw_8c_ae48b6e52709a6f251d2ce1557fe1c30f}} 
+\index{draw.c@{draw.c}!NB\_COLS@{NB\_COLS}}
+\index{NB\_COLS@{NB\_COLS}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{NB\_COLS}{NB\_COLS}}
+{\footnotesize\ttfamily short NB\+\_\+\+COLS}
+
+
+
+Definition at line 17 of file draw.\+c.
+
+\mbox{\Hypertarget{draw_8c_a05006631523e042b76590ff0f00d9232}\label{draw_8c_a05006631523e042b76590ff0f00d9232}} 
+\index{draw.c@{draw.c}!NB\_LINES@{NB\_LINES}}
+\index{NB\_LINES@{NB\_LINES}!draw.c@{draw.c}}
+\doxysubsubsection{\texorpdfstring{NB\_LINES}{NB\_LINES}}
+{\footnotesize\ttfamily short NB\+\_\+\+LINES}
+
+
+
+Definition at line 16 of file draw.\+c.
+
