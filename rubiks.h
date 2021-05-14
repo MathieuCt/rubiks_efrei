@@ -9,15 +9,15 @@
 /**
  * @brief Définition des couleurs des faces et des cubies.
  */
-typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
+typedef enum {WHITE=0, ORANGE=1, GREEN=2, RED=3, BLUE=4, YELLOW=5} T_COLOR;
 /**
  * @brief Définition des faces adjacentes à une face du Rubik's Cube.
  */
-typedef enum {UP, RIGHT, DOWN, LEFT} T_SIDE;
+typedef enum {UP=0, RIGHT=1, DOWN=2, LEFT=3} T_SIDE;
 /**
  * @brief Définition des types de chaque cubie.
  */
-typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
+typedef enum {CORNER=0, EDGE=1, CENTER=2} T_CUBIE_TYPE;
 
 /**
  * @brief Définition des adjacents à un cubie
@@ -53,7 +53,7 @@ typedef struct {
  * @brief Définition d'une face du Rubik's Cube
  * @param neighbour_side[4] Une face a 4 faces adjacentes, UP, DOWN, LEFT, et RIGHT.
  * @param opposite_side Définition de la face opposée.
- * @param side Définition du numéro et couleur de la face. Soir WHITE, ORANGE, GREEN, RED, BLUE, ou YELLOW
+ * @param side Définition du numéro et couleur de la face. Soit WHITE, ORANGE, GREEN, RED, BLUE, ou YELLOW
  * @param cubie[9] Liaison vers les 9 cubies composants une face
  */
 typedef struct {
