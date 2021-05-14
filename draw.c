@@ -10,11 +10,30 @@
 
 
 WINDOW *BOARD[SQUARES];
+// Définition des indices des couleurs utilisées avec nCurses
+/**
+ * Écriture noire sur blanc
+ */
 const short BLACK_ON_WHITE = 1;
+/**
+ * Écriture noire sur orange
+ */
 const short BLACK_ON_ORANGE = 2;
+/**
+ * Écriture noire sur vert
+ */
 const short BLACK_ON_GREEN = 3;
+/**
+ * Écriture noire sur rouge
+ */
 const short BLACK_ON_RED = 4;
+/**
+ * Écriture noire sur bleu
+ */
 const short BLACK_ON_BLUE = 5;
+/**
+ * Écriture noire sur jaune
+ */
 const short BLACK_ON_YELLOW = 6;
 
 short NB_LINES;
