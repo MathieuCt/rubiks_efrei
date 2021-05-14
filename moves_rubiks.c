@@ -172,8 +172,87 @@ void alternate_color(rubiks_side * rubiks){
 void solve_rubiks(rubiks_side *rubiks){
     // On commence par la résolution de la face blanche
     solve_white_side(rubiks);
+    // Puis la résolution de la 2eme couronne
+    solve_middle_row(rubiks);
 }
+/**
+ * Cette fonction cherche à résoudre la 2ème couronne du rubik's cube
+ * Le choix est fait de ne pas "retourner" le rubiks cube et d'adapter les algorithmes en conséquence
+ * @param rubiks Un pointeur vers une structure rubiks_side*/
+ void solve_middle_row(rubiks_side *rubiks){
+    // cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
+     cubies cubie;
+     //Pour chaque face regarder si l'arrète milieu, gauche est la bonne
+     for(int i = ORANGE ; i <= BLUE ; i++){
+         // chercher où se trouve le cubie
+         cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
+         // si le cubie est sur la 2ème couronne, il faut le ramener sur la 3ème
+         if(cubie.y == 1 && cubie.cubie_side != YELLOW){
+             //prendre l'arrète qui se trouve sur la même face mais sur la 3ème couronne pour le remplacer
+             if(cubie.num == 5) {
+                 right_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
+            }
+             else{
+                 left_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
+             }
+             cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
+         }
+         // si le cubie est sur  la face jaune, on cherche à le positionner selon son voisin
+         if(cubie.cubie_side == YELLOW){
+             while( cubie.neighbours[0].num_side != rubiks[i].neighbour_side[LEFT]){
+                 move_side_clockwise(rubiks,YELLOW);
+                 cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
+             }
+             // Déplacer l'arrète de la 3ème couronne à sa position finale
+             right_move(rubiks, cubie);
+         }
+         if(cubie.num == 7){
+             while( cubie.cubie_side != i){
+                 move_side_clockwise(rubiks,YELLOW);
+                 cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
+             }
+             left_move(rubiks, rubiks[YELLOW].cubie[cubie.neighbours[0].num_cubie]);
+         }
+     }
+ }
+ /**
+  * Cette fontion permet de déplacer une arète correctement positionné de la 3ème couronne à la 2ème couronne
+  * Déplacement vers le côté droit
+  * Utilisée lors de la résolution de la 2ème couronne
+  * @param rubiks Un pointeur vers une structure rubiks_side
+  * @param cubie UN pointeur vers une structure cubie
+  */
+void right_move(rubiks_side *rubiks, cubies cubie){
+    // algorithme retranscrit pour être réaliser sans retournement du cube
+     move_side_anticlockwise(rubiks, YELLOW);
+     move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[RIGHT]);
+     move_side_clockwise(rubiks, YELLOW);
+     move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[RIGHT]);
+     move_side_clockwise(rubiks, YELLOW);
+     move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
+     move_side_anticlockwise(rubiks, YELLOW);
+     move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
 
+
+}
+/**
+ * Cette fontion permet de déplacer une arète correctement positionné de la 3ème couronne à la 2ème couronne
+ * Déplacement vers le côté gauche
+ * Utilisée lors de la résolution de la 2ème couronne
+ * @param rubiks Un pointeur vers une structure rubiks_side
+ * @param cubie UN pointeur vers une structure cubie
+ */
+void left_move(rubiks_side *rubiks, cubies cubie){
+    // algorithme retranscrit pour être réaliser sans retournement du cube
+    move_side_clockwise(rubiks, YELLOW);
+    move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[LEFT]);
+    move_side_anticlockwise(rubiks, YELLOW);
+    move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[LEFT]);
+    move_side_anticlockwise(rubiks, YELLOW);
+    move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
+    move_side_clockwise(rubiks, YELLOW);
+    move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
+}
 /**
  * Cette fonction cherche à résoudre la face blanche du Rubik's Cube
  * @param rubiks Un pointeur vers une structure rubiks_side
