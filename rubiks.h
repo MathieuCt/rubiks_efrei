@@ -5,13 +5,11 @@
 #ifndef RUBIKS_EFREI_RUBIKS_H
 #define RUBIKS_EFREI_RUBIKS_H
 
-
-
-
 typedef enum {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW} T_COLOR;
 typedef enum {UP,  RIGHT, DOWN, LEFT} T_SIDE;
 typedef enum {CORNER, EDGE, CENTER} T_CUBIE_TYPE;
 
+//todo : commenter toutes les structures et à quoi servent chacun des membres
 typedef struct {
     T_COLOR num_side;
     int num_cubie;
