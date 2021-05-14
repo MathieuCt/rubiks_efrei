@@ -4,8 +4,10 @@
 ## Installation
 ### Ubuntu
 * Installer dans un terminal : ```sudo apt install doxygen```
+* Pour générer un PDF à partir de l'export Latex, il faut ajouter les packages : ```sudo apt install texlive-latex-extra texlive-latex-recommended texlive-pictures telxcc```
 ### Manjaro
 * Installer dans un terminal : ```pamac install doxygen```
+* Pour générer un PDF à partir de l'export Latex, il faut ajouter le package texlive-latexextra : ```pamac install texlive-latexextra```
 ## Utilisation
 * Doxygen se base sur un fichier de configuration (et des fichiers de types, mais que nous n'utilisons pas ici).
 * Le premier fichier de configuration peut se créer via un Wizard : ```doxywizard```

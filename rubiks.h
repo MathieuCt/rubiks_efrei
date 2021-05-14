@@ -42,7 +42,7 @@ typedef struct {
 
 /**
  * Définition d'une face du Rubik's Cube
- * @param neighbour_side[4] : Une face à 4 faces adjacentes, UP, DOWN, LEFT, et RIGHT.
+ * @param neighbour_side[4] : Une face a 4 faces adjacentes, UP, DOWN, LEFT, et RIGHT.
  * @param opposite_side : Définition de la face opposée.
  * @param side : Définition du numéro et couleur de la face. Soir WHITE, ORANGE, GREEN, RED, BLUE, ou YELLOW
  * @param cubie[9] : Liaison vers les 9 cubies composants une face
