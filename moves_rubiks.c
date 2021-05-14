@@ -1,6 +1,10 @@
-//
-// Created by clestrat on 06/05/2021.
-//
+/**
+ * @file moves_rubiks.c
+ * @author Mathieu CHANTOT et Clément LE STRAT
+ * @date 7 Mai 2021
+ * @brief Dans ce fichier, on gère les déplacements possible du Rubik's Cube, ainsi que le mélange automatique et la résolution d'un cube.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

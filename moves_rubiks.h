@@ -1,6 +1,9 @@
-//
-// Created by clestrat on 06/05/2021.
-//
+/**
+ * @file moves_rubiks.h
+ * @author Mathieu CHANTOT et Clément LE STRAT
+ * @date 7 Mai 2021
+ * @brief Dans ce fichier, on trouve les Headers utilisées partout dans le code. Définitions dans moves_rubiks.c.
+ */
 
 #ifndef RUBIKS_EFREI_MOVES_RUBIKS_H
 #define RUBIKS_EFREI_MOVES_RUBIKS_H
