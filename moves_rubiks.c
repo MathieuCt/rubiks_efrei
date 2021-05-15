@@ -215,12 +215,13 @@ void solve_rubiks(rubiks_side *rubiks){
          }
      }
  }
+
  /**
-  * Cette fontion permet de déplacer une arète correctement positionné de la 3ème couronne à la 2ème couronne
+  * Cette fonction permet de déplacer une arête correctement positionné de la 3ème couronne à la 2ème couronne
   * Déplacement vers le côté droit
   * Utilisée lors de la résolution de la 2ème couronne
   * @param rubiks Un pointeur vers une structure rubiks_side
-  * @param cubie UN pointeur vers une structure cubie
+  * @param cubie Un pointeur vers une structure cubie
   */
 void right_move(rubiks_side *rubiks, cubies cubie){
     // algorithme retranscrit pour être réaliser sans retournement du cube
@@ -233,12 +234,13 @@ void right_move(rubiks_side *rubiks, cubies cubie){
      move_side_anticlockwise(rubiks, YELLOW);
      move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
 }
+
 /**
  * Cette fonction permet de déplacer une arête correctement positionné de la 3ème couronne à la 2ème couronne
  * Déplacement vers le côté gauche
  * Utilisée lors de la résolution de la 2ème couronne
  * @param rubiks Un pointeur vers une structure rubiks_side
- * @param cubie UN pointeur vers une structure cubie
+ * @param cubie Un pointeur vers une structure cubie
  */
 void left_move(rubiks_side *rubiks, cubies cubie){
     // algorithme retranscrit pour être réaliser sans retournement du cube
@@ -251,6 +253,7 @@ void left_move(rubiks_side *rubiks, cubies cubie){
     move_side_clockwise(rubiks, YELLOW);
     move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
 }
+
 /**
  * Cette fonction cherche à résoudre la face blanche du Rubik's Cube
  * @param rubiks Un pointeur vers une structure rubiks_side
