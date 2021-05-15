@@ -13,7 +13,7 @@
 * Le premier fichier de configuration peut se créer via un Wizard : ```doxywizard```
 * Le fichier de configuration s'appelle, par défaut, Doxyfile.
 * Une fois le fichier créé, on peut facilement le modifier dans un éditeur de texte quelconque, y compris dans Clion.
-* Un fichier Doxyfile a été créé pour ce projet, ainsi qu'un fichier header.tex qui ne nous utilisons pour changer le pied de page du document PDF.
+* Un fichier Doxyfile a été créé pour ce projet, ainsi qu'un fichier header.tex que ne nous utilisons pour changer le pied de page du document PDF.
 * Pour créer un fichier vierge header.tex (pour le modifier en fonction de nos besoins), il faut faire ```doxygen -w latex header.tex footer.tex doxygen.sty```. Il suffit de récupérer le fichier header.tex, le déplacer dans ```Doc\doxygen\``` et le modifier en conséquence.
 * Enfin, on référence le fichier header.tex dans le fichier Doxyfile : ```LATEX_HEADER           = header.tex```
 ## Génération de la documentation :
