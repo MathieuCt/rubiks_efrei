@@ -41,7 +41,7 @@ short NB_COLS;
 
 /**
  * Détection de l'événement de changement de taille d'une fenêtre. Pas certains de pouvoir gérer ça.
- * @param dummy Paramètre inutilisé. Il est passé par la fonction d'appel des évenements sur une fenêtre
+ * @param dummy Paramètre inutilisé. Il est passé par la fonction d'appel des évènements sur une fenêtre
  */
 void detect_resize(__attribute__((unused)) int dummy)
 {
