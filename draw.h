@@ -10,6 +10,7 @@
 #include <ncurses.h>
 #include "rubiks.h"
 
+// Configurations nCurses
 // Nombre de lignes graphique pour les faces du cube (La première pour U, la troisième pour D, la deuxième pour le reste.
 /**
  * @def RUBIK_LINES
@@ -37,6 +38,7 @@
 */
 #define SQUARES ((RUBIK_LINES * 3) * (RUBIK_COLS * 3))
 
+// Gestion des erreurs nCurses
 /** @def MIN_COLORS_NUMBER
     @brief Nombre de couleurs gérés par le terminal, nécessaire pour faire tourner le programme.
 */
@@ -72,18 +74,13 @@ extern short NB_LINES;
 // Nombre de colonnes détectées dans le terminal
 extern short NB_COLS;
 
+// Les fonction
 int check_and_set_term(void);
-
 void set_colors(void);
-
 void create_board(void);
-
 void destroy_board(void);
-
 void detect_resize(__attribute__((unused)) int);
-
 void rubiks_display(rubiks_side *rubiks);
-
 void draw_rubiks(rubiks_side *rubiks);
 
 #endif //RUBIKS_EFREI_DRAW_H
