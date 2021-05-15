@@ -234,7 +234,7 @@ void right_move(rubiks_side *rubiks, cubies cubie){
      move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
 }
 /**
- * Cette fontion permet de déplacer une arète correctement positionné de la 3ème couronne à la 2ème couronne
+ * Cette fonction permet de déplacer une arête correctement positionné de la 3ème couronne à la 2ème couronne
  * Déplacement vers le côté gauche
  * Utilisée lors de la résolution de la 2ème couronne
  * @param rubiks Un pointeur vers une structure rubiks_side
@@ -331,7 +331,7 @@ void solve_white_side(rubiks_side * rubiks){
            //rechercher sa nouvelle position
            cubie = search_cubie(rubiks, WHITE, i,EDGE);
         }
-       // placer le cubie une fois aligé sur la face jaune, sur la face blanche
+       // placer le cubie une fois aligné sur la face jaune, sur la face blanche
         move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
         move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
     }
