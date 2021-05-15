@@ -2,7 +2,7 @@
  * @file rubiks.h
  * @author Mathieu CHANTOT et Clément LE STRAT
  * @date 7 Mai 2021
- * @brief Dans ce fichier, on trouve Headers et structures utilisées partout dans le code. Définitions dans rubiks.c
+ * @brief Dans ce fichier, on trouve les headers et structures utilisées partout dans le code. Définitions dans rubiks.c
  */
 #ifndef RUBIKS_EFREI_RUBIKS_H
 #define RUBIKS_EFREI_RUBIKS_H
