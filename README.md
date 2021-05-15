@@ -16,7 +16,7 @@
   target_link_libraries(XXXX curses) <br />
   target_link_libraries(XXXX menu) <br />
 ## Librairies
-* Librairie standard pour gérer des menus (basée sur ncurses) : https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/menus.html
+* [Librairie standard pour gérer des menus (basée sur ncurses)](https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/menus.html)
 ## Documentation avec Doxygen
 * [Comment documenter son code, avec Doxygen dans Clion](https://blog.jetbrains.com/clion/2016/05/keep-your-code-documented/)
 * [Comment utiliser Doxygen pour générer de la documentation](https://lugatgt.org/2002/05/30/using-doxygen/) 
