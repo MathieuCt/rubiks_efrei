@@ -172,9 +172,28 @@ void alternate_color(rubiks_side * rubiks){
 void solve_rubiks(rubiks_side *rubiks){
     // On commence par la résolution de la face blanche
     solve_white_side(rubiks);
+    draw_rubiks(rubiks);
     // Puis la résolution de la 2eme couronne
     solve_middle_row(rubiks);
 }
+/**
+ * Cette fonction résoud la croix jaune
+ * @param rubiks Un pointeur vers une structure rubiks
+ */
+ void solve_yellow_cross(rubiks_side *rubiks){
+     int j = 0 ;
+     //cubie pour enregistrer les informations du cubie recherché
+     cubies cubie;
+     // parcours des arrètes jaunes par la couleur de leurs voisins
+     for(int i = ORANGE ; i <= BLUE && j == 0 ; i++){
+         cubie = search_cubie(rubiks, YELLOW, i, EDGE);
+         // si il y a un cubie jaune de l'autre coté
+         if(rubiks[rubiks[rubiks[cubie.neighbours[0].num_side].opposite_side].cubie[7].neighbours[0].num_side].cubie[rubiks[rubiks[cubie.neighbours[0].num_side].opposite_side].cubie[7].neighbours[0].num_cubie].color == YELLOW){
+
+         }
+
+     }
+ }
 /**
  * Cette fonction cherche à résoudre la 2ème couronne du rubik's cube
  * Le choix est fait de ne pas "retourner" le rubiks cube et d'adapter les algorithmes en conséquence
@@ -221,7 +240,7 @@ void solve_rubiks(rubiks_side *rubiks){
   * Déplacement vers le côté droit
   * Utilisée lors de la résolution de la 2ème couronne
   * @param rubiks Un pointeur vers une structure rubiks_side
-  * @param cubie Un pointeur vers une structure cubie
+  * @param cubie cubie situé au dessus de l'arrète à déplacer
   */
 void right_move(rubiks_side *rubiks, cubies cubie){
     // algorithme retranscrit pour être réaliser sans retournement du cube
@@ -240,7 +259,7 @@ void right_move(rubiks_side *rubiks, cubies cubie){
  * Déplacement vers le côté gauche
  * Utilisée lors de la résolution de la 2ème couronne
  * @param rubiks Un pointeur vers une structure rubiks_side
- * @param cubie Un pointeur vers une structure cubie
+ * @param cubie cubie situé au dessus de l'arrète à déplacer
  */
 void left_move(rubiks_side *rubiks, cubies cubie){
     // algorithme retranscrit pour être réaliser sans retournement du cube
