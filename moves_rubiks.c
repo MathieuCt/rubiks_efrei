@@ -172,68 +172,108 @@ void alternate_color(rubiks_side * rubiks){
 void solve_rubiks(rubiks_side *rubiks){
     // On commence par la résolution de la face blanche
     solve_white_side(rubiks);
-    draw_rubiks(rubiks);
     // Puis la résolution de la 2eme couronne
     solve_middle_row(rubiks);
+    solve_yellow_cross(rubiks);
 }
 /**
  * Cette fonction résoud la croix jaune
  * @param rubiks Un pointeur vers une structure rubiks
  */
- void solve_yellow_cross(rubiks_side *rubiks){
-     int j = 0 ;
-     //cubie pour enregistrer les informations du cubie recherché
-     cubies cubie;
-     // parcours des arrètes jaunes par la couleur de leurs voisins
-     for(int i = ORANGE ; i <= BLUE && j == 0 ; i++){
-         cubie = search_cubie(rubiks, YELLOW, i, EDGE);
-         // si il y a un cubie jaune de l'autre coté
-         if(rubiks[rubiks[rubiks[cubie.neighbours[0].num_side].opposite_side].cubie[7].neighbours[0].num_side].cubie[rubiks[rubiks[cubie.neighbours[0].num_side].opposite_side].cubie[7].neighbours[0].num_cubie].color == YELLOW){
+void solve_yellow_cross(rubiks_side *rubiks) {
+    // un tableau pour savoir quelles arètes jaunes sont sur la face jaunes
+    int yellow_edge[9] = {0};
+    int j = 0;
+    // si la croix est déjà résolue ou complètement non résolue
+    int cross = 0, no_cross = 0;
+    //cubie pour enregistrer les informations du cubie recherché
+    cubies cubie;
 
-         }
+    // parcourir les cubies de la face jaune
+    do {
+        move_side_clockwise(rubiks, YELLOW);
+        for (int i = 0; i <= 8; i++) {
+            // si le cubie est une arète et qu'il est jaune
+            if (rubiks[YELLOW].cubie[i].type == EDGE) {
+                if (rubiks[YELLOW].cubie[i].color == YELLOW) {
+                    // si le cubie jaune est sur le dessus on note un dans le tableau dédié
+                    yellow_edge[i] = 1;
+                } else {
+                    yellow_edge[i] = 0;
+                }
+                // on compte le nombre d'arètes parcourues
+            }
+        }
+        j++;
+        // si la croix jaune est déjà résolu
+        if (yellow_edge[1] == 1 && yellow_edge[3] == 1 && yellow_edge[5] == 1 && yellow_edge[7] == 1) cross = 1;
+        if (yellow_edge[1] == 0 && yellow_edge[3] == 0 && yellow_edge[5] == 0 && yellow_edge[7] == 0) cross = -1;
+    } while (yellow_edge[5] != 1 && cross == 0 );
 
-     }
- }
+    // si aucune des arètes est bien placée alors les algorithmes doivent être exécuté
+    // si 2 cotés adjacents sont jaune: 2 possibilités
+    if ((yellow_edge[5] == 1 && (yellow_edge[1] == 1 || yellow_edge[7] == 1 ) && cross == 0)||cross == -1) {
+        // dans le cas du l il peut être néssessaire de refaire tourner la face jaune
+        if (yellow_edge[1] == 1) move_side_clockwise(rubiks, YELLOW);
+        draw_rubiks(rubiks);
+        move_side_anticlockwise(rubiks, ORANGE);
+        move_side_anticlockwise(rubiks, YELLOW);
+        move_side_anticlockwise(rubiks, GREEN);
+        move_side_clockwise(rubiks, YELLOW);
+        move_side_clockwise(rubiks, GREEN);
+        move_side_clockwise(rubiks, ORANGE);
+    }
+        // si deux cotés opposés sont jaunes et que les autres ne sont pas jaunes
+    if (( yellow_edge[3] == 1 && yellow_edge[5] == 1 && yellow_edge[1] == 0 && yellow_edge[7] == 0 && cross == 0) || cross == -1)  {
+        move_side_clockwise(rubiks, GREEN);
+        move_side_clockwise(rubiks, ORANGE);
+        move_side_clockwise(rubiks,YELLOW);
+        move_side_anticlockwise(rubiks,ORANGE);
+        move_side_anticlockwise(rubiks,YELLOW);
+        move_side_anticlockwise(rubiks,GREEN);
+    }
+}
+
 /**
  * Cette fonction cherche à résoudre la 2ème couronne du rubik's cube
  * Le choix est fait de ne pas "retourner" le rubiks cube et d'adapter les algorithmes en conséquence
  * @param rubiks Un pointeur vers une structure rubiks_side*/
- void solve_middle_row(rubiks_side *rubiks){
-    // cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
-     cubies cubie;
-     //Pour chaque face regarder si l'arrète milieu, gauche est la bonne
-     for(int i = ORANGE ; i <= BLUE ; i++){
-         // chercher où se trouve le cubie
+void solve_middle_row(rubiks_side *rubiks){
+// cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
+ cubies cubie;
+ //Pour chaque face regarder si l'arrète milieu, gauche est la bonne
+ for(int i = ORANGE ; i <= BLUE ; i++){
+     // chercher où se trouve le cubie
+     cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
+     // si le cubie est sur la 2ème couronne, il faut le ramener sur la 3ème
+     if(cubie.y == 1 && cubie.cubie_side != YELLOW){
+         //prendre l'arrète qui se trouve sur la même face mais sur la 3ème couronne pour le remplacer
+         if(cubie.num == 5) {
+             right_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
+        }
+         else{
+             left_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
+         }
          cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
-         // si le cubie est sur la 2ème couronne, il faut le ramener sur la 3ème
-         if(cubie.y == 1 && cubie.cubie_side != YELLOW){
-             //prendre l'arrète qui se trouve sur la même face mais sur la 3ème couronne pour le remplacer
-             if(cubie.num == 5) {
-                 right_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
-            }
-             else{
-                 left_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
-             }
+     }
+     // si le cubie est sur  la face jaune, on cherche à le positionner selon son voisin
+     if(cubie.cubie_side == YELLOW){
+         while( cubie.neighbours[0].num_side != rubiks[i].neighbour_side[LEFT]){
+             move_side_clockwise(rubiks,YELLOW);
              cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
          }
-         // si le cubie est sur  la face jaune, on cherche à le positionner selon son voisin
-         if(cubie.cubie_side == YELLOW){
-             while( cubie.neighbours[0].num_side != rubiks[i].neighbour_side[LEFT]){
-                 move_side_clockwise(rubiks,YELLOW);
-                 cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
-             }
-             // Déplacer l'arrète de la 3ème couronne à sa position finale
-             right_move(rubiks, cubie);
+         // Déplacer l'arrète de la 3ème couronne à sa position finale
+         right_move(rubiks, cubie);
+     }
+     if(cubie.num == 7){
+         while( cubie.cubie_side != i){
+             move_side_clockwise(rubiks,YELLOW);
+             cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
          }
-         if(cubie.num == 7){
-             while( cubie.cubie_side != i){
-                 move_side_clockwise(rubiks,YELLOW);
-                 cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
-             }
-             left_move(rubiks, rubiks[YELLOW].cubie[cubie.neighbours[0].num_cubie]);
-         }
+         left_move(rubiks, rubiks[YELLOW].cubie[cubie.neighbours[0].num_cubie]);
      }
  }
+}
 
  /**
   * Cette fonction permet de déplacer une arête correctement positionné de la 3ème couronne à la 2ème couronne
