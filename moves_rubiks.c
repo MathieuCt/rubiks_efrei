@@ -188,7 +188,7 @@ void solve_yellow_cross(rubiks_side *rubiks) {
     int cross = 0, no_cross = 0;
     //cubie pour enregistrer les informations du cubie recherché
     cubies cubie;
-
+    // on cherche d'abord à résoudre la croix sans se soucier des arêtes
     // parcourir les cubies de la face jaune
     do {
         move_side_clockwise(rubiks, YELLOW);
@@ -208,11 +208,11 @@ void solve_yellow_cross(rubiks_side *rubiks) {
         // si la croix jaune est déjà résolu
         if (yellow_edge[1] == 1 && yellow_edge[3] == 1 && yellow_edge[5] == 1 && yellow_edge[7] == 1) cross = 1;
         if (yellow_edge[1] == 0 && yellow_edge[3] == 0 && yellow_edge[5] == 0 && yellow_edge[7] == 0) cross = -1;
-    } while (yellow_edge[5] != 1 && cross == 0 );
+    } while (yellow_edge[5] != 1 && cross == 0);
 
     // si aucune des arètes est bien placée alors les algorithmes doivent être exécuté
     // si 2 cotés adjacents sont jaune: 2 possibilités
-    if ((yellow_edge[5] == 1 && (yellow_edge[1] == 1 || yellow_edge[7] == 1 ) && cross == 0)||cross == -1) {
+    if ((yellow_edge[5] == 1 && (yellow_edge[1] == 1 || yellow_edge[7] == 1) && cross == 0) || cross == -1) {
         // dans le cas du l il peut être néssessaire de refaire tourner la face jaune
         if (yellow_edge[1] == 1) move_side_clockwise(rubiks, YELLOW);
         draw_rubiks(rubiks);
@@ -223,16 +223,90 @@ void solve_yellow_cross(rubiks_side *rubiks) {
         move_side_clockwise(rubiks, GREEN);
         move_side_clockwise(rubiks, ORANGE);
     }
-        // si deux cotés opposés sont jaunes et que les autres ne sont pas jaunes
-    if (( yellow_edge[3] == 1 && yellow_edge[5] == 1 && yellow_edge[1] == 0 && yellow_edge[7] == 0 && cross == 0) || cross == -1)  {
+    // si deux cotés opposés sont jaunes et que les autres ne sont pas jaunes
+    if ((yellow_edge[3] == 1 && yellow_edge[5] == 1 && yellow_edge[1] == 0 && yellow_edge[7] == 0 && cross == 0) ||
+        cross == -1) {
         move_side_clockwise(rubiks, GREEN);
         move_side_clockwise(rubiks, ORANGE);
-        move_side_clockwise(rubiks,YELLOW);
+        move_side_clockwise(rubiks, YELLOW);
+        move_side_anticlockwise(rubiks, ORANGE);
+        move_side_anticlockwise(rubiks, YELLOW);
+        move_side_anticlockwise(rubiks, GREEN);
+    }
+// On cherche maintenant à positionner les bon voisins des arêtes
+// on initialise à nouveau cross pour savoir quelle combinaison effectuée
+// elle sont déja bien placées si aucune n'est mal placée
+    cross = 0;
+    // Tourner la face jaune jusqu'à ce qu'une des combinaison apparaisse
+    for (int j = 0; j < 4; j++){
+        int edge_placed = 1;
+        for (int i = ORANGE; i <= BLUE; i++) {
+            if (rubiks[i].cubie[7].color != rubiks[i].side) {
+                edge_placed =0;
+            }
+        }
+        if (edge_placed == 1) cross == 1;
+    }
+    while(cross == 0) {
+        move_side_clockwise(rubiks, YELLOW);
+        // si 2 faces opposées sont bien placés
+        if (rubiks[BLUE].cubie[7].color == BLUE && rubiks[GREEN].cubie[7].color == GREEN)
+            cross = 2;
+        // 2 faces opposées correctement positionnées mais mal placées pour le prochain algo
+        if (rubiks[ORANGE].cubie[7].color == ORANGE && rubiks[RED].cubie[7].color == RED) {
+            cross = 2;
+            move_side_clockwise(rubiks, YELLOW);
+        }
+        // savoir si une arête et sa voisine de droite sont bien placées
+        for (int i = ORANGE; i < BLUE; i++) {
+            if (rubiks[i].side == rubiks[i].cubie[7].color &&
+                rubiks[rubiks[i].neighbour_side[3]].side == rubiks[rubiks[i].neighbour_side[3]].cubie[7].color) {
+                cross = 3;
+                // faire tourner la face jaune jusqu'à ce que les 2 arêtes biens placées soient en bonne position pour l'algo
+                while (rubiks[BLUE].cubie[7].color != i) {
+                    move_side_clockwise(rubiks, YELLOW);
+                }
+
+            }
+        }
+    }
+    // On sait maintenant quel algo exécuter,
+    printf("après le choix de l'algo");
+    printf("%d",cross);
+    draw_rubiks(rubiks);
+
+    if(cross == 2){
+        move_side_clockwise(rubiks,ORANGE);
+        move_side_clockwise(rubiks, YELLOW);
+        move_side_clockwise(rubiks, YELLOW);
         move_side_anticlockwise(rubiks,ORANGE);
+        move_side_anticlockwise(rubiks, YELLOW);
+        move_side_clockwise(rubiks,ORANGE);
+        move_side_anticlockwise(rubiks, YELLOW);
+        move_side_anticlockwise(rubiks,ORANGE);
+
+        move_side_clockwise(rubiks,YELLOW);
+        cross = 3;
+    }
+    if(cross == 3){
+        move_side_clockwise(rubiks, ORANGE);
+        move_side_clockwise(rubiks,YELLOW);
+        move_side_clockwise(rubiks,YELLOW);
+        move_side_anticlockwise(rubiks, ORANGE);
         move_side_anticlockwise(rubiks,YELLOW);
-        move_side_anticlockwise(rubiks,GREEN);
+        move_side_clockwise(rubiks, ORANGE);
+        move_side_anticlockwise(rubiks,YELLOW);
+        move_side_anticlockwise(rubiks, ORANGE);
+        move_side_anticlockwise(rubiks,YELLOW);
+    }
+
+    // faire tourner la face jaune jusqu'à ce que au moins une arête ( <=> toutes les arêtes) retrouve la bonne position
+    while(rubiks[GREEN].side != rubiks[GREEN].cubie[7].color){
+        move_side_clockwise(rubiks,YELLOW);
+
     }
 }
+
 
 /**
  * Cette fonction cherche à résoudre la 2ème couronne du rubik's cube
