@@ -177,7 +177,7 @@ void solve_rubiks(rubiks_side *rubiks){
     // résolution de la croix blanche
     solve_yellow_cross(rubiks);
     // résolution des coins jaunes
-    //solve_yellow_corner(rubiks);
+    solve_yellow_corner(rubiks);
 }
 
 /**
@@ -187,20 +187,64 @@ void solve_rubiks(rubiks_side *rubiks){
 void solve_yellow_corner(rubiks_side * rubiks){
     // cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
     cubies cubie;
-    // on positionne d'abord les coins sur leur bon emplacement
-    for(int i = YELLOW ; i <= BLUE ; i++){
-        // rechercher la position du cubie
-        cubie = search_cubie(rubiks,YELLOW,i,CORNER);
-        // si un cubie est à la bonne position
-        if(rubiks[cubie.neighbours[1].num_side].cubie[cubie.neighbours[1].num_cubie].color == GREEN){
-            // algorithme à répéter tant que les autres sont mal postionner
-            while(1){
-
-            }
+    // ON recherche la position du coin de référence, l'objectif est de correctement le placer
+    cubie = search_cubie(rubiks,YELLOW,ORANGE,CORNER);
+    int i = 0;
+    // 3 possibilités pour que le coin de de référence (orange/vert/jaune) soit bien placé
+    while((cubie.cubie_side != YELLOW || cubie.num != 0 ) &&
+        (cubie.cubie_side != GREEN || cubie.num != 6 ) &&
+        (cubie.cubie_side != ORANGE || cubie.num != 8 )){
+        // si le coin de référence se trouve sur le coin qui ne bouge pas ( <=> à 2 mouvements sans résultats), on le change
+        if( i == 2){
+            turn_three_corner(rubiks);
+            i = 0;
         }
+        else {
+            // tourner 3 côtés
+            i++;
+            // mouvement de la face jaune obligatoire pour tourner le coin de référence
+            move_side_clockwise(rubiks, YELLOW);
+            turn_three_corner(rubiks);
+            move_side_anticlockwise(rubiks, YELLOW);
+        }
+        cubie = search_cubie(rubiks, YELLOW, ORANGE, CORNER);
     }
-}
+    while((cubie.cubie_side != YELLOW || cubie.num != 2 ) &&
+          (cubie.cubie_side != GREEN || cubie.num != 8 ) &&
+          (cubie.cubie_side != RED || cubie.num != 6 )) {
+        turn_three_corner(rubiks);
+        cubie = search_cubie(rubiks, YELLOW, GREEN, CORNER);
+    }
+    // La doc du sujet est indigeste, surtout à programmer, donc: on utilise la technique détaillée dans cet articele:
+    //https://ruwix.com/the-rubiks-cube/how-to-solve-the-rubiks-cube-beginners-method/orient-yellow-corners-how-to-solve-last-layer-corner/
+    // on parcours tous les coins
+    for(int j = 0 ; j <= 3 ; j++){
+        while(rubiks[YELLOW].cubie[0].color != YELLOW){
+            move_side_anticlockwise(rubiks, ORANGE);
+            move_side_anticlockwise(rubiks, WHITE);
+            move_side_clockwise(rubiks, ORANGE);
+            move_side_clockwise(rubiks, WHITE);
+        }
+        move_side_clockwise(rubiks,YELLOW);
+    }
 
+
+}
+/**
+ * Cette fonction permet de faire tourner trois côtés d'une même face sans bouger le 4em
+ * et le reste du cube
+ * @param Rubiks est un pointeur vers une strucure rubiks_sid
+ */
+ void turn_three_corner(rubiks_side *rubiks){
+    move_side_anticlockwise(rubiks, RED);
+    move_side_clockwise(rubiks,YELLOW);
+    move_side_clockwise(rubiks,ORANGE);
+    move_side_anticlockwise(rubiks,YELLOW);
+    move_side_clockwise(rubiks,RED);
+    move_side_clockwise(rubiks,YELLOW);
+    move_side_anticlockwise(rubiks, ORANGE);
+    move_side_anticlockwise(rubiks,YELLOW);
+ }
 /**
  * Cette fonction résoud la croix jaune
  * @param rubiks Un pointeur vers une structure rubiks
@@ -260,8 +304,6 @@ void solve_yellow_cross(rubiks_side *rubiks) {
 // On cherche maintenant à positionner les bon voisins des arêtes
 // on initialise à nouveau cross pour savoir quelle combinaison effectuée
 // elle sont déja bien placées si aucune n'est mal placée
-    printf("teste du bug qui arrive presque jamais :");
-    draw_rubiks(rubiks);
     cross = 0;
     // Tourner la face jaune jusqu'à ce qu'une des combinaison apparaisse
     for (int k =0; k < 4; k++){
@@ -293,9 +335,6 @@ void solve_yellow_cross(rubiks_side *rubiks) {
         }
     }
     // On sait maintenant quel algo exécuter,
-    printf("après le choix de l'algo");
-    printf("%d",cross);
-    draw_rubiks(rubiks);
 
     if(cross == 2){
         move_side_clockwise(rubiks,ORANGE);
@@ -315,8 +354,6 @@ void solve_yellow_cross(rubiks_side *rubiks) {
         // faire tourner la face jaune jusqu'à ce que les 2 arêtes biens placées soient en bonne position pour l'algo
         while (rubiks[BLUE].cubie[7].color != rubiks[rubiks[RED].cubie[7].color].neighbour_side[RIGHT]) {
             move_side_clockwise(rubiks, YELLOW);
-            printf("pendant rotations :");
-            draw_rubiks(rubiks);
         }
         move_side_clockwise(rubiks, ORANGE);
         move_side_clockwise(rubiks,YELLOW);
