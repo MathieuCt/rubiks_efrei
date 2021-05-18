@@ -19,6 +19,7 @@ void solve_rubiks(rubiks_side *);
 void solve_white_side(rubiks_side *rubiks);
 void solve_middle_row(rubiks_side *rubiks);
 void solve_yellow_cross(rubiks_side *rubiks);
+void solve_yellow_corner(rubiks_side *rubiks);
 cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour1, T_CUBIE_TYPE cubie_type);
 void right_move(rubiks_side *rubiks, cubies cubie);
 void left_move(rubiks_side *rubiks, cubies cubie);

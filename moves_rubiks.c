@@ -174,8 +174,33 @@ void solve_rubiks(rubiks_side *rubiks){
     solve_white_side(rubiks);
     // Puis la résolution de la 2eme couronne
     solve_middle_row(rubiks);
+    // résolution de la croix blanche
     solve_yellow_cross(rubiks);
+    // résolution des coins jaunes
+    //solve_yellow_corner(rubiks);
 }
+
+/**
+ * Cette fonction permet de résoudre les coins jaunes
+ * @param rubiks Un pointeur vers une strucuture rubiks
+ */
+void solve_yellow_corner(rubiks_side * rubiks){
+    // cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
+    cubies cubie;
+    // on positionne d'abord les coins sur leur bon emplacement
+    for(int i = YELLOW ; i <= BLUE ; i++){
+        // rechercher la position du cubie
+        cubie = search_cubie(rubiks,YELLOW,i,CORNER);
+        // si un cubie est à la bonne position
+        if(rubiks[cubie.neighbours[1].num_side].cubie[cubie.neighbours[1].num_cubie].color == GREEN){
+            // algorithme à répéter tant que les autres sont mal postionner
+            while(1){
+
+            }
+        }
+    }
+}
+
 /**
  * Cette fonction résoud la croix jaune
  * @param rubiks Un pointeur vers une structure rubiks
