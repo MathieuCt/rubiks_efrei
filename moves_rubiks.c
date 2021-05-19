@@ -170,11 +170,11 @@ void alternate_color(rubiks_side * rubiks){
  * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void solve_rubiks(rubiks_side *rubiks){
-    // On commence par la résolution de la face blanche
+    // On commence par la résolution de la face blanche, soit la face supérieure
     solve_white_side(rubiks);
     // Puis la résolution de la 2eme couronne
     solve_middle_row(rubiks);
-    // résolution de la croix blanche
+    // résolution de la croix jaune de la face antérieure
     solve_yellow_cross(rubiks);
     // résolution des coins jaunes
     solve_yellow_corner(rubiks);
@@ -230,6 +230,7 @@ void solve_yellow_corner(rubiks_side * rubiks){
 
 
 }
+
 /**
  * Cette fonction permet de faire tourner trois côtés d'une même face sans bouger le 4em
  * et le reste du cube
@@ -245,6 +246,7 @@ void solve_yellow_corner(rubiks_side * rubiks){
     move_side_anticlockwise(rubiks, ORANGE);
     move_side_anticlockwise(rubiks,YELLOW);
  }
+
 /**
  * Cette fonction résoud la croix jaune
  * @param rubiks Un pointeur vers une structure rubiks
@@ -381,13 +383,13 @@ void solve_yellow_cross(rubiks_side *rubiks) {
 void solve_middle_row(rubiks_side *rubiks){
 // cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
  cubies cubie;
- //Pour chaque face regarder si l'arrète milieu, gauche est la bonne
+ //Pour chaque face regarder si l'arête milieu, gauche est la bonne
  for(int i = ORANGE ; i <= BLUE ; i++){
      // chercher où se trouve le cubie
      cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
      // si le cubie est sur la 2ème couronne, il faut le ramener sur la 3ème
      if(cubie.y == 1 && cubie.cubie_side != YELLOW){
-         //prendre l'arrète qui se trouve sur la même face mais sur la 3ème couronne pour le remplacer
+         //prendre l'arête qui se trouve sur la même face mais sur la 3ème couronne pour le remplacer
          if(cubie.num == 5) {
              right_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
         }
@@ -402,7 +404,7 @@ void solve_middle_row(rubiks_side *rubiks){
              move_side_clockwise(rubiks,YELLOW);
              cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
          }
-         // Déplacer l'arrète de la 3ème couronne à sa position finale
+         // Déplacer l'arête de la 3ème couronne à sa position finale
          right_move(rubiks, cubie);
      }
      if(cubie.num == 7){
@@ -420,10 +422,10 @@ void solve_middle_row(rubiks_side *rubiks){
   * Déplacement vers le côté droit
   * Utilisée lors de la résolution de la 2ème couronne
   * @param rubiks Un pointeur vers une structure rubiks_side
-  * @param cubie cubie situé au dessus de l'arrète à déplacer
+  * @param cubie cubie situé au dessus de l'arête à déplacer
   */
 void right_move(rubiks_side *rubiks, cubies cubie){
-    // algorithme retranscrit pour être réaliser sans retournement du cube
+    // algorithme retranscrit pour être réalisé sans retournement du cube
      move_side_anticlockwise(rubiks, YELLOW);
      move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[RIGHT]);
      move_side_clockwise(rubiks, YELLOW);
@@ -439,10 +441,10 @@ void right_move(rubiks_side *rubiks, cubies cubie){
  * Déplacement vers le côté gauche
  * Utilisée lors de la résolution de la 2ème couronne
  * @param rubiks Un pointeur vers une structure rubiks_side
- * @param cubie cubie situé au dessus de l'arrète à déplacer
+ * @param cubie cubie situé au dessus de l'arête à déplacer
  */
 void left_move(rubiks_side *rubiks, cubies cubie){
-    // algorithme retranscrit pour être réaliser sans retournement du cube
+    // algorithme retranscrit pour être réalisé sans retournement du cube
     move_side_clockwise(rubiks, YELLOW);
     move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[LEFT]);
     move_side_anticlockwise(rubiks, YELLOW);
