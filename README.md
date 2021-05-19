@@ -7,6 +7,10 @@
   * https://youtu.be/2R3OSGmUmoU?t=2015
 * Documentation pour debugger et utiliser ncurses dans Clion est dans le répertoire Doc
 * Comment ajouter des librairies dans Clion pour pouvoir compiler : [Lien](https://stackoverflow.com/questions/40710903/undefined-reference-during-linking-using-ncurses-and-cmake) <br />
+## Documentation et aides nCurses
+* [Tutoriel ncurses](https://arnaud-feltz.developpez.com/tutoriels/ncurses/?page=premier_pas)
+* [Ncurses Programming Guide](www.cs.ukzn.ac.za/~hughm/os/notes/ncurses.html)
+* [NCURSES Programming HOWTO Menus](https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/menus.html)
 ## CMake
 * Dans notre cas, pour l'instant, le fichier CMakeLists.txt doit contenir, si le nom du projet est XXXX :  
   cmake_minimum_required(VERSION 3.20) <br />
