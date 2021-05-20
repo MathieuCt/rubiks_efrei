@@ -12,11 +12,12 @@
 #include "draw.h"
 #include "rubiks.h"
 #include "moves_rubiks.h"
+#include "Menu.h"
 
 /**
  * Définie si nous réalisons les affichages en mode texte (true) ou en mode nCurses (false)
  */
-#define PRINT_TEXT_ONLY true
+#define PRINT_TEXT_ONLY TRUE
 
 int main()
 {
@@ -28,17 +29,19 @@ int main()
 
     if (PRINT_TEXT_ONLY)
     {
-        printf("Mode non graphique\n");
+        printf("Mode non graphique--------------------------------\n");
         rubiks_side rubiks[6];
         rubiks_creation(rubiks);
-        //rubiks_display(rubiks);
 
+        show_menu(rubiks);
+
+        //rubiks_display(rubiks);
         // alterner les couleurs
         //alternate_color(rubiks);
-        mix_rubiks(rubiks);
-        draw_rubiks(rubiks);
-        solve_rubiks(rubiks);
-        draw_rubiks(rubiks);
+        //mix_rubiks(rubiks);
+        //draw_rubiks(rubiks);
+        //solve_rubiks(rubiks);
+        //draw_rubiks(rubiks);
     }
     else
     {
