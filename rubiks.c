@@ -107,12 +107,17 @@ void rubiks_creation(rubiks_side *rubiks) {
 }
 
 /**
- * todo : explications à réaliser
+ * Cette fonction permet d'attribuer à chaque cubie ses voisin.
+ * num_side indique sur quelle face il se trouve
+ * num_cubie correspond au numéro du cubie voisin sur sa face
+ * les voisins ne changent pas avec la réalisation de mouvements ils sont donc attribués définitivement
  * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void rubiks_neighbour(rubiks_side *rubiks) {
     // initialiser les voisins
     int face, cubie;
+    // side relative : UP, DOWN, RIGHT, LEFT
+    // side absolu : ORANGE, GREEN, BLUE...
     int side_relative, side_abs;
     for (face = WHITE; face <= YELLOW; face++) {
         for (cubie = 0; cubie < 9; cubie++) {
@@ -146,7 +151,7 @@ void rubiks_neighbour(rubiks_side *rubiks) {
                 rubiks[face].cubie[cubie].neighbours[0].num_side = side_abs;
                 // recuperer le num du cubie voisin
                 rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(rubiks,face, side_abs), EDGE,0);
-                // mise a -1 du 2nd voisin
+                // mise a -1 du 2nd voisin, se chiffre indique qu'il n'y a pas de second voisuin (type edge)
                 rubiks[face].cubie[cubie].neighbours[1].num_side = -1;
                 rubiks[face].cubie[cubie].neighbours[1].num_cubie = -1;
                 // position initiale
@@ -155,6 +160,7 @@ void rubiks_neighbour(rubiks_side *rubiks) {
             if (rubiks[face].cubie[cubie].type == CORNER){
                 // 2 voisins pour un corner
                 int side_relative2, side_abs2;
+                // trouver à côté de quelles faces (relative) le cubie est en fonction de ses coordonnées
                 if(rubiks[face].cubie[cubie].y == 0) {
                     if (rubiks[face].cubie[cubie].x == 0) {
                         side_relative = 3;
@@ -173,14 +179,19 @@ void rubiks_neighbour(rubiks_side *rubiks) {
                         side_relative2 = 2;
                     }
                 }
+                // enregistrer le numéro absolu de ces faces
                 side_abs = rubiks[face].neighbour_side[side_relative];
                 side_abs2 = rubiks[face].neighbour_side[side_relative2];
+                // On peut maintenant attribuer num_side (2 fois)
                 rubiks[face].cubie[cubie].neighbours[0].num_side = side_abs;
                 rubiks[face].cubie[cubie].neighbours[1].num_side = side_abs2;
+                //On peut maintenant retrouver num_cubie grâce à research_side() et research_num()
                 rubiks[face].cubie[cubie].neighbours[0].num_cubie = research_num(research_side(rubiks,face, side_abs), CORNER,research_side(rubiks,side_abs2, side_abs));
                 rubiks[face].cubie[cubie].neighbours[1].num_cubie = research_num(research_side(rubiks,face, side_abs2), CORNER,research_side(rubiks,side_abs, side_abs2));
 
             }
+            // dans le cas du centre on considère que son cubie voisin est le cubie opposé sur le rubiks cube
+            // il est donc facile à définir et il n'y a pas de deuxième voisin
             if (rubiks[face].cubie[cubie].type == CENTER){
 
                 rubiks[face].cubie[cubie].neighbours[0].num_side = rubiks[face].opposite_side;
@@ -194,14 +205,16 @@ void rubiks_neighbour(rubiks_side *rubiks) {
 }
 
 /**
- * todo : expliquer
+ * Cette fonction permet de trouver à partir de la position absolu d'une face (neighbour_side)
+ * la position relative quelle occupe.
+ * exemple : si je souaite retrouver la position de GREEN par rapport à ORANGE la fonction renvoie LEFT
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face principale qui nous sert de référence pour la recherche
  * @param neighbour_face todo : expliquer
  * @return Renvoi l'indice de la face trouvée ou 0 en cas d'échec de la recherche
  */
 int research_side(rubiks_side *rubiks, int side, int neighbour_face){
-    // neighbour_face ( pos abs de la face voisine)
+    // neighbour_face (position absolue de la face voisine)
     // side : face principale
     // face : variable locale pour parcourir la liste de voisin de neighbour side
     for(int face = 0 ; face < 4 ; face++){
@@ -214,15 +227,16 @@ int research_side(rubiks_side *rubiks, int side, int neighbour_face){
 }
 //
 /**
- * Cette fonction retourne le numéro du cubie selon la position relative de la face de son voisin
- * @param side todo expliquer
- * @param type todo expliquer
- * @param side2 todo expliquer et probablement renommer
+ * Cette fonction retourne le numéro du cubie selon la position relative de la face de son ou de ses voisins
+ * @param side position relative de la face voisine au cubie dont on cherche le numéro.
+ * @param type Le type recherché permet d'orienter la recherche
+ * @param side2 Dans le cas où l'on cherche la position du'un coin alors il est nécessaire de connaitre la position de la face de son deuxième voisin
  * @return Renvoi l'indice de lu cubie trouvé, -1 en cas d'erreur, ou 0 en cas d'échec de la recherche
  */
 int research_num( int side, int type, int side2 ){
     // pour une arrete
     if (type == EDGE){
+        // retourne le bon numéro en fonction de la position de la face voisine au cubie
         switch (side) {
             case 0 :
                 return 1;
@@ -237,11 +251,13 @@ int research_num( int side, int type, int side2 ){
 
         }
     }
-    //pour un coin, besoin de 2 faces pour définir le num
+    //pour un coin, il est nécessaire d'avoir la position de 2 faces pour définir le numéro d'un cubie
     if(type == CORNER){
+        // En fonction de la première face voisine, il reste 2 possibilités
         switch (side) {
             //cas du top
             case 0 :
+                // le numéro de la seconde face voisine permet de choisir entre les 2 possibilités restante
                 if(side2 == 1){
                     return 2;
                 }

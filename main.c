@@ -17,7 +17,7 @@
 /**
  * Définie si nous réalisons les affichages en mode texte (true) ou en mode nCurses (false)
  */
-#define PRINT_TEXT_ONLY TRUE
+#define PRINT_TEXT_ONLY true
 
 int main()
 {
