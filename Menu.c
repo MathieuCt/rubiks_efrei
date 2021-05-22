@@ -137,6 +137,34 @@ void choose_color(rubiks_side *rubiks){
     }
 }
 
+/**
+ * permet de récupérer le choix de l'utilisateur
+ * @param rubiks pointeur sur un rubiks
+ * @param type type de cubie à placer
+ * @param liste des cubie disponibles
+ * @param longueur de la liste
+ */
+void choice_cubie(rubiks_side *rubiks, T_CUBIE_TYPE type, cubies *liste_cubie, int len_liste)
+{
+    char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET};
+    int choice;
+    rubiks_side reference_rubiks[6];
+    rubiks_creation(reference_rubiks);
+
+    for(int i = 0; i < len_liste ;i++){
+        printf("num %d :%s, %s ;",i, tabcolor[liste_cubie[i].color],
+               tabcolor[reference_rubiks[liste_cubie[i].neighbours[0].num_side].cubie[liste_cubie[i].neighbours[0].num_cubie].color]);
+
+    }
+    printf("\n");
+    do
+    {
+        printf("Rentrez vôtre choix:");
+        choice = getchar();
+    } while (choice < 0 && choice > len_liste);
+
+}
+
 void clear_buffer()
 {
     int c = 0;

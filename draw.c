@@ -271,7 +271,7 @@ void rubiks_display(rubiks_side *rubiks){
  */
 void draw_rubiks(rubiks_side *rubiks)
 {
-    char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET, GRY "G"};
+    char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET, GRY "?"};
 
     printf("--------------\n");
     printf("    %s%s%s       \n", tabcolor[rubiks[0].cubie[0].color], tabcolor[rubiks[0].cubie[1].color],tabcolor[rubiks[0].cubie[2].color]);
