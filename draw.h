@@ -85,6 +85,7 @@ extern short NB_COLS;
 //    #define WHT   "\x1B[37m"
 #define WHT "\033[38;2;255;255;255m"
 #define ORG "\033[38;2;255;165;0m"
+#define GRY "\033[38;2;80;80m"
 #define RESET "\x1B[0m"
 
 // Les fonction
