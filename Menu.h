@@ -11,5 +11,6 @@
 #include <stdio.h>
 
 void show_menu(rubiks_side *);
+void choose_color(rubiks_side *);
 
 #endif //RUBIKS_EFREI_MENU_H

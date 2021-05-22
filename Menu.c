@@ -97,3 +97,32 @@ void show_menu(rubiks_side *rubiks)
         scanf("%d", &end_choice);
     }
 }
+/**
+ * Cette fonction permet à l'utilisateur de remplir un cube
+ */
+void choose_color(rubiks_side *rubiks){
+    // pour enregistrer la couleur choisie
+    int color_choose;
+    //initialisation avec la couleur grise
+    for(int i = WHITE ; i <= YELLOW ; i++){
+        for(int j = 0 ; j < 9 ; j++) {
+            rubiks[i].cubie[j].color = GREY;
+        }
+    }
+    //remplir le rubiks
+    for(int i = WHITE ; i <= YELLOW ; i++){
+        for(int j = 0 ; j < 9 ; j++) {
+            // dessiner le rubiks
+            draw_rubiks(rubiks);
+            do{
+                //demander une couleur
+                printf("Choisir la couleur sur la face %d, numéro %d:\n", i, j);
+                scanf("%d",&color_choose);
+                // si la couleur est valide
+            }while(color_choose > YELLOW || color_choose < WHITE);
+            rubiks[i].cubie[j].color = color_choose;
+
+
+        }
+    }
+}

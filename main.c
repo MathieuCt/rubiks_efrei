@@ -33,8 +33,8 @@ int main()
         rubiks_side rubiks[6];
         rubiks_creation(rubiks);
 
-        show_menu(rubiks);
-
+        //show_menu(rubiks);
+        choose_color(rubiks);
         //rubiks_display(rubiks);
         // alterner les couleurs
         //alternate_color(rubiks);
