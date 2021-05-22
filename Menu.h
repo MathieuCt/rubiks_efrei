@@ -9,8 +9,10 @@
 #include "draw.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 void show_menu(rubiks_side *);
 void choose_color(rubiks_side *);
+int choice_menu(char *);
 
 #endif //RUBIKS_EFREI_MENU_H
