@@ -74,6 +74,19 @@ extern short NB_LINES;
 // Nombre de colonnes détectées dans le terminal
 extern short NB_COLS;
 
+// Les couleurs ANSI pour l'affichage du cube au format texte, non nCurses
+// Références : https://en.wikipedia.org/wiki/ANSI_escape_code
+#define ARED   "\x1B[31m"
+//    #define GRN   "\x1B[32m"
+#define GRN   "\033[38;2;0;175;0m"
+//    #define YEL   "\x1B[33m"
+#define YEL "\033[38;2;255;255;0m"
+#define BLU   "\x1B[34m"
+//    #define WHT   "\x1B[37m"
+#define WHT "\033[38;2;255;255;255m"
+#define ORG "\033[38;2;255;165;0m"
+#define RESET "\x1B[0m"
+
 // Les fonction
 int check_and_set_term(void);
 void set_colors(void);
