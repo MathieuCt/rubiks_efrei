@@ -68,7 +68,7 @@ void show_menu(rubiks_side *rubiks)
                         char tab3[6] = {1, 2, 3, 4, 5, 6};
                         side_choice = choice_menu(tab3);
 
-                        move_side_clockwise(rubiks, side_choice - 1);
+                        move_side_clockwise(rubiks, side_choice - 1, true);
                         draw_rubiks(rubiks);
 
                         printf("--------------------------------\n");
@@ -90,7 +90,7 @@ void show_menu(rubiks_side *rubiks)
                         char tab4[6] = {1, 2, 3, 4, 5, 6};
                         side_choice = choice_menu(tab4);
 
-                        move_side_anticlockwise(rubiks, side_choice - 1);
+                        move_side_anticlockwise(rubiks, side_choice - 1, true);
                         draw_rubiks(rubiks);
 
                         printf("--------------------------------\n");
@@ -180,19 +180,28 @@ void choice_cubie(rubiks_side *reference_rubiks, rubiks_side *rubiks, T_CUBIE_TY
 {
     char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET};
     int choice;
+
     // imprimer la liste des possibilités des cubies disponibles
     for(int i = 0; i < len_liste ;i++){
-        printf("num %d : %s, %s ;",i, tabcolor[liste_cubie[i].color],
+        printf("Choix %d : %s, %s", i, tabcolor[liste_cubie[i].color],
                tabcolor[reference_rubiks[liste_cubie[i].neighbours[0].num_side].cubie[liste_cubie[i].neighbours[0].num_cubie].color]);
-
+        if(type == CORNER)
+            printf(", %s",
+                   tabcolor[reference_rubiks[liste_cubie[i].neighbours[1].num_side].cubie[liste_cubie[i].neighbours[1].num_cubie].color]);
+        printf(" | ");
+        if(i % 6 == 0 && i != 0){
+            printf("\n");
+        }
     }
-    // récubpérer le choix de l'utilisateur
     printf("\n");
     do
     {
-        printf("Rentrez vôtre choix:");
-        choice = getchar();
-    } while (choice < 0 && choice > len_liste);
+        printf("Rentrez votre choix:");
+        scanf("%d", &choice);
+        // Vérifier qu'on n'a bien que des chiffres, et qu'ils sont entre 0 et x
+    } while (choice < 0 || choice > len_liste);
+
+
     // mettre à jour le rubiks
     rubiks[face].cubie[num_cubie].color = liste_cubie[choice].color;
     // mettre à jour les cubies disponibles

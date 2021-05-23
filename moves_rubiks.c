@@ -14,6 +14,8 @@
 #include "moves_rubiks.h"
 #include "rubiks.h"
 
+solutions_steps * history = NULL;
+
 /**
  * Cette fonction permet de déplacer un coin du cube, depuis "from" vers "to"
  * @param rubiks Un pointeur vers une structure rubiks_side
@@ -50,7 +52,9 @@ void move_edge(rubiks_side *rubiks, int side, int from, int to) {
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face à faire tourner dans le sens horaire
  */
-void move_side_clockwise(rubiks_side *rubiks, int side){
+void move_side_clockwise(rubiks_side *rubiks, int side, int add_to_history) {
+    char tab_face[][strlen("YELLOW")] = {"BLANC", "ORANGE", "VERT", "ROUGE", "BLEU", "YELLOW"};
+
     int tmp1, tmp2, tmp3;
     // On sauvegarde les données du coin 0 pour pouvoir les utiliser à la fin de l'algorithme, pour écraser le coin 2
     // todo: renommer ces variables pour qu'elles aient un sens
@@ -76,11 +80,18 @@ void move_side_clockwise(rubiks_side *rubiks, int side){
     move_edge(rubiks, side, 7, 3);
     move_edge(rubiks, side, 5, 7);
 
-
     // Et enfin l'arête restante 5, deviens 0.
     rubiks[rubiks[side].cubie[5].neighbours[0].num_side].cubie[rubiks[side].cubie[5].neighbours[0].num_cubie].color = tmp2;
     rubiks[side].cubie[5].color = tmp1;
 
+    if (add_to_history) {
+        if (history == NULL) {
+            history = init_solution(tab_face[side]);
+        }
+        else {
+            add_step_to_solution(history, tab_face[side]);
+        }
+    }
 }
 
 /**
@@ -89,11 +100,20 @@ void move_side_clockwise(rubiks_side *rubiks, int side){
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face à faire tourner dans le sens horaire
  */
-void move_side_anticlockwise(rubiks_side *rubiks, int side){
+void move_side_anticlockwise(rubiks_side *rubiks, int side, int add_to_history) {
+    char tab_face[][strlen("YELLOW")] = {"BLANC", "ORANGE", "VERT", "ROUGE", "BLEU", "YELLOW"};
     // On appelle trois fois la fonction move_side_clockwise, plutôt que de faire une fonction inverse.
     for (int i = 0; i < 3; i++)
     {
-        move_side_clockwise(rubiks, side);
+        move_side_clockwise(rubiks, side, false);
+    }
+    if (add_to_history) {
+        if (history == NULL) {
+            history = init_solution(strcat(tab_face[side], " '"));
+        }
+        else {
+            add_step_to_solution(history, strcat(tab_face[side], " '"));
+        }
     }
 }
 
@@ -110,7 +130,7 @@ void mix_rubiks(rubiks_side *rubiks){
     int nbr_moves = 20 + rand() % (30 + 1 - 20);
     for (int i = 0 ; i < nbr_moves; i++){
         // Réalise "nbr_moves" nombre de mouvements aléatoires
-        move_side_clockwise(rubiks, rand() % (5 + 1));
+        move_side_clockwise(rubiks, rand() % (5 + 1), true);
     }
 }
 
@@ -119,18 +139,18 @@ void mix_rubiks(rubiks_side *rubiks){
  * @param rubiks un pointeur vers une structure rubiks_side
  */
 void alternate_color(rubiks_side * rubiks){
-    move_side_clockwise(rubiks, 0);
-    move_side_clockwise(rubiks, 0);
-    move_side_clockwise(rubiks, 5);
-    move_side_clockwise(rubiks, 5);
-    move_side_clockwise(rubiks, 1);
-    move_side_clockwise(rubiks, 1);
-    move_side_clockwise(rubiks, 3);
-    move_side_clockwise(rubiks, 3);
-    move_side_clockwise(rubiks, 2);
-    move_side_clockwise(rubiks, 2);
-    move_side_clockwise(rubiks, 4);
-    move_side_clockwise(rubiks, 4);
+    move_side_clockwise(rubiks, 0, true);
+    move_side_clockwise(rubiks, 0, true);
+    move_side_clockwise(rubiks, 5, true);
+    move_side_clockwise(rubiks, 5, true);
+    move_side_clockwise(rubiks, 1, true);
+    move_side_clockwise(rubiks, 1, true);
+    move_side_clockwise(rubiks, 3, true);
+    move_side_clockwise(rubiks, 3, true);
+    move_side_clockwise(rubiks, 2, true);
+    move_side_clockwise(rubiks, 2, true);
+    move_side_clockwise(rubiks, 4, true);
+    move_side_clockwise(rubiks, 4, true);
 }
 
 /**
@@ -146,11 +166,13 @@ void solve_rubiks(rubiks_side *rubiks){
     solve_yellow_cross(rubiks);
     // résolution des coins jaunes
     solve_yellow_corner(rubiks);
+    print_solution(history);
+    clear_solution(history);
 }
 
 /**
  * Cette fonction permet de résoudre les coins jaunes
- * @param rubiks Un pointeur vers une strucuture rubiks
+ * @param rubiks Un pointeur vers une structure rubiks
  */
 void solve_yellow_corner(rubiks_side * rubiks){
     // cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
@@ -171,9 +193,9 @@ void solve_yellow_corner(rubiks_side * rubiks){
             // tourner 3 côtés
             i++;
             // mouvement de la face jaune obligatoire pour tourner le coin de référence
-            move_side_clockwise(rubiks, YELLOW);
+            move_side_clockwise(rubiks, YELLOW, true);
             turn_three_corner(rubiks);
-            move_side_anticlockwise(rubiks, YELLOW);
+            move_side_anticlockwise(rubiks, YELLOW, true);
         }
         cubie = search_cubie(rubiks, YELLOW, ORANGE, CORNER);
     }
@@ -188,12 +210,12 @@ void solve_yellow_corner(rubiks_side * rubiks){
     // on parcours tous les coins
     for(int j = 0 ; j <= 3 ; j++){
         while(rubiks[YELLOW].cubie[0].color != YELLOW){
-            move_side_anticlockwise(rubiks, ORANGE);
-            move_side_anticlockwise(rubiks, WHITE);
-            move_side_clockwise(rubiks, ORANGE);
-            move_side_clockwise(rubiks, WHITE);
+            move_side_anticlockwise(rubiks, ORANGE, true);
+            move_side_anticlockwise(rubiks, WHITE, true);
+            move_side_clockwise(rubiks, ORANGE, true);
+            move_side_clockwise(rubiks, WHITE, true);
         }
-        move_side_clockwise(rubiks,YELLOW);
+        move_side_clockwise(rubiks, YELLOW, true);
     }
 
 
@@ -204,14 +226,14 @@ void solve_yellow_corner(rubiks_side * rubiks){
  * @param Rubiks est un pointeur vers une strucure rubiks_sid
  */
  void turn_three_corner(rubiks_side *rubiks){
-    move_side_anticlockwise(rubiks, RED);
-    move_side_clockwise(rubiks,YELLOW);
-    move_side_clockwise(rubiks,ORANGE);
-    move_side_anticlockwise(rubiks,YELLOW);
-    move_side_clockwise(rubiks,RED);
-    move_side_clockwise(rubiks,YELLOW);
-    move_side_anticlockwise(rubiks, ORANGE);
-    move_side_anticlockwise(rubiks,YELLOW);
+    move_side_anticlockwise(rubiks, RED, true);
+    move_side_clockwise(rubiks, YELLOW, true);
+    move_side_clockwise(rubiks, ORANGE, true);
+    move_side_anticlockwise(rubiks, YELLOW, true);
+    move_side_clockwise(rubiks, RED, true);
+    move_side_clockwise(rubiks, YELLOW, true);
+    move_side_anticlockwise(rubiks, ORANGE, true);
+    move_side_anticlockwise(rubiks, YELLOW, true);
  }
 /**
  * Cette fonction résoud la croix jaune
@@ -228,7 +250,7 @@ void solve_yellow_cross(rubiks_side *rubiks) {
     // on cherche d'abord à résoudre la croix sans se soucier des arêtes
     // parcourir les cubies de la face jaune
     do {
-        move_side_clockwise(rubiks, YELLOW);
+        move_side_clockwise(rubiks, YELLOW, true);
         for (int i = 0; i <= 8; i++) {
             // si le cubie est une arète et qu'il est jaune
             if (rubiks[YELLOW].cubie[i].type == EDGE) {
@@ -251,23 +273,23 @@ void solve_yellow_cross(rubiks_side *rubiks) {
     // si 2 cotés adjacents sont jaune: 2 possibilités
     if ((yellow_edge[5] == 1 && (yellow_edge[1] == 1 || yellow_edge[7] == 1) && cross == 0) || cross == -1) {
         // dans le cas du l il peut être néssessaire de refaire tourner la face jaune
-        if (yellow_edge[1] == 1) move_side_clockwise(rubiks, YELLOW);
-        move_side_anticlockwise(rubiks, ORANGE);
-        move_side_anticlockwise(rubiks, YELLOW);
-        move_side_anticlockwise(rubiks, GREEN);
-        move_side_clockwise(rubiks, YELLOW);
-        move_side_clockwise(rubiks, GREEN);
-        move_side_clockwise(rubiks, ORANGE);
+        if (yellow_edge[1] == 1) move_side_clockwise(rubiks, YELLOW, true);
+        move_side_anticlockwise(rubiks, ORANGE, true);
+        move_side_anticlockwise(rubiks, YELLOW, true);
+        move_side_anticlockwise(rubiks, GREEN, true);
+        move_side_clockwise(rubiks, YELLOW, true);
+        move_side_clockwise(rubiks, GREEN, true);
+        move_side_clockwise(rubiks, ORANGE, true);
     }
     // si deux cotés opposés sont jaunes et que les autres ne sont pas jaunes
     if ((yellow_edge[3] == 1 && yellow_edge[5] == 1 && yellow_edge[1] == 0 && yellow_edge[7] == 0 && cross == 0) ||
         cross == -1) {
-        move_side_clockwise(rubiks, GREEN);
-        move_side_clockwise(rubiks, ORANGE);
-        move_side_clockwise(rubiks, YELLOW);
-        move_side_anticlockwise(rubiks, ORANGE);
-        move_side_anticlockwise(rubiks, YELLOW);
-        move_side_anticlockwise(rubiks, GREEN);
+        move_side_clockwise(rubiks, GREEN, true);
+        move_side_clockwise(rubiks, ORANGE, true);
+        move_side_clockwise(rubiks, YELLOW, true);
+        move_side_anticlockwise(rubiks, ORANGE, true);
+        move_side_anticlockwise(rubiks, YELLOW, true);
+        move_side_anticlockwise(rubiks, GREEN, true);
     }
 // On cherche maintenant à positionner les bon voisins des arêtes
 // on initialise à nouveau cross pour savoir quelle combinaison effectuée
@@ -284,14 +306,14 @@ void solve_yellow_cross(rubiks_side *rubiks) {
         if (edge_placed == 1) cross = 1;
     }
     while(cross == 0) {
-        move_side_clockwise(rubiks, YELLOW);
+        move_side_clockwise(rubiks, YELLOW, true);
         // si 2 faces opposées sont bien placés
         if (rubiks[BLUE].cubie[7].color == BLUE && rubiks[GREEN].cubie[7].color == GREEN)
             cross = 2;
         // 2 faces opposées correctement positionnées mais mal placées pour le prochain algo
         if (rubiks[ORANGE].cubie[7].color == ORANGE && rubiks[RED].cubie[7].color == RED) {
             cross = 2;
-            move_side_clockwise(rubiks, YELLOW);
+            move_side_clockwise(rubiks, YELLOW, true);
         }
         // savoir si une arête et sa voisine de droite sont bien placées
         for (int i = ORANGE; i <= BLUE; i++) {
@@ -305,14 +327,14 @@ void solve_yellow_cross(rubiks_side *rubiks) {
     // On sait maintenant quel algo exécuter,
 
     if(cross == 2){
-        move_side_clockwise(rubiks,ORANGE);
-        move_side_clockwise(rubiks, YELLOW);
-        move_side_clockwise(rubiks, YELLOW);
-        move_side_anticlockwise(rubiks,ORANGE);
-        move_side_anticlockwise(rubiks, YELLOW);
-        move_side_clockwise(rubiks,ORANGE);
-        move_side_anticlockwise(rubiks, YELLOW);
-        move_side_anticlockwise(rubiks,ORANGE);
+        move_side_clockwise(rubiks, ORANGE, true);
+        move_side_clockwise(rubiks, YELLOW, true);
+        move_side_clockwise(rubiks, YELLOW, true);
+        move_side_anticlockwise(rubiks, ORANGE, true);
+        move_side_anticlockwise(rubiks, YELLOW, true);
+        move_side_clockwise(rubiks, ORANGE, true);
+        move_side_anticlockwise(rubiks, YELLOW, true);
+        move_side_anticlockwise(rubiks, ORANGE, true);
 
 
         cross = 3;
@@ -321,22 +343,22 @@ void solve_yellow_cross(rubiks_side *rubiks) {
     if(cross == 3){
         // faire tourner la face jaune jusqu'à ce que les 2 arêtes biens placées soient en bonne position pour l'algo
         while (rubiks[BLUE].cubie[7].color != rubiks[rubiks[RED].cubie[7].color].neighbour_side[RIGHT]) {
-            move_side_clockwise(rubiks, YELLOW);
+            move_side_clockwise(rubiks, YELLOW, true);
         }
-        move_side_clockwise(rubiks, ORANGE);
-        move_side_clockwise(rubiks,YELLOW);
-        move_side_clockwise(rubiks,YELLOW);
-        move_side_anticlockwise(rubiks, ORANGE);
-        move_side_anticlockwise(rubiks,YELLOW);
-        move_side_clockwise(rubiks, ORANGE);
-        move_side_anticlockwise(rubiks,YELLOW);
-        move_side_anticlockwise(rubiks, ORANGE);
-        move_side_anticlockwise(rubiks,YELLOW);
+        move_side_clockwise(rubiks, ORANGE, true);
+        move_side_clockwise(rubiks, YELLOW, true);
+        move_side_clockwise(rubiks, YELLOW, true);
+        move_side_anticlockwise(rubiks, ORANGE, true);
+        move_side_anticlockwise(rubiks, YELLOW, true);
+        move_side_clockwise(rubiks, ORANGE, true);
+        move_side_anticlockwise(rubiks, YELLOW, true);
+        move_side_anticlockwise(rubiks, ORANGE, true);
+        move_side_anticlockwise(rubiks, YELLOW, true);
     }
 
     // faire tourner la face jaune jusqu'à ce que au moins une arête ( <=> toutes les arêtes) retrouve la bonne position
     while(rubiks[GREEN].side != rubiks[GREEN].cubie[7].color){
-        move_side_clockwise(rubiks,YELLOW);
+        move_side_clockwise(rubiks, YELLOW, true);
 
     }
 }
@@ -367,7 +389,7 @@ void solve_middle_row(rubiks_side *rubiks){
      // si le cubie est sur  la face jaune, on cherche à le positionner selon son voisin
      if(cubie.cubie_side == YELLOW){
          while( cubie.neighbours[0].num_side != rubiks[i].neighbour_side[LEFT]){
-             move_side_clockwise(rubiks,YELLOW);
+             move_side_clockwise(rubiks, YELLOW, true);
              cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
          }
          // Déplacer l'arrète de la 3ème couronne à sa position finale
@@ -375,7 +397,7 @@ void solve_middle_row(rubiks_side *rubiks){
      }
      if(cubie.num == 7){
          while( cubie.cubie_side != i){
-             move_side_clockwise(rubiks,YELLOW);
+             move_side_clockwise(rubiks, YELLOW, true);
              cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
          }
          left_move(rubiks, rubiks[YELLOW].cubie[cubie.neighbours[0].num_cubie]);
@@ -392,14 +414,14 @@ void solve_middle_row(rubiks_side *rubiks){
   */
 void right_move(rubiks_side *rubiks, cubies cubie){
     // algorithme retranscrit pour être réaliser sans retournement du cube
-     move_side_anticlockwise(rubiks, YELLOW);
-     move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[RIGHT]);
-     move_side_clockwise(rubiks, YELLOW);
-     move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[RIGHT]);
-     move_side_clockwise(rubiks, YELLOW);
-     move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
-     move_side_anticlockwise(rubiks, YELLOW);
-     move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
+     move_side_anticlockwise(rubiks, YELLOW, true);
+     move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[RIGHT], true);
+     move_side_clockwise(rubiks, YELLOW, true);
+     move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[RIGHT], true);
+     move_side_clockwise(rubiks, YELLOW, true);
+     move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side, true);
+     move_side_anticlockwise(rubiks, YELLOW, true);
+     move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side, true);
 }
 
 /**
@@ -411,14 +433,14 @@ void right_move(rubiks_side *rubiks, cubies cubie){
  */
 void left_move(rubiks_side *rubiks, cubies cubie){
     // algorithme retranscrit pour être réaliser sans retournement du cube
-    move_side_clockwise(rubiks, YELLOW);
-    move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[LEFT]);
-    move_side_anticlockwise(rubiks, YELLOW);
-    move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[LEFT]);
-    move_side_anticlockwise(rubiks, YELLOW);
-    move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
-    move_side_clockwise(rubiks, YELLOW);
-    move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
+    move_side_clockwise(rubiks, YELLOW, true);
+    move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[LEFT], true);
+    move_side_anticlockwise(rubiks, YELLOW, true);
+    move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].neighbour_side[LEFT], true);
+    move_side_anticlockwise(rubiks, YELLOW, true);
+    move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side, true);
+    move_side_clockwise(rubiks, YELLOW, true);
+    move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side, true);
 }
 
 /**
@@ -439,26 +461,26 @@ void solve_white_side(rubiks_side * rubiks){
         //si le cubie se trouve sur la  3ème couronne
         if ((cubie.num == 7 ) && (cubie.cubie_side > WHITE && cubie.cubie_side < YELLOW)){
             // le déplacer sur la face jaune
-            move_side_clockwise(rubiks, cubie.cubie_side);
-            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT]);
+            move_side_clockwise(rubiks, cubie.cubie_side, true);
+            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT], true);
             //tourner la face jaune pour pouvoir annuler le 2nd mouvement sans revenir en arrière
-            move_side_anticlockwise(rubiks, YELLOW);
+            move_side_anticlockwise(rubiks, YELLOW, true);
             // annuler le 2nd mouvement
-            move_side_anticlockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT]);
+            move_side_anticlockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[LEFT], true);
             // annuler le premier mouvement
-            move_side_anticlockwise(rubiks, cubie.cubie_side);
+            move_side_anticlockwise(rubiks, cubie.cubie_side, true);
             // rechercher la nouvelle position du cubie après déplacement
             cubie = search_cubie(rubiks, WHITE, i, EDGE);
         }
         //si le cubie est sur la 1ère couronne
         else if ((cubie.num == 1) && (cubie.cubie_side > WHITE && cubie.cubie_side < YELLOW)){
             // le déplacer sur la face jaune
-            move_side_clockwise(rubiks, cubie.cubie_side);
-            move_side_anticlockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT]);
+            move_side_clockwise(rubiks, cubie.cubie_side, true);
+            move_side_anticlockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT], true);
             //tourner la face jaune pour pouvoir annuler le 2nd mouvement sans revenir en arrière
-            move_side_clockwise(rubiks, YELLOW);
+            move_side_clockwise(rubiks, YELLOW, true);
             // annuler le 2nd mouvement
-            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT]);
+            move_side_clockwise(rubiks, rubiks[cubie.cubie_side].neighbour_side[RIGHT], true);
             // je crois qu'annuler le premier mouvement ne sert à rien dans ce cas (aucun bon cubie ne peut occuper cette place)
             //move_side_anticlockwise(rubiks, cubie.cubie_side);
             // rechercher la nouvelle position du cubie après déplacement
@@ -469,19 +491,19 @@ void solve_white_side(rubiks_side * rubiks){
             // un mouvement pour arriver sur le jaune
             if( cubie.num == 5) {
                 // aller sur le jaune
-                move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side);
+                move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side, true);
                 // tourner le jaune
-                move_side_clockwise(rubiks, YELLOW);
+                move_side_clockwise(rubiks, YELLOW, true);
                 // annuler le premier mouvement
-                move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
+                move_side_clockwise(rubiks, cubie.neighbours[0].num_side, true);
             }
             else {
                 // aller sur le jaune
-                move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
+                move_side_clockwise(rubiks, cubie.neighbours[0].num_side, true);
                 //tourner le jaune
-                move_side_clockwise(rubiks, YELLOW);
+                move_side_clockwise(rubiks, YELLOW, true);
                 // annuler le premier mouvement
-                move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side);
+                move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side, true);
             }
             // rechercher la nouvelle position du cubie après déplacement
             cubie = search_cubie(rubiks, WHITE, i, EDGE);
@@ -489,21 +511,21 @@ void solve_white_side(rubiks_side * rubiks){
         // si le cubie est déjà sur la face blanche il n'est peut-être pas à la bonne place
         else if (cubie.cubie_side == WHITE) {
             // aller sur la face jaune
-            move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
-            move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
+            move_side_clockwise(rubiks, cubie.neighbours[0].num_side, true);
+            move_side_clockwise(rubiks, cubie.neighbours[0].num_side, true);
             // trouver sa nouvelle position
             cubie = search_cubie(rubiks, WHITE, i, EDGE);
         }
         // tant que le voisin n'est pas sur la bonne face
        while(cubie.neighbours[0].num_side != i ){
            //tourner la face jaune jusqu'à ce que le cubie à placer soit aligné avec la bonne couleur
-           move_side_clockwise(rubiks, YELLOW);
+           move_side_clockwise(rubiks, YELLOW, true);
            //rechercher sa nouvelle position
            cubie = search_cubie(rubiks, WHITE, i,EDGE);
         }
        // placer le cubie une fois aligné sur la face jaune, sur la face blanche
-        move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
-        move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
+        move_side_clockwise(rubiks, cubie.neighbours[0].num_side, true);
+        move_side_clockwise(rubiks, cubie.neighbours[0].num_side, true);
     }
     // Ensuite, les coins blancs Coins blancs
     // parcourir les coins blanc en fonction de leur premier voisin (suffisant pour les identifier)
@@ -515,33 +537,33 @@ void solve_white_side(rubiks_side * rubiks){
             // cas de la position 0
             if (cubie.num == 0) {
                 // le mettre sur la 3ème couronne
-                move_side_anticlockwise(rubiks, cubie.cubie_side);
+                move_side_anticlockwise(rubiks, cubie.cubie_side, true);
                 //tourner la face jaune !le sens est important!
-                move_side_anticlockwise(rubiks, YELLOW);
+                move_side_anticlockwise(rubiks, YELLOW, true);
                 // annuler le premier mouvement
-                move_side_clockwise(rubiks, cubie.cubie_side);
+                move_side_clockwise(rubiks, cubie.cubie_side, true);
                 cubie = search_cubie(rubiks, WHITE, i, CORNER);
             }
                 // cas de la position 0, seul les sens des mouvements changent
             else {
                 // le mettre sur la 3ème couronne
-                move_side_clockwise(rubiks, cubie.cubie_side);
+                move_side_clockwise(rubiks, cubie.cubie_side, true);
                 //tourner la face jaune !le sens est important!
-                move_side_clockwise(rubiks, YELLOW);
+                move_side_clockwise(rubiks, YELLOW, true);
                 // annuler le premier mouvement
-                move_side_anticlockwise(rubiks, cubie.cubie_side);
+                move_side_anticlockwise(rubiks, cubie.cubie_side, true);
                 cubie = search_cubie(rubiks, WHITE, i, CORNER);
             }
         }
         // si le cubie est sur la face blanche
         else if (cubie.cubie_side == WHITE){
             // on tourne la face de l'un de ses voisin
-            move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side);
+            move_side_anticlockwise(rubiks, cubie.neighbours[0].num_side, true);
             //On éloigne le cubie en tournant 2 fois la face jaune
-            move_side_clockwise(rubiks,YELLOW);
-            move_side_clockwise(rubiks,YELLOW);
+            move_side_clockwise(rubiks, YELLOW, true);
+            move_side_clockwise(rubiks, YELLOW, true);
             //annuler le 1er mouvement
-            move_side_clockwise(rubiks, cubie.neighbours[0].num_side);
+            move_side_clockwise(rubiks, cubie.neighbours[0].num_side, true);
             cubie = search_cubie(rubiks, WHITE, i, CORNER);
         }
         // aligner le coins avec le bon angle le bon cubie
@@ -549,18 +571,18 @@ void solve_white_side(rubiks_side * rubiks){
         if(cubie.cubie_side == YELLOW){
             //ses voisins doivent être de couleurs inversées
             while(rubiks[cubie.neighbours[0].num_side].cubie[cubie.neighbours[0].num_cubie].color != rubiks[cubie.neighbours[1].num_side].side) {
-                move_side_clockwise(rubiks, YELLOW);
+                move_side_clockwise(rubiks, YELLOW, true);
                 cubie = search_cubie(rubiks, WHITE, i, CORNER);
             }
             cubie = search_cubie(rubiks, WHITE, i, CORNER);
             //tourner 1 fois la face de son voisin 2
-            move_side_anticlockwise(rubiks,rubiks[cubie.neighbours[1].num_side].side);
+            move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[1].num_side].side, true);
             // tourner 2 fois la face jaune
-            move_side_anticlockwise(rubiks,YELLOW);
-            move_side_anticlockwise(rubiks,YELLOW);
+            move_side_anticlockwise(rubiks, YELLOW, true);
+            move_side_anticlockwise(rubiks, YELLOW, true);
             //remonter une fois la fasse du voisin 1
-            move_side_clockwise(rubiks,rubiks[cubie.neighbours[1].num_side].side);
-            move_side_clockwise(rubiks,YELLOW);
+            move_side_clockwise(rubiks, rubiks[cubie.neighbours[1].num_side].side, true);
+            move_side_clockwise(rubiks, YELLOW, true);
             // le cubie n'est maintenant plus sur la face jaune mais toujours sur le boin coin
             cubie = search_cubie(rubiks, WHITE, i, CORNER);
 
@@ -568,23 +590,23 @@ void solve_white_side(rubiks_side * rubiks){
         else{
             //un de ses voisin doit être sur la bonne couleur
             while(rubiks[cubie.neighbours[0].num_side].cubie[cubie.neighbours[0].num_cubie].color != rubiks[cubie.neighbours[0].num_side].side && rubiks[cubie.neighbours[1].num_side].cubie[cubie.neighbours[1].num_cubie].color != rubiks[cubie.neighbours[1].num_side].side){
-                move_side_clockwise(rubiks,YELLOW);
+                move_side_clockwise(rubiks, YELLOW, true);
                 cubie = search_cubie(rubiks, WHITE, i, CORNER);
 
             }
         }
         // positionner correctement le coin, 2 algo selon le voisin bien placé
         if(rubiks[cubie.neighbours[0].num_side].cubie[cubie.neighbours[0].num_cubie].color == rubiks[cubie.neighbours[0].num_side].side) {
-            move_side_anticlockwise(rubiks, YELLOW);
-            move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
-            move_side_clockwise(rubiks, YELLOW);
-            move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side);
+            move_side_anticlockwise(rubiks, YELLOW, true);
+            move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side, true);
+            move_side_clockwise(rubiks, YELLOW, true);
+            move_side_clockwise(rubiks, rubiks[cubie.neighbours[0].num_side].side, true);
         }
         else{
-            move_side_clockwise(rubiks, YELLOW);
-            move_side_clockwise(rubiks, rubiks[cubie.neighbours[1].num_side].side);
-            move_side_anticlockwise(rubiks, YELLOW);
-            move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[1].num_side].side);
+            move_side_clockwise(rubiks, YELLOW, true);
+            move_side_clockwise(rubiks, rubiks[cubie.neighbours[1].num_side].side, true);
+            move_side_anticlockwise(rubiks, YELLOW, true);
+            move_side_anticlockwise(rubiks, rubiks[cubie.neighbours[1].num_side].side, true);
         }
     }
 }
