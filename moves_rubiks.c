@@ -670,7 +670,7 @@ solutions_steps * init_solution(char new_step[SIZE_MOVE])
     return step;
 }
 
-void add_move_to_solution(solutions_steps *first_step, char new_step[SIZE_MOVE])
+void add_step_to_solution(solutions_steps *first_step, char new_step[SIZE_MOVE])
 {
     // On alloue la mémoire pour une nouvelle étape de la solution
     solutions_steps *step_tmp = malloc(sizeof(solutions_steps));
@@ -711,7 +711,7 @@ void print_solution(solutions_steps *first_step)
     // On sauvegarde la position du premier pointeur pour ne pas le modifier
     tmp = first_step;
     do {
-        printf("%s", tmp->solution_step);
+        printf("%s\n", tmp->solution_step);
         tmp = tmp->next_step;
     } while (tmp != NULL);
 }
