@@ -274,7 +274,7 @@ void draw_rubiks(rubiks_side *rubiks)
     // Définition des couleurs "ANSI" pour pouvoir écrire les cubies en couleur
     // A chaque fois, on défini la couleur à utiliser, suivi de la lettre du cubie, suivi d'un reset pour que la couleur
     // revienne à celle par défaut.
-    char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET, GRY "?"};
+    char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET, GRY "?", " "};
 
     printf("--------------\n");
     // On "imprime" face par face, et cubie par cubie.

@@ -113,55 +113,89 @@ void show_menu(rubiks_side *rubiks)
  * Cette fonction permet à l'utilisateur de remplir un cube
  */
 void choose_color(rubiks_side *rubiks){
+    // liste des cubie disponibles pour êtres positioner
+    cubies liste_corner[24], liste_edge[24];
+    int len_liste_corner = 0, len_liste_edge = 0;
+
+    // création d'un rubiks cube de référence (déjà résolu
+    rubiks_side reference_rubiks[6];
+    rubiks_creation(reference_rubiks);
     // pour enregistrer la couleur choisie
+
     int color_choose;
     //initialisation avec la couleur grise
     for(int i = WHITE ; i <= YELLOW ; i++){
         for(int j = 0 ; j < 9 ; j++) {
-            rubiks[i].cubie[j].color = GREY;
+            // si le cubie est un centre, il est déjà correctement positionné
+            if(rubiks[i].cubie[j].type != CENTER) {
+                // on lui retire sa couleur
+                rubiks[i].cubie[j].color = NO_COLOR;
+            }
+            // on complète la liste des edge et des corners à l'aide du rubiks de référence
+            if(rubiks[i].cubie[j].type == EDGE) {
+                liste_edge[len_liste_edge] = reference_rubiks[i].cubie[j];
+                len_liste_edge++;
+            }
+            if(rubiks[i].cubie[j].type == CORNER) {
+                liste_corner[len_liste_corner] = reference_rubiks[i].cubie[j];
+                len_liste_corner++;
+            }
         }
     }
     //remplir le rubiks
     for(int i = WHITE ; i <= YELLOW ; i++){
         for(int j = 0 ; j < 9 ; j++) {
-            // dessiner le rubiks
-            draw_rubiks(rubiks);
-            do{
-                //demander une couleur
-                printf("Choisir la couleur de la face %d, numéro %d:", i, j);
-                scanf("%d",&color_choose);
-                // si la couleur est valide
-            } while(color_choose > YELLOW || color_choose < WHITE);
-            rubiks[i].cubie[j].color = color_choose;
+            if(rubiks[i].cubie[j].type != CENTER){
+                // changer la couleur du cubie sélectionné
+                rubiks[i].cubie[j].color = GREY;
+                // dessiner le rubiks
+                draw_rubiks(rubiks);
+                /*do{
+                    //demander une couleur
+                    printf("Choisir la couleur de la face %d, numéro %d:", i, j);
+                    scanf("%d",&color_choose);
+                    // si la couleur est valide
+                } while(color_choose > YELLOW || color_choose < WHITE);*/
+
+                //Si le cubie est une arête on donne les liste d'arête à choice_cubie
+                if(rubiks[i].cubie[j].type == EDGE){
+                    choice_cubie(reference_rubiks, rubiks, rubiks[i].cubie[j].type, liste_edge, len_liste_edge, i,j);
+                }
+            }
         }
     }
 }
 
 /**
  * permet de récupérer le choix de l'utilisateur
+ * @param reference_rubiks pointeur sur un rubiks
  * @param rubiks pointeur sur un rubiks
  * @param type type de cubie à placer
  * @param liste des cubie disponibles
  * @param longueur de la liste
+ * @param face du cubie à modifier
+ * @param numéro du cubie à modifier
  */
-void choice_cubie(rubiks_side *rubiks, T_CUBIE_TYPE type, cubies *liste_cubie, int len_liste)
+void choice_cubie(rubiks_side *reference_rubiks, rubiks_side *rubiks, T_CUBIE_TYPE type, cubies *liste_cubie, int len_liste, int face, int num_cubie)
 {
     char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET};
     int choice;
-    rubiks_side reference_rubiks[6];
-    rubiks_creation(reference_rubiks);
-
+    // imprimer la liste des possibilités des cubies disponibles
     for(int i = 0; i < len_liste ;i++){
-        printf("num %d :%s, %s ;",i, tabcolor[liste_cubie[i].color],
+        printf("num %d : %s, %s ;",i, tabcolor[liste_cubie[i].color],
                tabcolor[reference_rubiks[liste_cubie[i].neighbours[0].num_side].cubie[liste_cubie[i].neighbours[0].num_cubie].color]);
 
     }
+    // récubpérer le choix de l'utilisateur
     printf("\n");
     do
     {
         printf("Rentrez vôtre choix:");
         choice = getchar();
     } while (choice < 0 && choice > len_liste);
+    // mettre à jour le rubiks
+    rubiks[face].cubie[num_cubie].color = liste_cubie[choice].color;
+    // mettre à jour les cubies disponibles
 
 }
 

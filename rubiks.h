@@ -9,7 +9,7 @@
 /**
  * @brief Définition des couleurs des faces et des cubies.
  */
-typedef enum {WHITE=0, ORANGE=1, GREEN=2, RED=3, BLUE=4, YELLOW=5, GREY = 6} T_COLOR;
+typedef enum {WHITE=0, ORANGE=1, GREEN=2, RED=3, BLUE=4, YELLOW=5, GREY = 6, NO_COLOR =7} T_COLOR;
 /**
  * @brief Définition des faces adjacentes à une face du Rubik's Cube.
  */
