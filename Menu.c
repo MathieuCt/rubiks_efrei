@@ -16,13 +16,14 @@ void show_menu(rubiks_side *rubiks)
         printf("2->Résoudre le rubiks.\n");
         printf("3->Faire vos propre mouvements.\n");
         printf("4->Placer les couleurs.\n");
-        printf("5->Quitter le programme\n");
+        printf("5->Afficher le rubiks\n");
+        printf("6->Quitter le programme\n");
         //printf("Rentrez votre choix: ");
         /*do
         {
             start_choice = getchar();
         } while (start_choice != '1' && start_choice != '2' && start_choice != '3' && start_choice != '4' && start_choice != '5');*/
-        char tab[5] = {1, 2, 3, 4, 5};
+        char tab[6] = {1, 2, 3, 4, 5, 6};
         start_choice = choice_menu(tab);
 
         printf("--------------------------------\n");
@@ -38,8 +39,8 @@ void show_menu(rubiks_side *rubiks)
                 draw_rubiks(rubiks);
                 break;
             case 3:
-                printf("1->'move_side_clockwise'.\n");
-                printf("2->'move_side_anticlockwise'.\n");
+                printf("1->Mouvement horaire.\n");
+                printf("2->Mouvement antihoraire.\n");
                 //printf("Rentrez votre choix: ");
                 /*do
                 {
@@ -68,7 +69,7 @@ void show_menu(rubiks_side *rubiks)
                         char tab3[6] = {1, 2, 3, 4, 5, 6};
                         side_choice = choice_menu(tab3);
 
-                        move_side_clockwise(rubiks, side_choice - 1, true);
+                        move_side_clockwise(rubiks, side_choice - 1, false);
                         draw_rubiks(rubiks);
 
                         printf("--------------------------------\n");
@@ -90,10 +91,13 @@ void show_menu(rubiks_side *rubiks)
                         char tab4[6] = {1, 2, 3, 4, 5, 6};
                         side_choice = choice_menu(tab4);
 
-                        move_side_anticlockwise(rubiks, side_choice - 1, true);
+                        move_side_anticlockwise(rubiks, side_choice - 1, false);
                         draw_rubiks(rubiks);
 
                         printf("--------------------------------\n");
+                        break;
+
+                    default:
                         break;
                 }
                 break;
@@ -103,7 +107,14 @@ void show_menu(rubiks_side *rubiks)
                 break;
 
             case 5:
+                draw_rubiks(rubiks);
+                break;
+
+            case 6:
                 end_choice = FALSE;
+                break;
+
+            default:
                 break;
         }
     }

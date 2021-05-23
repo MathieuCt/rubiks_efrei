@@ -129,7 +129,7 @@ void mix_rubiks(rubiks_side *rubiks){
     int nbr_moves = 20 + rand() % (30 + 1 - 20);
     for (int i = 0 ; i < nbr_moves; i++){
         // Réalise "nbr_moves" nombre de mouvements aléatoires
-        move_side_clockwise(rubiks, rand() % (5 + 1), true);
+        move_side_clockwise(rubiks, rand() % (5 + 1), false);
     }
 }
 
@@ -138,18 +138,18 @@ void mix_rubiks(rubiks_side *rubiks){
  * @param rubiks un pointeur vers une structure rubiks_side
  */
 void alternate_color(rubiks_side * rubiks){
-    move_side_clockwise(rubiks, 0, true);
-    move_side_clockwise(rubiks, 0, true);
-    move_side_clockwise(rubiks, 5, true);
-    move_side_clockwise(rubiks, 5, true);
-    move_side_clockwise(rubiks, 1, true);
-    move_side_clockwise(rubiks, 1, true);
-    move_side_clockwise(rubiks, 3, true);
-    move_side_clockwise(rubiks, 3, true);
-    move_side_clockwise(rubiks, 2, true);
-    move_side_clockwise(rubiks, 2, true);
-    move_side_clockwise(rubiks, 4, true);
-    move_side_clockwise(rubiks, 4, true);
+    move_side_clockwise(rubiks, 0, false);
+    move_side_clockwise(rubiks, 0, false);
+    move_side_clockwise(rubiks, 5, false);
+    move_side_clockwise(rubiks, 5, false);
+    move_side_clockwise(rubiks, 1, false);
+    move_side_clockwise(rubiks, 1, false);
+    move_side_clockwise(rubiks, 3, false);
+    move_side_clockwise(rubiks, 3, false);
+    move_side_clockwise(rubiks, 2, false);
+    move_side_clockwise(rubiks, 2, false);
+    move_side_clockwise(rubiks, 4, false);
+    move_side_clockwise(rubiks, 4, false);
 }
 
 /**
@@ -698,9 +698,12 @@ void print_solution(solutions_steps *first_step)
 
     // On sauvegarde la position du premier pointeur pour ne pas le modifier
     tmp = first_step;
+    printf("La couleur indiquée donne la face à tourner et un \"'\" indique que la rotation se fait dans un sens antihoraire.\n");
     do {
         printf("%s\n", tmp->solution_step);
         tmp = tmp->next_step;
+        if( i % 6 == 0 && i != 0) printf("\n");
+        i++;
     } while (tmp != NULL);
 }
 
