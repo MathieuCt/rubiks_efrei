@@ -31,7 +31,6 @@ void move_corner(rubiks_side *rubiks, int side, int from, int to) {
             rubiks[rubiks[side].cubie[from].neighbours[0].num_side].cubie[rubiks[side].cubie[from].neighbours[0].num_cubie].color ;
     rubiks[rubiks[side].cubie[to].neighbours[1].num_side].cubie[rubiks[side].cubie[to].neighbours[1].num_cubie].color =
             rubiks[rubiks[side].cubie[from].neighbours[1].num_side].cubie[rubiks[side].cubie[from].neighbours[1].num_cubie].color ;
-
 }
 
 /**
@@ -53,7 +52,7 @@ void move_edge(rubiks_side *rubiks, int side, int from, int to) {
  * @param side La face à faire tourner dans le sens horaire
  */
 void move_side_clockwise(rubiks_side *rubiks, int side, int add_to_history) {
-    char tab_face[][strlen("YELLOW")] = {"BLANC", "ORANGE", "VERT", "ROUGE", "BLEU", "YELLOW"};
+    char tab_face[][10] = {"BLANC", "ORANGE", "VERT", "ROUGE", "BLEU", "JAUNE"};
 
     int tmp1, tmp2, tmp3;
     // On sauvegarde les données du coin 0 pour pouvoir les utiliser à la fin de l'algorithme, pour écraser le coin 2
@@ -101,7 +100,7 @@ void move_side_clockwise(rubiks_side *rubiks, int side, int add_to_history) {
  * @param side La face à faire tourner dans le sens horaire
  */
 void move_side_anticlockwise(rubiks_side *rubiks, int side, int add_to_history) {
-    char tab_face[][strlen("YELLOW")] = {"BLANC", "ORANGE", "VERT", "ROUGE", "BLEU", "YELLOW"};
+    char tab_face[][10] = {"BLANC", "ORANGE", "VERT", "ROUGE", "BLEU", "JAUNE"};
     // On appelle trois fois la fonction move_side_clockwise, plutôt que de faire une fonction inverse.
     for (int i = 0; i < 3; i++)
     {
