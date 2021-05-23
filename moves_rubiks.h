@@ -28,7 +28,7 @@ void solve_middle_row(rubiks_side *);
 void solve_yellow_cross(rubiks_side *);
 void solve_yellow_corner(rubiks_side *);
 void turn_three_corner(rubiks_side *);
-cubies search_cubie(rubiks_side * , T_COLOR, T_COLOR, T_CUBIE_TYPE);
+cubies search_cubie(rubiks_side *, T_COLOR, T_COLOR, T_CUBIE_TYPE);
 void right_move(rubiks_side *, cubies);
 void left_move(rubiks_side *, cubies);
 solutions_steps * init_solution(char[SIZE_MOVE]);

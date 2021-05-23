@@ -11,7 +11,6 @@
 
 #include "draw.h"
 #include "rubiks.h"
-#include "moves_rubiks.h"
 #include "Menu.h"
 
 /**
@@ -19,6 +18,11 @@
  */
 #define PRINT_TEXT_ONLY true
 
+/**
+ * Fonction principale du programme. Elle se contente d'afficher les menus. Soit en mode nCurses (non implémenté pour le moment)
+ * soit en mode "texte" avec des couleurs ANSI.
+ * @return 0
+ */
 int main()
 {
     int term_error_type;
@@ -45,6 +49,7 @@ int main()
     }
     else
     {
+        /* Mode nCurses */
         /* Initialisation ncurses */
         initscr();
         cbreak();

@@ -34,34 +34,34 @@
 #define SQ_WIDTH 8
 
 /** @def SQUARES
-     @brief Nombre de carrés dans un Rubik's cube. A mon avis, ne servira pas.
+     @brief Nombre de carrés nCurses dans un Rubik's cube. Ne servira probablement pas.
 */
 #define SQUARES ((RUBIK_LINES * 3) * (RUBIK_COLS * 3))
 
 // Gestion des erreurs nCurses
 /** @def MIN_COLORS_NUMBER
-    @brief Nombre de couleurs gérés par le terminal, nécessaire pour faire tourner le programme.
+    @brief Nombre de couleurs gérés par le terminal (nCurses), nécessaire pour faire tourner le programme.
 */
 #define MIN_COLORS_NUMBER 256
 
 // Les erreurs possibles lors de la vérification du terminal.
 /** @def TERM_NOT_BIG_ENOUGH
-    @brief Le terminal n'est pas assez grand pour afficher le Rubik's cube avec nCurses
+    @brief Le terminal (nCurses) n'est pas assez grand pour afficher le Rubik's cube avec nCurses
 */
 #define TERM_NOT_BIG_ENOUGH 1
 /** @def TERM_HAS_NO_COLORS
-    @brief Le terminal ne gère pas les couleurs.
+    @brief Le terminal (nCurses) ne gère pas les couleurs.
 */
 #define TERM_HAS_NO_COLORS 2
 /** @def TERM_HAS_NOT_ENOUGH_COLORS
-    @brief Le terminal ne gère pas assez de couleurs.
+    @brief Le terminal (nCurses) ne gère pas assez de couleurs.
 */
 #define TERM_HAS_NOT_ENOUGH_COLORS 3
 
-// Ne servira probablement pas, c'est juste un test.
+// Ne servira probablement pas, c'est juste un test (nCurses).
 extern WINDOW *BOARD[SQUARES];
 
-// La définition des couleurs possibles, gérées dans draw.c
+// La définition des couleurs nCurses possibles, gérées dans draw.c
 extern const short BLACK_ON_WHITE;
 extern const short BLACK_ON_ORANGE;
 extern const short BLACK_ON_GREEN;
@@ -74,8 +74,10 @@ extern short NB_LINES;
 // Nombre de colonnes détectées dans le terminal
 extern short NB_COLS;
 
-// Les couleurs ANSI pour l'affichage du cube au format texte, non nCurses
-// Références : https://en.wikipedia.org/wiki/ANSI_escape_code
+/**
+ * Les couleurs ANSI pour l'affichage du cube au format texte (non nCurses)
+ * Références : https://en.wikipedia.org/wiki/ANSI_escape_code
+ */
 #define ARED   "\x1B[31m"
 //    #define GRN   "\x1B[32m"
 #define GRN   "\033[38;2;0;175;0m"

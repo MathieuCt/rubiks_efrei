@@ -1,6 +1,9 @@
-//
-// Created by clestrat on 20/05/2021.
-//
+/**
+ * @file Menu.c
+ * @author Mathieu CHANTOT et Clément LE STRAT
+ * @date 7 Mai 2021
+ * @brief Dans ce fichier, on gère tous les menus nécessaires aux différentes fonctions utilisables dans le projet. Ainsi que la gestion des saisies utilisateur.
+ */
 
 #include "Menu.h"
 

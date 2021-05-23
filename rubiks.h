@@ -7,6 +7,7 @@
 
 #ifndef RUBIKS_EFREI_RUBIKS_H
 #define RUBIKS_EFREI_RUBIKS_H
+
 /**
  * @brief Définition des couleurs des faces et des cubies.
  */
@@ -63,7 +64,7 @@ typedef struct {
     T_COLOR neighbour_side[4];
     T_COLOR opposite_side;
     T_COLOR side;
-    cubies cubie[9]; /**< 9 cubies par face. */
+    cubies cubie[9]; /* <- 9 cubies par face. */
 } rubiks_side;
 
 void rubiks_creation(rubiks_side *rubiks);

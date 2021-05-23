@@ -17,7 +17,8 @@
 solutions_steps * history = NULL;
 
 /**
- * Cette fonction permet de déplacer un coin du cube, depuis "from" vers "to"
+ * Cette fonction permet de déplacer un coin du cube sur la face "side", depuis "from" vers "to".
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face du rubiks à traiter
  * @param from Déplacer depuis ce cubie
@@ -34,7 +35,8 @@ void move_corner(rubiks_side *rubiks, int side, int from, int to) {
 }
 
 /**
- * Cette fonction permet de déplacer une arête depuis "from" vers "to"
+ * Cette fonction permet de déplacer une arête sur la face "side" depuis "from" vers "to".
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face du rubiks à traiter
  * @param from Déplacer depuis ce cubie
@@ -48,15 +50,16 @@ void move_edge(rubiks_side *rubiks, int side, int from, int to) {
 
 /**
  * cette fonction permet de faire tourner la face side du cube dans le sens horaire
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face à faire tourner dans le sens horaire
+ * @param add_to_history Si true, on ajoute le mouvement à l'historique des étapes de la résolution du cube.
  */
 void move_side_clockwise(rubiks_side *rubiks, int side, int add_to_history) {
     char tab_face[][10] = {"BLANC", "ORANGE", "VERT", "ROUGE", "BLEU", "JAUNE"};
 
     int tmp1, tmp2, tmp3;
     // On sauvegarde les données du coin 0 pour pouvoir les utiliser à la fin de l'algorithme, pour écraser le coin 2
-    // todo: renommer ces variables pour qu'elles aient un sens
     tmp1 = rubiks[side].cubie[0].color;
     tmp2 = rubiks[rubiks[side].cubie[0].neighbours[0].num_side].cubie[rubiks[side].cubie[0].neighbours[0].num_cubie].color;
     tmp3 = rubiks[rubiks[side].cubie[0].neighbours[1].num_side].cubie[rubiks[side].cubie[0].neighbours[1].num_cubie].color;
@@ -83,6 +86,7 @@ void move_side_clockwise(rubiks_side *rubiks, int side, int add_to_history) {
     rubiks[rubiks[side].cubie[5].neighbours[0].num_side].cubie[rubiks[side].cubie[5].neighbours[0].num_cubie].color = tmp2;
     rubiks[side].cubie[5].color = tmp1;
 
+    // Et on ajoute le mouvement réalisé à l'historique des étapes, uniquement si ça nous a été demandé
     if (add_to_history) {
         if (history == NULL) {
             history = init_solution(tab_face[side]);
@@ -95,9 +99,11 @@ void move_side_clockwise(rubiks_side *rubiks, int side, int add_to_history) {
 
 /**
  * Cette fonction fait tourner la face side dans le sens anti-horaire. En réalité, cela revient à tourner trois
- * fois dans le sens horaire
+ * fois dans le sens horaire.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face à faire tourner dans le sens horaire
+ * @param add_to_history Si true, on ajoute le mouvement à l'historique des étapes de la résolution du cube.
  */
 void move_side_anticlockwise(rubiks_side *rubiks, int side, int add_to_history) {
     char tab_face[][10] = {"BLANC", "ORANGE", "VERT", "ROUGE", "BLEU", "JAUNE"};
@@ -106,6 +112,8 @@ void move_side_anticlockwise(rubiks_side *rubiks, int side, int add_to_history) 
     {
         move_side_clockwise(rubiks, side, false);
     }
+
+    // Et on ajoute le mouvement réalisé à l'historique des étapes, uniquement si ça nous a été demandé
     if (add_to_history) {
         if (history == NULL) {
             history = init_solution(strcat(tab_face[side], " '"));
@@ -119,6 +127,7 @@ void move_side_anticlockwise(rubiks_side *rubiks, int side, int add_to_history) 
 /**
  * Cette fonction permet de mélanger le cube de manière aléatoire. Elle choisit entre 20 et 30 mouvements à réaliser
  * tout en choisissant une face à déplacer, au hasard.
+ *
  * @param rubiks un pointeur vers une structure rubiks_side
  */
 void mix_rubiks(rubiks_side *rubiks){
@@ -135,6 +144,7 @@ void mix_rubiks(rubiks_side *rubiks){
 
 /**
  *  Cette fonction permet de créer un damier de couleurs
+ *
  * @param rubiks un pointeur vers une structure rubiks_side
  */
 void alternate_color(rubiks_side * rubiks){
@@ -154,6 +164,7 @@ void alternate_color(rubiks_side * rubiks){
 
 /**
  * Cette fonction permet de résoudre le cube.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void solve_rubiks(rubiks_side *rubiks){
@@ -171,6 +182,7 @@ void solve_rubiks(rubiks_side *rubiks){
 
 /**
  * Cette fonction permet de résoudre les coins jaunes
+ *
  * @param rubiks Un pointeur vers une structure rubiks
  */
 void solve_yellow_corner(rubiks_side * rubiks){
@@ -219,9 +231,11 @@ void solve_yellow_corner(rubiks_side * rubiks){
 
 
 }
+
 /**
  * Cette fonction permet de faire tourner trois côtés d'une même face sans bouger le 4em
- * et le reste du cube
+ * et le reste du cube.
+ *
  * @param Rubiks est un pointeur vers une strucure rubiks_sid
  */
  void turn_three_corner(rubiks_side *rubiks){
@@ -234,8 +248,10 @@ void solve_yellow_corner(rubiks_side * rubiks){
     move_side_anticlockwise(rubiks, ORANGE, true);
     move_side_anticlockwise(rubiks, YELLOW, true);
  }
+
 /**
- * Cette fonction résoud la croix jaune
+ * Cette fonction résoud la croix jaune.
+ *
  * @param rubiks Un pointeur vers une structure rubiks
  */
 void solve_yellow_cross(rubiks_side *rubiks) {
@@ -290,9 +306,10 @@ void solve_yellow_cross(rubiks_side *rubiks) {
         move_side_anticlockwise(rubiks, YELLOW, true);
         move_side_anticlockwise(rubiks, GREEN, true);
     }
-// On cherche maintenant à positionner les bon voisins des arêtes
-// on initialise à nouveau cross pour savoir quelle combinaison effectuée
-// elle sont déja bien placées si aucune n'est mal placée
+
+    // On cherche maintenant à positionner les bon voisins des arêtes
+    // on initialise à nouveau cross pour savoir quelle combinaison effectuée
+    // elle sont déja bien placées si aucune n'est mal placée
     cross = 0;
     // Tourner la face jaune jusqu'à ce qu'une des combinaison apparaisse
     for (int k =0; k < 4; k++){
@@ -365,49 +382,51 @@ void solve_yellow_cross(rubiks_side *rubiks) {
 
 /**
  * Cette fonction cherche à résoudre la 2ème couronne du rubik's cube
- * Le choix est fait de ne pas "retourner" le rubiks cube et d'adapter les algorithmes en conséquence
+ * Le choix est fait de ne pas "retourner" le rubiks cube et d'adapter les algorithmes en conséquence.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side*/
 void solve_middle_row(rubiks_side *rubiks){
-// cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
- cubies cubie;
- //Pour chaque face regarder si l'arrète milieu, gauche est la bonne
- for(int i = ORANGE ; i <= BLUE ; i++){
-     // chercher où se trouve le cubie
-     cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
-     // si le cubie est sur la 2ème couronne, il faut le ramener sur la 3ème
-     if(cubie.y == 1 && cubie.cubie_side != YELLOW){
-         //prendre l'arrète qui se trouve sur la même face mais sur la 3ème couronne pour le remplacer
-         if(cubie.num == 5) {
-             right_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
+    // cubie permet d'enregistrer les informations d'un cubie (position, voisin, couleur...) après l'avoir cherché
+    cubies cubie;
+    //Pour chaque face regarder si l'arrète milieu, gauche est la bonne
+    for(int i = ORANGE ; i <= BLUE ; i++){
+        // chercher où se trouve le cubie
+        cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
+        // si le cubie est sur la 2ème couronne, il faut le ramener sur la 3ème
+        if(cubie.y == 1 && cubie.cubie_side != YELLOW){
+            //prendre l'arrète qui se trouve sur la même face mais sur la 3ème couronne pour le remplacer
+            if(cubie.num == 5) {
+                right_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
+            }
+            else{
+                left_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
+            }
+            cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
         }
-         else{
-             left_move(rubiks, rubiks[YELLOW].cubie[rubiks[cubie.cubie_side].cubie[7].neighbours[0].num_cubie]);
-         }
-         cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
-     }
-     // si le cubie est sur  la face jaune, on cherche à le positionner selon son voisin
-     if(cubie.cubie_side == YELLOW){
-         while( cubie.neighbours[0].num_side != rubiks[i].neighbour_side[LEFT]){
-             move_side_clockwise(rubiks, YELLOW, true);
-             cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
-         }
-         // Déplacer l'arrète de la 3ème couronne à sa position finale
-         right_move(rubiks, cubie);
-     }
-     if(cubie.num == 7){
-         while( cubie.cubie_side != i){
-             move_side_clockwise(rubiks, YELLOW, true);
-             cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
-         }
-         left_move(rubiks, rubiks[YELLOW].cubie[cubie.neighbours[0].num_cubie]);
-     }
- }
+        // si le cubie est sur  la face jaune, on cherche à le positionner selon son voisin
+        if(cubie.cubie_side == YELLOW){
+            while( cubie.neighbours[0].num_side != rubiks[i].neighbour_side[LEFT]){
+                move_side_clockwise(rubiks, YELLOW, true);
+                cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
+            }
+            // Déplacer l'arrète de la 3ème couronne à sa position finale
+            right_move(rubiks, cubie);
+        }
+        if(cubie.num == 7){
+            while( cubie.cubie_side != i){
+                move_side_clockwise(rubiks, YELLOW, true);
+                cubie = search_cubie(rubiks,i , rubiks[i].neighbour_side[LEFT],EDGE);
+            }
+            left_move(rubiks, rubiks[YELLOW].cubie[cubie.neighbours[0].num_cubie]);
+        }
+    }
 }
 
  /**
   * Cette fonction permet de déplacer une arête correctement positionné de la 3ème couronne à la 2ème couronne
-  * Déplacement vers le côté droit
-  * Utilisée lors de la résolution de la 2ème couronne
+  * Déplacement vers le côté droit.
+  * Utilisée lors de la résolution de la 2ème couronne.
+  *
   * @param rubiks Un pointeur vers une structure rubiks_side
   * @param cubie cubie situé au dessus de l'arrète à déplacer
   */
@@ -425,8 +444,9 @@ void right_move(rubiks_side *rubiks, cubies cubie){
 
 /**
  * Cette fonction permet de déplacer une arête correctement positionné de la 3ème couronne à la 2ème couronne
- * Déplacement vers le côté gauche
- * Utilisée lors de la résolution de la 2ème couronne
+ * Déplacement vers le côté gauche.
+ * Utilisée lors de la résolution de la 2ème couronne.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param cubie cubie situé au dessus de l'arrète à déplacer
  */
@@ -443,7 +463,8 @@ void left_move(rubiks_side *rubiks, cubies cubie){
 }
 
 /**
- * Cette fonction cherche à résoudre la face blanche du Rubik's Cube
+ * Cette fonction cherche à résoudre la face blanche du Rubik's Cube.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void solve_white_side(rubiks_side * rubiks){
@@ -611,7 +632,8 @@ void solve_white_side(rubiks_side * rubiks){
 }
 
 /**
- * Cette fonction permet de trouver un cubie en fonction de sa couleur et celle de ses voisins
+ * Cette fonction permet de trouver un cubie en fonction de sa couleur et celle de ses voisins.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param cubie_color couleur du cubie que l'on cherche
  * @param neighbour1 couleur du premier voisin du cubie recherché
@@ -634,7 +656,7 @@ cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour
 
 /**
  * Cette fonction initialise une liste chaînée avec le premier mouvement de la solution. Elle renvoie un pointeur
- * vers le premier élément (rubiks_solution.solution) de la liste chaînée (solution_steps)
+ * vers le premier élément (rubiks_solution.solution) de la liste chaînée (solution_steps).
  *
  * @param new_step Description du premier mouvement, au format texte
  * @return Pointeur vers le premier élément de la liste chaînée de l'historique des étapes de résolution.

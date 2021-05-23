@@ -1,6 +1,9 @@
-//
-// Created by clestrat on 20/05/2021.
-//
+/**
+ * @file Menu.h
+ * @author Mathieu CHANTOT et Clément LE STRAT
+ * @date 7 Mai 2021
+ * @brief Dans ce fichier, on trouve les headers des fonction définies dans Menu.c.
+ */
 
 #ifndef RUBIKS_EFREI_MENU_H
 #define RUBIKS_EFREI_MENU_H

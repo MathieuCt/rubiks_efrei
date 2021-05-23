@@ -5,7 +5,6 @@
  * @brief Dans ce fichier, on gère toutes les propriétés du Rubik's Cube, depuis sa création, la gestion des faces
  * adjacentes, et les recherches associées (recherche par couleur, ou depuis la couleur).
  */
-#include <stdio.h>
 
 #include "rubiks.h"
 
@@ -19,6 +18,7 @@
  * - La face à sa gauche est la face orange
  * - La face sous-elle est la face verte
  * - La face opposée ne change jamais, dans le cas de la blanche, il s'agit de la face jaune.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void rubiks_creation(rubiks_side *rubiks) {
@@ -75,6 +75,7 @@ void rubiks_creation(rubiks_side *rubiks) {
             default:
                 break;
         }
+
         // Initialisation des cubies de la face en cours de traitement. On parcourt donc le tableau de 0 à 8
         for (cubie = 0; cubie < 9; cubie++) {
             // donner a chaque cubie la couleur de sa face
@@ -110,7 +111,8 @@ void rubiks_creation(rubiks_side *rubiks) {
  * Cette fonction permet d'attribuer à chaque cubie ses voisin.
  * num_side indique sur quelle face il se trouve
  * num_cubie correspond au numéro du cubie voisin sur sa face
- * les voisins ne changent pas avec la réalisation de mouvements ils sont donc attribués définitivement
+ * les voisins ne changent pas avec la réalisation de mouvements ils sont donc attribués définitivement.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void rubiks_neighbour(rubiks_side *rubiks) {
@@ -207,7 +209,8 @@ void rubiks_neighbour(rubiks_side *rubiks) {
 /**
  * Cette fonction permet de trouver à partir de la position absolu d'une face (neighbour_side)
  * la position relative quelle occupe.
- * exemple : si je souaite retrouver la position de GREEN par rapport à ORANGE la fonction renvoie LEFT
+ * exemple : si je souhaite retrouver la position de GREEN par rapport à ORANGE la fonction renvoie LEFT.
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face principale qui nous sert de référence pour la recherche
  * @param neighbour_face todo : expliquer
@@ -225,9 +228,10 @@ int research_side(rubiks_side *rubiks, int side, int neighbour_face){
     }
     return 0;
 }
-//
+
 /**
- * Cette fonction retourne le numéro du cubie selon la position relative de la face de son ou de ses voisins
+ * Cette fonction retourne le numéro du cubie selon la position relative de la face de son ou de ses voisins.
+ *
  * @param side position relative de la face voisine au cubie dont on cherche le numéro.
  * @param type Le type recherché permet d'orienter la recherche
  * @param side2 Dans le cas où l'on cherche la position du'un coin alors il est nécessaire de connaitre la position de la face de son deuxième voisin
@@ -291,4 +295,3 @@ int research_num( int side, int type, int side2 ){
     }
     return 0;
 }
-

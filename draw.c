@@ -8,39 +8,43 @@
 #include "draw.h"
 #include "rubiks.h"
 
-
+// Définitions pour nCurses
 WINDOW *BOARD[SQUARES];
 // Définition des indices des couleurs utilisées avec nCurses
 /**
- * Écriture noire sur blanc
+ * Écriture noire sur blanc, pour nCurses
  */
 const short BLACK_ON_WHITE = 1;
 /**
- * Écriture noire sur orange
+ * Écriture noire sur orange, pour nCurses
  */
 const short BLACK_ON_ORANGE = 2;
 /**
- * Écriture noire sur vert
+ * Écriture noire sur vert, pour nCurses
  */
 const short BLACK_ON_GREEN = 3;
 /**
- * Écriture noire sur rouge
+ * Écriture noire sur rouge, pour nCurses
  */
 const short BLACK_ON_RED = 4;
 /**
- * Écriture noire sur bleu
+ * Écriture noire sur bleu, pour nCurses
  */
 const short BLACK_ON_BLUE = 5;
 /**
- * Écriture noire sur jaune
+ * Écriture noire sur jaune, pour nCurses
  */
 const short BLACK_ON_YELLOW = 6;
 
+/**
+ * Taille de l'écran nCurses
+ */
 short NB_LINES;
 short NB_COLS;
 
 /**
- * Détection de l'événement de changement de taille d'une fenêtre. Pas certains de pouvoir gérer ça.
+ * Détection de l'événement de changement de taille d'une fenêtre. L'évenement est non géré, pour le moment.
+ *
  * @param dummy Paramètre inutilisé. Il est passé par la fonction d'appel des évènements sur une fenêtre
  */
 void detect_resize(__attribute__((unused)) int dummy)
@@ -64,6 +68,7 @@ void set_colors(void)
 
 /**
  * Vérification du terminal, pour voir si il pourra faire tourner le programme avec nCurses
+ *
  * @return 0 si OK, sinon retourne une erreur différente de 0
  */
 int check_and_set_term(void)
@@ -130,7 +135,7 @@ void change_color(short line, short col, short cube_x, short cube_y, short color
 }
 
 /**
- * Fonction de test pour créer la face uniforme d'un cube dans une couleur donnée
+ * Fonction de test nCurses pour créer la face uniforme d'un cube dans une couleur donnée
  * @param line Ligne de la matrice nCurses dans laquelle dessiner le cube
  * @param col Colonne de la matrice nCurses dans laquelle dessiner le cube
  * @param color Couleur à appliquer sur le cube
@@ -212,8 +217,6 @@ void create_board(void)
         BOARD[i] = newwin(SQ_HEIGHT, SQ_WIDTH, start_y, start_x);
     }
 
-    /* put border on each window and refresh */
-
     for (i = 0; i < SQUARES; i++) {
         box(BOARD[i], 0, 0);
         if(i % 2 == 0)
@@ -226,7 +229,7 @@ void create_board(void)
 
 /**
  * Fonction de test liée à create_board, qui permet de libérer les ressources et la mémoire.
- * <br><em><b>Attention, cette fonction n'est pas à jour</b></em>
+ * <br><em><b>Attention, cette fonction n'est pas à jour et ne libère pas correctement les choses</b></em>
  */
 void destroy_board(void)
 {
@@ -266,7 +269,8 @@ void rubiks_display(rubiks_side *rubiks){
 }
 
 /**
- * Dessine le rubik's Cube au format texte, pas au format nCurses
+ * Dessine le rubik's Cube au format texte ANSI (pas au format nCurses)
+ *
  * @param rubiks Un pointeur vers une structure rubiks_side
  */
 void draw_rubiks(rubiks_side *rubiks)
