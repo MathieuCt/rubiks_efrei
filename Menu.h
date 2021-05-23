@@ -10,10 +10,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 void show_menu(rubiks_side *);
 void choose_color(rubiks_side *);
-int choice_menu(const char *);
+int choice_menu(int);
+int read_ints(void);
 void choice_cubie(rubiks_side *,rubiks_side *, T_CUBIE_TYPE, cubies *, int, int, int);
 int creation_liste_cubie(rubiks_side *,cubies *, T_CUBIE_TYPE);
 

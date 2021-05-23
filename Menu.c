@@ -26,9 +26,7 @@ void show_menu(rubiks_side *rubiks)
         printf("4-> Placer les couleurs.\n");
         printf("5-> Afficher le rubiks\n");
         printf("6-> Quitter le programme\n");
-        char tab[6] = {1, 2, 3, 4, 5, 6};
-//        char tab[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        start_choice = choice_menu(tab);
+        start_choice = choice_menu(6);
 
         printf("--------------------------------\n");
         // Choix des différents sous-menus.
@@ -45,8 +43,7 @@ void show_menu(rubiks_side *rubiks)
             case 3:
                 printf("1-> Mouvement horaire.\n");
                 printf("2-> Mouvement antihoraire.\n");
-                char tab2[2] = {1, 2};
-                move_choice = choice_menu(tab2);
+                move_choice = choice_menu(2);
 
                 printf("\n--------------------------------\n");
 
@@ -59,9 +56,7 @@ void show_menu(rubiks_side *rubiks)
                         printf("4-> rouge.\n");
                         printf("5-> bleu.\n");
                         printf("6-> jaune.\n");
-
-                        char tab3[6] = {1, 2, 3, 4, 5, 6};
-                        side_choice = choice_menu(tab3);
+                        side_choice = choice_menu(6);
 
                         move_side_clockwise(rubiks, side_choice - 1, false);
                         draw_rubiks(rubiks);
@@ -76,9 +71,7 @@ void show_menu(rubiks_side *rubiks)
                         printf("4-> rouge.\n");
                         printf("5-> bleu.\n");
                         printf("6-> jaune.\n");
-
-                        char tab4[6] = {1, 2, 3, 4, 5, 6};
-                        side_choice = choice_menu(tab4);
+                        side_choice = choice_menu(6);
 
                         move_side_anticlockwise(rubiks, side_choice - 1, false);
                         draw_rubiks(rubiks);
@@ -93,6 +86,7 @@ void show_menu(rubiks_side *rubiks)
 
             case 4:
                 choose_color(rubiks);
+                draw_rubiks(rubiks);
                 break;
 
             case 5:
@@ -114,11 +108,10 @@ void show_menu(rubiks_side *rubiks)
  *
  * @param rubiks Un pointeur vers le rubik's en cours de traitement.
  */
-
 void choose_color(rubiks_side *rubiks){
     // liste des cubies disponibles pour être positionnés correctement.
     cubies liste_corner[24], liste_edge[24];
-    int len_liste_corner = 0, len_liste_edge = 0;
+    int len_liste_corner, len_liste_edge;
 
     // création d'un rubiks cube de référence (déjà résolu, et que nous modifierons en fonction des étapes de la saisie)
     rubiks_side reference_rubiks[6];
@@ -182,7 +175,7 @@ void choice_cubie(rubiks_side *reference_rubiks, rubiks_side *rubiks, T_CUBIE_TY
 
     // imprimer la liste des cubies encore disponibles
     for(int i = 0; i < len_liste ;i++){
-        printf("Choix %d : %s, %s", i, tabcolor[liste_cubie[i].color],
+        printf("Choix %d : %s, %s", i+1, tabcolor[liste_cubie[i].color],
                tabcolor[reference_rubiks[liste_cubie[i].neighbours[0].num_side].cubie[liste_cubie[i].neighbours[0].num_cubie].color]);
         if(type == CORNER)
             printf(", %s",
@@ -195,13 +188,9 @@ void choice_cubie(rubiks_side *reference_rubiks, rubiks_side *rubiks, T_CUBIE_TY
     }
     printf("\n");
     // récupérer le choix de l'utilisateur
-    do
-    {
-        printf("Rentrez votre choix:");
-        scanf("%d", &choice);
-        // Vérifier qu'on n'a bien que des chiffres, et qu'ils sont entre 0 et x
-    } while (choice < 0 || choice > len_liste);
-
+    choice = choice_menu(len_liste);
+    // Les menus vont de 1 à n, mais nos tableaux commencent à 0.
+    choice--;
 
     // mettre à jour le rubiks
     rubiks[face].cubie[num_cubie].color = liste_cubie[choice].color;
@@ -244,7 +233,7 @@ int creation_liste_cubie(rubiks_side * rubiks,cubies * liste, T_CUBIE_TYPE type)
 }
 
 /**
- * Purge des buffers de getchar(), car elle conserve les return du clavier. On les supprime donc.
+ * Purge des buffers de getchar(), car elle conserve les return du clavier. On les supprime donc quand ça nous arrange.
  */
 void clear_buffer()
 {
@@ -256,36 +245,48 @@ void clear_buffer()
 }
 
 /**
- * Cette fonction va laisser l'utilisateur choisir des entrées du menu parmi une liste de choix passée en paramètre.
+ * Cette fonction permet de lire plusieurs caractères, qui seront des entiers. Elle retourne l'entier saisi.
  *
- * @param list_of_choices Liste de choix disponibles à la saisie
+ * @return L'entier saisie par l'utilisateur
+ */
+int read_ints(void)
+{
+    int i, c;
+    bool at_least_one_digit = false;
+
+    c = getchar();
+    i = 0;
+
+    while (c >= '0' && c <= '9') {
+        i = 10 * i + (c - '0');
+        at_least_one_digit = true;
+        c = getchar();
+    }
+    if (at_least_one_digit)
+        return i;
+    // Une mauvaise saisie, on supprime tout ce qu'il reste dans le buffer.
+    clear_buffer();
+    return -1;
+}
+
+/**
+ * Cette fonction valide les saisies de l'utilisateur en s'assurant que celles-ci sont bien celles qui sont acceptable.
+ * Les entrées disponibles vont de 1 à num_entries.
+ *
+ * @param num_entries Nombre d'entrées dans le menu.
  * @return L'entrée choisit par l'utilisateur
  */
-int choice_menu(const char list_of_choices[])
+int choice_menu(int num_entries)
 {
-    int choice = 0, good_choice = false;
+    int choice;
 
+    // On rentre dans une boucle infinie, tant que l'utilisateur n'a pas choisit une entrée correcte
+    // Celle-ci doit être entre 1 et num_entries, tout le reste est rejeté.
     do
     {
         printf("Rentrez votre choix: ");
-/*        if (sizeof(list_of_choices) > 9) {
-            printf("Plus de 9 caractères...");
-        }*/
-        choice = getchar();
-        // On vide les buffers, sinon on prend minimum deux caractères.
-        clear_buffer();
-        // getchar renvoie le code ascii du caractère saisie. 0 est égal à 48, 1 = 49, etc. Donc, on retranche 48 au code ascii récupéré
-        choice -= 48;
-
-        // On parcourt les options disponibles dans la liste, pour voir si la saisie en fait bien partie.
-        for (int i = 0; i < sizeof(list_of_choices); i++)
-        {
-            if (list_of_choices[i] == choice)
-            {
-                good_choice = true;
-            }
-        }
-    } while (!good_choice);
-    // On renvoie le choix de l'utilisateur.
-    return choice;
+        choice = read_ints();
+        if (choice >= 1 && choice <= num_entries)
+            return choice;
+    } while (true);
 }
