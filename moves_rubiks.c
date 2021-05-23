@@ -62,25 +62,6 @@ void move_side_clockwise(rubiks_side *rubiks, int side){
     move_corner(rubiks, side, 8, 6);
     move_corner(rubiks, side, 2, 8);
 
-    /*    rubiks[side].cubie[0].color = rubiks[side].cubie[6].color;
-    // faire tourner les voisins des coins
-    rubiks[rubiks[side].cubie[0].neighbours[0].num_side].cubie[rubiks[side].cubie[0].neighbours[0].num_cubie].color =
-            rubiks[rubiks[side].cubie[6].neighbours[0].num_side].cubie[rubiks[side].cubie[6].neighbours[0].num_cubie].color ;
-    rubiks[rubiks[side].cubie[0].neighbours[1].num_side].cubie[rubiks[side].cubie[0].neighbours[1].num_cubie].color =
-            rubiks[rubiks[side].cubie[6].neighbours[1].num_side].cubie[rubiks[side].cubie[6].neighbours[1].num_cubie].color ;
-
-    rubiks[side].cubie[6].color = rubiks[side].cubie[8].color;
-    rubiks[rubiks[side].cubie[6].neighbours[0].num_side].cubie[rubiks[side].cubie[6].neighbours[0].num_cubie].color =
-            rubiks[rubiks[side].cubie[8].neighbours[0].num_side].cubie[rubiks[side].cubie[8].neighbours[0].num_cubie].color ;
-    rubiks[rubiks[side].cubie[6].neighbours[1].num_side].cubie[rubiks[side].cubie[6].neighbours[1].num_cubie].color =
-            rubiks[rubiks[side].cubie[8].neighbours[1].num_side].cubie[rubiks[side].cubie[8].neighbours[1].num_cubie].color ;
-
-    rubiks[side].cubie[8].color = rubiks[side].cubie[2].color;
-    rubiks[rubiks[side].cubie[8].neighbours[0].num_side].cubie[rubiks[side].cubie[8].neighbours[0].num_cubie].color =
-            rubiks[rubiks[side].cubie[2].neighbours[0].num_side].cubie[rubiks[side].cubie[2].neighbours[0].num_cubie].color ;
-    rubiks[rubiks[side].cubie[8].neighbours[1].num_side].cubie[rubiks[side].cubie[8].neighbours[1].num_cubie].color =
-            rubiks[rubiks[side].cubie[2].neighbours[1].num_side].cubie[rubiks[side].cubie[2].neighbours[1].num_cubie].color ;
-    */
     // Et on finit par récupérer les données sauvegardées pour faire "tourner" le cubie[2]
     rubiks[side].cubie[2].color = tmp1;
     rubiks[rubiks[side].cubie[2].neighbours[0].num_side].cubie[rubiks[side].cubie[2].neighbours[0].num_cubie].color = tmp2 ;
@@ -95,20 +76,6 @@ void move_side_clockwise(rubiks_side *rubiks, int side){
     move_edge(rubiks, side, 7, 3);
     move_edge(rubiks, side, 5, 7);
 
-    /*    // faire tourner le voisin
-    rubiks[rubiks[side].cubie[1].neighbours[0].num_side].cubie[rubiks[side].cubie[1].neighbours[0].num_cubie].color =
-            rubiks[rubiks[side].cubie[3].neighbours[0].num_side].cubie[rubiks[side].cubie[3].neighbours[0].num_cubie].color ;
-    //faire tourner l'arête
-    rubiks[side].cubie[1].color = rubiks[side].cubie[3].color;
-
-    rubiks[rubiks[side].cubie[3].neighbours[0].num_side].cubie[rubiks[side].cubie[3].neighbours[0].num_cubie].color =
-            rubiks[rubiks[side].cubie[7].neighbours[0].num_side].cubie[rubiks[side].cubie[7].neighbours[0].num_cubie].color ;
-    rubiks[side].cubie[3].color = rubiks[side].cubie[7].color;
-
-    rubiks[rubiks[side].cubie[7].neighbours[0].num_side].cubie[rubiks[side].cubie[7].neighbours[0].num_cubie].color =
-            rubiks[rubiks[side].cubie[5].neighbours[0].num_side].cubie[rubiks[side].cubie[5].neighbours[0].num_cubie].color ;
-    rubiks[side].cubie[7].color = rubiks[side].cubie[5].color;
-    */
 
     // Et enfin l'arête restante 5, deviens 0.
     rubiks[rubiks[side].cubie[5].neighbours[0].num_side].cubie[rubiks[side].cubie[5].neighbours[0].num_cubie].color = tmp2;

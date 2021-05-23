@@ -128,10 +128,10 @@ void choose_color(rubiks_side *rubiks){
             draw_rubiks(rubiks);
             do{
                 //demander une couleur
-                printf("Choisir la couleur sur la face %d, numéro %d:", i, j);
+                printf("Choisir la couleur de la face %d, numéro %d:", i, j);
                 scanf("%d",&color_choose);
                 // si la couleur est valide
-            }while(color_choose > YELLOW || color_choose < WHITE);
+            } while(color_choose > YELLOW || color_choose < WHITE);
             rubiks[i].cubie[j].color = color_choose;
         }
     }
