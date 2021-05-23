@@ -120,9 +120,6 @@ void choose_color(rubiks_side *rubiks){
     // création d'un rubiks cube de référence (déjà résolu
     rubiks_side reference_rubiks[6];
     rubiks_creation(reference_rubiks);
-    // pour enregistrer la couleur choisie
-
-    int color_choose;
     //initialisation avec la couleur grise
     for(int i = WHITE ; i <= YELLOW ; i++){
         for(int j = 0 ; j < 9 ; j++) {
@@ -131,35 +128,30 @@ void choose_color(rubiks_side *rubiks){
                 // on lui retire sa couleur
                 rubiks[i].cubie[j].color = NO_COLOR;
             }
-            // on complète la liste des edge et des corners à l'aide du rubiks de référence
-            if(rubiks[i].cubie[j].type == EDGE) {
-                liste_edge[len_liste_edge] = reference_rubiks[i].cubie[j];
-                len_liste_edge++;
-            }
-            if(rubiks[i].cubie[j].type == CORNER) {
-                liste_corner[len_liste_corner] = reference_rubiks[i].cubie[j];
-                len_liste_corner++;
-            }
         }
     }
+    // on complète la liste des edge et des corners à l'aide du rubiks de référence
+    len_liste_corner = creation_liste_cubie(reference_rubiks,liste_corner, CORNER);
+    len_liste_edge = creation_liste_cubie(reference_rubiks, liste_edge, EDGE);
     //remplir le rubiks
     for(int i = WHITE ; i <= YELLOW ; i++){
         for(int j = 0 ; j < 9 ; j++) {
-            if(rubiks[i].cubie[j].type != CENTER){
+            if(rubiks[i].cubie[j].type != CENTER && rubiks[i].cubie[j].color == NO_COLOR){
                 // changer la couleur du cubie sélectionné
                 rubiks[i].cubie[j].color = GREY;
                 // dessiner le rubiks
                 draw_rubiks(rubiks);
-                /*do{
-                    //demander une couleur
-                    printf("Choisir la couleur de la face %d, numéro %d:", i, j);
-                    scanf("%d",&color_choose);
-                    // si la couleur est valide
-                } while(color_choose > YELLOW || color_choose < WHITE);*/
 
                 //Si le cubie est une arête on donne les liste d'arête à choice_cubie
                 if(rubiks[i].cubie[j].type == EDGE){
                     choice_cubie(reference_rubiks, rubiks, rubiks[i].cubie[j].type, liste_edge, len_liste_edge, i,j);
+                    // mettre à jour les cubies disponibles
+                    len_liste_edge = creation_liste_cubie(reference_rubiks,liste_edge, EDGE);
+                }
+                if(rubiks[i].cubie[j].type == CORNER){
+                    choice_cubie(reference_rubiks, rubiks, rubiks[i].cubie[j].type, liste_corner, len_liste_corner, i,j);
+                    // mettre à jour les cubies disponibles
+                    len_liste_corner = creation_liste_cubie(reference_rubiks,liste_corner, CORNER);
                 }
             }
         }
@@ -194,6 +186,7 @@ void choice_cubie(rubiks_side *reference_rubiks, rubiks_side *rubiks, T_CUBIE_TY
         }
     }
     printf("\n");
+    // récupérer le choix de l'utilisateur
     do
     {
         printf("Rentrez votre choix:");
@@ -204,8 +197,39 @@ void choice_cubie(rubiks_side *reference_rubiks, rubiks_side *rubiks, T_CUBIE_TY
 
     // mettre à jour le rubiks
     rubiks[face].cubie[num_cubie].color = liste_cubie[choice].color;
-    // mettre à jour les cubies disponibles
+    rubiks[rubiks[face].cubie[num_cubie].neighbours[0].num_side].cubie[rubiks[face].cubie[num_cubie].neighbours[0].num_cubie].color =
+            reference_rubiks[liste_cubie[choice].neighbours[0].num_side].cubie[liste_cubie[choice].neighbours[0].num_cubie].color;
 
+    // mettre à jour le rubiks cube de référence
+    reference_rubiks[liste_cubie[choice].cubie_side].cubie[liste_cubie[choice].num].color = NO_COLOR;
+    reference_rubiks[liste_cubie[choice].neighbours[0].num_side].cubie[liste_cubie[choice].neighbours[0].num_cubie].color = NO_COLOR;
+
+    // dans le cas d'un corner
+    if(type == CORNER) {
+        rubiks[rubiks[face].cubie[num_cubie].neighbours[1].num_side].cubie[rubiks[face].cubie[num_cubie].neighbours[1].num_cubie].color =
+                reference_rubiks[liste_cubie[choice].neighbours[1].num_side].cubie[liste_cubie[choice].neighbours[1].num_cubie].color;
+        reference_rubiks[liste_cubie[choice].neighbours[1].num_side].cubie[liste_cubie[choice].neighbours[1].num_cubie].color = NO_COLOR;
+    }
+}
+
+/**
+ *
+ *
+ * */
+int creation_liste_cubie(rubiks_side * rubiks,cubies * liste, T_CUBIE_TYPE type){
+
+    int len_liste = 0;
+    for(int i = WHITE ; i <= YELLOW ; i++) {
+        for (int j = 0; j < 9; j++) {
+            if(rubiks[i].cubie[j].color != NO_COLOR)
+                // on complète la liste des edge et des corners à l'aide du rubiks de référence
+                if (rubiks[i].cubie[j].type == type) {
+                    liste[len_liste] = rubiks[i].cubie[j];
+                    len_liste++;
+            }
+        }
+    }
+    return len_liste;
 }
 
 void clear_buffer()
