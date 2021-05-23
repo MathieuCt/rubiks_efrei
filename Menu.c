@@ -11,7 +11,7 @@ void show_menu(rubiks_side *rubiks)
 
     while (end_choice)
     {
-        printf("Fates votre choix (attention vous ne pouvez rentrer que des chiffes comme choix).\n");
+        printf("Faites votre choix (attention vous ne pouvez rentrer que des chiffes comme choix).\n");
         printf("1->Mélanger le rubiks.\n");
         printf("2->Résoudre le rubiks.\n");
         printf("3->Faire vos propre mouvements.\n");

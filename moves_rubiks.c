@@ -690,6 +690,7 @@ void add_step_to_solution(solutions_steps *first_step, char new_step[SIZE_MOVE])
  */
 void print_solution(solutions_steps *first_step)
 {
+    int i = 0;
     solutions_steps *tmp = NULL;
 
     if (first_step == NULL) {
@@ -700,7 +701,7 @@ void print_solution(solutions_steps *first_step)
     tmp = first_step;
     printf("La couleur indiquée donne la face à tourner et un \"'\" indique que la rotation se fait dans un sens antihoraire.\n");
     do {
-        printf("%s\n", tmp->solution_step);
+        printf("%s | ", tmp->solution_step);
         tmp = tmp->next_step;
         if( i % 6 == 0 && i != 0) printf("\n");
         i++;
