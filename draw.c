@@ -271,17 +271,84 @@ void rubiks_display(rubiks_side *rubiks){
  */
 void draw_rubiks(rubiks_side *rubiks)
 {
+    // Définition des couleurs "ANSI" pour pouvoir écrire les cubies en couleur
+    // A chaque fois, on défini la couleur à utiliser, suivi de la lettre du cubie, suivi d'un reset pour que la couleur
+    // revienne à celle par défaut.
     char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET, GRY "?"};
 
     printf("--------------\n");
-    printf("    %s%s%s       \n", tabcolor[rubiks[0].cubie[0].color], tabcolor[rubiks[0].cubie[1].color],tabcolor[rubiks[0].cubie[2].color]);
-    printf("    %s%s%s       \n", tabcolor[rubiks[0].cubie[3].color], tabcolor[rubiks[0].cubie[4].color],tabcolor[rubiks[0].cubie[5].color]);
-    printf("    %s%s%s       \n", tabcolor[rubiks[0].cubie[6].color], tabcolor[rubiks[0].cubie[7].color],tabcolor[rubiks[0].cubie[8].color]);
-    printf("%s%s%s %s%s%s %s%s%s %s%s%s\n", tabcolor[rubiks[1].cubie[0].color], tabcolor[rubiks[1].cubie[1].color],tabcolor[rubiks[1].cubie[2].color], tabcolor[rubiks[2].cubie[0].color], tabcolor[rubiks[2].cubie[1].color],tabcolor[rubiks[2].cubie[2].color], tabcolor[rubiks[3].cubie[0].color], tabcolor[rubiks[3].cubie[1].color],tabcolor[rubiks[3].cubie[2].color], tabcolor[rubiks[4].cubie[0].color], tabcolor[rubiks[4].cubie[1].color],tabcolor[rubiks[4].cubie[2].color]);
-    printf("%s%s%s %s%s%s %s%s%s %s%s%s\n", tabcolor[rubiks[1].cubie[3].color], tabcolor[rubiks[1].cubie[4].color],tabcolor[rubiks[1].cubie[5].color], tabcolor[rubiks[2].cubie[3].color], tabcolor[rubiks[2].cubie[4].color],tabcolor[rubiks[2].cubie[5].color], tabcolor[rubiks[3].cubie[3].color], tabcolor[rubiks[3].cubie[4].color],tabcolor[rubiks[3].cubie[5].color], tabcolor[rubiks[4].cubie[3].color], tabcolor[rubiks[4].cubie[4].color],tabcolor[rubiks[4].cubie[5].color]);
-    printf("%s%s%s %s%s%s %s%s%s %s%s%s\n", tabcolor[rubiks[1].cubie[6].color], tabcolor[rubiks[1].cubie[7].color],tabcolor[rubiks[1].cubie[8].color], tabcolor[rubiks[2].cubie[6].color], tabcolor[rubiks[2].cubie[7].color],tabcolor[rubiks[2].cubie[8].color], tabcolor[rubiks[3].cubie[6].color], tabcolor[rubiks[3].cubie[7].color],tabcolor[rubiks[3].cubie[8].color], tabcolor[rubiks[4].cubie[6].color], tabcolor[rubiks[4].cubie[7].color],tabcolor[rubiks[4].cubie[8].color]);
-    printf("    %s%s%s       \n", tabcolor[rubiks[5].cubie[0].color], tabcolor[rubiks[5].cubie[1].color],tabcolor[rubiks[5].cubie[2].color]);
-    printf("    %s%s%s       \n", tabcolor[rubiks[5].cubie[3].color], tabcolor[rubiks[5].cubie[4].color],tabcolor[rubiks[5].cubie[5].color]);
-    printf("    %s%s%s       \n", tabcolor[rubiks[5].cubie[6].color], tabcolor[rubiks[5].cubie[7].color],tabcolor[rubiks[5].cubie[8].color]);
+    // On "imprime" face par face, et cubie par cubie.
+    printf("    %s%s%s       \n",
+           tabcolor[rubiks[WHITE].cubie[0].color],
+           tabcolor[rubiks[WHITE].cubie[1].color],
+           tabcolor[rubiks[WHITE].cubie[2].color]);
+    printf("    %s%s%s       \n",
+           tabcolor[rubiks[WHITE].cubie[3].color],
+           tabcolor[rubiks[WHITE].cubie[4].color],
+           tabcolor[rubiks[WHITE].cubie[5].color]);
+    printf("    %s%s%s       \n",
+           tabcolor[rubiks[WHITE].cubie[6].color],
+           tabcolor[rubiks[WHITE].cubie[7].color],
+           tabcolor[rubiks[WHITE].cubie[8].color]);
+/* On aurait pu faire des boucles plutôt que des tableaux en dur, mais ça ne change pas grand-chose et c'est moins clair.
+      int i, j;
+      for (i = WHITE; i <= BLUE; i++) {
+        for (j = 0; j <= 2; j++) {
+            printf("%s", tabcolor[rubiks[i].cubie[j].color]);
+            if (j == 2) printf(" ");
+            if (i * j == 8) printf("\n");
+        }
+    }*/
+    printf("%s%s%s %s%s%s %s%s%s %s%s%s\n",
+           tabcolor[rubiks[ORANGE].cubie[0].color],
+           tabcolor[rubiks[ORANGE].cubie[1].color],
+           tabcolor[rubiks[ORANGE].cubie[2].color],
+           tabcolor[rubiks[GREEN].cubie[0].color],
+           tabcolor[rubiks[GREEN].cubie[1].color],
+           tabcolor[rubiks[GREEN].cubie[2].color],
+           tabcolor[rubiks[RED].cubie[0].color],
+           tabcolor[rubiks[RED].cubie[1].color],
+           tabcolor[rubiks[RED].cubie[2].color],
+           tabcolor[rubiks[BLUE].cubie[0].color],
+           tabcolor[rubiks[BLUE].cubie[1].color],
+           tabcolor[rubiks[BLUE].cubie[2].color]);
+    printf("%s%s%s %s%s%s %s%s%s %s%s%s\n",
+           tabcolor[rubiks[ORANGE].cubie[3].color],
+           tabcolor[rubiks[ORANGE].cubie[4].color],
+           tabcolor[rubiks[ORANGE].cubie[5].color],
+           tabcolor[rubiks[GREEN].cubie[3].color],
+           tabcolor[rubiks[GREEN].cubie[4].color],
+           tabcolor[rubiks[GREEN].cubie[5].color],
+           tabcolor[rubiks[RED].cubie[3].color],
+           tabcolor[rubiks[RED].cubie[4].color],
+           tabcolor[rubiks[RED].cubie[5].color],
+           tabcolor[rubiks[BLUE].cubie[3].color],
+           tabcolor[rubiks[BLUE].cubie[4].color],
+           tabcolor[rubiks[BLUE].cubie[5].color]);
+    printf("%s%s%s %s%s%s %s%s%s %s%s%s\n",
+           tabcolor[rubiks[ORANGE].cubie[6].color],
+           tabcolor[rubiks[ORANGE].cubie[7].color],
+           tabcolor[rubiks[ORANGE].cubie[8].color],
+           tabcolor[rubiks[GREEN].cubie[6].color],
+           tabcolor[rubiks[GREEN].cubie[7].color],
+           tabcolor[rubiks[GREEN].cubie[8].color],
+           tabcolor[rubiks[RED].cubie[6].color],
+           tabcolor[rubiks[RED].cubie[7].color],
+           tabcolor[rubiks[RED].cubie[8].color],
+           tabcolor[rubiks[BLUE].cubie[6].color],
+           tabcolor[rubiks[BLUE].cubie[7].color],
+           tabcolor[rubiks[BLUE].cubie[8].color]);
+    printf("    %s%s%s       \n",
+           tabcolor[rubiks[YELLOW].cubie[0].color],
+           tabcolor[rubiks[YELLOW].cubie[1].color],
+           tabcolor[rubiks[YELLOW].cubie[2].color]);
+    printf("    %s%s%s       \n",
+           tabcolor[rubiks[YELLOW].cubie[3].color],
+           tabcolor[rubiks[YELLOW].cubie[4].color],
+           tabcolor[rubiks[YELLOW].cubie[5].color]);
+    printf("    %s%s%s       \n",
+           tabcolor[rubiks[YELLOW].cubie[6].color],
+           tabcolor[rubiks[YELLOW].cubie[7].color],
+           tabcolor[rubiks[YELLOW].cubie[8].color]);
     printf("--------------\n");
 }
