@@ -19,7 +19,7 @@ void show_menu(rubiks_side *rubiks)
     // Gestion des choix du menu principal
     while (end_choice)
     {
-        printf("Faites votre choix (attention vous ne pouvez rentrer que des chiffes comme choix).\n");
+        printf("Faites votre choix (attention vous ne pouvez saisir que des chiffres).\n");
         printf("1-> Mélanger le rubiks.\n");
         printf("2-> Résoudre le rubiks.\n");
         printf("3-> Faire vos propre mouvements.\n");
@@ -27,6 +27,7 @@ void show_menu(rubiks_side *rubiks)
         printf("5-> Afficher le rubiks\n");
         printf("6-> Quitter le programme\n");
         char tab[6] = {1, 2, 3, 4, 5, 6};
+//        char tab[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         start_choice = choice_menu(tab);
 
         printf("--------------------------------\n");
@@ -260,13 +261,16 @@ void clear_buffer()
  * @param list_of_choices Liste de choix disponibles à la saisie
  * @return L'entrée choisit par l'utilisateur
  */
-int choice_menu(char * list_of_choices)
+int choice_menu(const char list_of_choices[])
 {
     int choice = 0, good_choice = false;
 
     do
     {
         printf("Rentrez votre choix: ");
+/*        if (sizeof(list_of_choices) > 9) {
+            printf("Plus de 9 caractères...");
+        }*/
         choice = getchar();
         // On vide les buffers, sinon on prend minimum deux caractères.
         clear_buffer();

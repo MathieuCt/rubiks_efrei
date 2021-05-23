@@ -13,7 +13,7 @@
 
 void show_menu(rubiks_side *);
 void choose_color(rubiks_side *);
-int choice_menu(char *);
+int choice_menu(const char *);
 void choice_cubie(rubiks_side *,rubiks_side *, T_CUBIE_TYPE, cubies *, int, int, int);
 int creation_liste_cubie(rubiks_side *,cubies *, T_CUBIE_TYPE);
 

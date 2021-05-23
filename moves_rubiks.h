@@ -16,24 +16,24 @@ struct solutions_steps{
     solutions_steps *next_step;
 };
 
-void move_side_clockwise(rubiks_side *rubiks, int side, int add_to_history);
-void move_side_anticlockwise(rubiks_side *rubiks, int side, int add_to_history);
-void move_corner(rubiks_side *rubiks, int side, int from, int to);
-void move_edge(rubiks_side *rubiks, int side, int from, int to);
-void mix_rubiks(rubiks_side * );
+void move_side_clockwise(rubiks_side *, int, int);
+void move_side_anticlockwise(rubiks_side *, int, int);
+void move_corner(rubiks_side *, int, int, int);
+void move_edge(rubiks_side *, int, int, int);
+void mix_rubiks(rubiks_side *);
 void alternate_color(rubiks_side * );
 void solve_rubiks(rubiks_side *);
-void solve_white_side(rubiks_side *rubiks);
-void solve_middle_row(rubiks_side *rubiks);
-void solve_yellow_cross(rubiks_side *rubiks);
-void solve_yellow_corner(rubiks_side *rubiks);
-void turn_three_corner(rubiks_side *rubiks);
-cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour1, T_CUBIE_TYPE cubie_type);
-void right_move(rubiks_side *rubiks, cubies cubie);
-void left_move(rubiks_side *rubiks, cubies cubie);
-solutions_steps * init_solution(char new_step[SIZE_MOVE]);
-void add_step_to_solution(solutions_steps *first_step, char new_step[SIZE_MOVE]);
-void print_solution(solutions_steps *first_step);
-void free_solution(solutions_steps *first_step);
+void solve_white_side(rubiks_side *);
+void solve_middle_row(rubiks_side *);
+void solve_yellow_cross(rubiks_side *);
+void solve_yellow_corner(rubiks_side *);
+void turn_three_corner(rubiks_side *);
+cubies search_cubie(rubiks_side * , T_COLOR, T_COLOR, T_CUBIE_TYPE);
+void right_move(rubiks_side *, cubies);
+void left_move(rubiks_side *, cubies);
+solutions_steps * init_solution(char[SIZE_MOVE]);
+void add_step_to_solution(solutions_steps *, char[SIZE_MOVE]);
+void print_solution(solutions_steps *);
+void free_solution(solutions_steps *);
 
 #endif //RUBIKS_EFREI_MOVES_RUBIKS_H
