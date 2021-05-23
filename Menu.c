@@ -273,6 +273,7 @@ int choice_menu(char * list_of_choices)
         // getchar renvoie le code ascii du caractère saisie. 0 est égal à 48, 1 = 49, etc. Donc, on retranche 48 au code ascii récupéré
         choice -= 48;
 
+        // On parcourt les options disponibles dans la liste, pour voir si la saisie en fait bien partie.
         for (int i = 0; i < sizeof(list_of_choices); i++)
         {
             if (list_of_choices[i] == choice)
@@ -280,11 +281,7 @@ int choice_menu(char * list_of_choices)
                 good_choice = true;
             }
         }
-
-//        if (!good_choice)
-//        {
-//            printf("\b");
-//        }
     } while (!good_choice);
+    // On renvoie le choix de l'utilisateur.
     return choice;
 }
