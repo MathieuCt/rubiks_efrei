@@ -4,16 +4,19 @@
  * @date 7 Mai 2021
  * @brief Dans ce fichier, on trouve les headers et structures utilisées partout dans le code. Définitions dans rubiks.c
  */
+
 #ifndef RUBIKS_EFREI_RUBIKS_H
 #define RUBIKS_EFREI_RUBIKS_H
 /**
  * @brief Définition des couleurs des faces et des cubies.
  */
 typedef enum {WHITE=0, ORANGE=1, GREEN=2, RED=3, BLUE=4, YELLOW=5, GREY = 6, NO_COLOR =7} T_COLOR;
+
 /**
  * @brief Définition des faces adjacentes à une face du Rubik's Cube.
  */
 typedef enum {UP=0, RIGHT=1, DOWN=2, LEFT=3} T_SIDE;
+
 /**
  * @brief Définition des types de chaque cubie.
  */
@@ -27,7 +30,7 @@ typedef enum {CORNER=0, EDGE=1, CENTER=2} T_CUBIE_TYPE;
 typedef struct {
     T_COLOR num_side;
     int num_cubie;
-} neighbour; //todo : probablement à renommer
+} neighbour;
 
 /**
  * @brief Définition des cubies, qui sont les petits cubes de couleur rattachés à une face
