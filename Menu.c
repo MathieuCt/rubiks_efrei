@@ -12,17 +12,12 @@ void show_menu(rubiks_side *rubiks)
     while (end_choice)
     {
         printf("Faites votre choix (attention vous ne pouvez rentrer que des chiffes comme choix).\n");
-        printf("1->Mélanger le rubiks.\n");
-        printf("2->Résoudre le rubiks.\n");
-        printf("3->Faire vos propre mouvements.\n");
-        printf("4->Placer les couleurs.\n");
-        printf("5->Afficher le rubiks\n");
-        printf("6->Quitter le programme\n");
-        //printf("Rentrez votre choix: ");
-        /*do
-        {
-            start_choice = getchar();
-        } while (start_choice != '1' && start_choice != '2' && start_choice != '3' && start_choice != '4' && start_choice != '5');*/
+        printf("1-> Mélanger le rubiks.\n");
+        printf("2-> Résoudre le rubiks.\n");
+        printf("3-> Faire vos propre mouvements.\n");
+        printf("4-> Placer les couleurs.\n");
+        printf("5-> Afficher le rubiks\n");
+        printf("6-> Quitter le programme\n");
         char tab[6] = {1, 2, 3, 4, 5, 6};
         start_choice = choice_menu(tab);
 
@@ -39,8 +34,8 @@ void show_menu(rubiks_side *rubiks)
                 draw_rubiks(rubiks);
                 break;
             case 3:
-                printf("1->Mouvement horaire.\n");
-                printf("2->Mouvement antihoraire.\n");
+                printf("1-> Mouvement horaire.\n");
+                printf("2-> Mouvement antihoraire.\n");
                 //printf("Rentrez votre choix: ");
                 /*do
                 {
@@ -49,52 +44,42 @@ void show_menu(rubiks_side *rubiks)
                 char tab2[2] = {1, 2};
                 move_choice = choice_menu(tab2);
 
-                printf("--------------------------------\n");
+                printf("\n--------------------------------\n");
 
                 switch (move_choice)
                 {
                     case 1:
-                        printf("1->blanc.\n");
-                        printf("2->orange.\n");
-                        printf("3->vert.\n");
-                        printf("4->rouge.\n");
-                        printf("5->bleu.\n");
-                        printf("6->jaune.\n");
-                        //printf("Rentrez votre choix: ");
-                        /*do
-                        {
-                            side_choice = getchar();
-                        }while (side_choice != '1' && side_choice != '2' && side_choice != '3' && side_choice != '4' &&
-                                  side_choice != '5' && side_choice != '6');*/
+                        printf("1-> blanc.\n");
+                        printf("2-> orange.\n");
+                        printf("3-> vert.\n");
+                        printf("4-> rouge.\n");
+                        printf("5-> bleu.\n");
+                        printf("6-> jaune.\n");
+
                         char tab3[6] = {1, 2, 3, 4, 5, 6};
                         side_choice = choice_menu(tab3);
 
                         move_side_clockwise(rubiks, side_choice - 1, false);
                         draw_rubiks(rubiks);
 
-                        printf("--------------------------------\n");
+                        printf("\n--------------------------------\n");
                         break;
 
                     case 2:
-                        printf("1->blanc.\n");
-                        printf("2->orange.\n");
-                        printf("3->vert.\n");
-                        printf("4->rouge.\n");
-                        printf("5->bleu.\n");
-                        printf("6->jaune.\n");
-                        //printf("Rentrez votre choix: ");
-                        /*do
-                        {
-                            side_choice = getchar();
-                        }while (side_choice != '1' && side_choice != '2' && side_choice != '3' && side_choice != '4' &&
-                                   side_choice != '5' && side_choice != '6');*/
+                        printf("1-> blanc.\n");
+                        printf("2-> orange.\n");
+                        printf("3-> vert.\n");
+                        printf("4-> rouge.\n");
+                        printf("5-> bleu.\n");
+                        printf("6-> jaune.\n");
+
                         char tab4[6] = {1, 2, 3, 4, 5, 6};
                         side_choice = choice_menu(tab4);
 
                         move_side_anticlockwise(rubiks, side_choice - 1, false);
                         draw_rubiks(rubiks);
 
-                        printf("--------------------------------\n");
+                        printf("\n--------------------------------\n");
                         break;
 
                     default:
@@ -153,7 +138,7 @@ void choose_color(rubiks_side *rubiks){
                 // dessiner le rubiks
                 draw_rubiks(rubiks);
 
-                //Si le cubie est une arête on donne les liste d'arête à choice_cubie
+                //Si le cubie est une arête on donne les listes d'arêtes à choice_cubie
                 if(rubiks[i].cubie[j].type == EDGE){
                     choice_cubie(reference_rubiks, rubiks, rubiks[i].cubie[j].type, liste_edge, len_liste_edge, i,j);
                     // mettre à jour les cubies disponibles
@@ -254,7 +239,7 @@ void clear_buffer()
 
 int choice_menu(char * soluce)
 {
-    int presence = false, choice = 0, good_choice = false;
+    int choice = 0, good_choice = false;
 
     do
     {

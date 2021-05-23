@@ -34,6 +34,6 @@ void left_move(rubiks_side *rubiks, cubies cubie);
 solutions_steps * init_solution(char new_step[SIZE_MOVE]);
 void add_step_to_solution(solutions_steps *first_step, char new_step[SIZE_MOVE]);
 void print_solution(solutions_steps *first_step);
-void clear_solution(solutions_steps *first_step);
+void free_solution(solutions_steps *first_step);
 
 #endif //RUBIKS_EFREI_MOVES_RUBIKS_H

@@ -166,7 +166,7 @@ void solve_rubiks(rubiks_side *rubiks){
     // résolution des coins jaunes
     solve_yellow_corner(rubiks);
     print_solution(history);
-    clear_solution(history);
+    free_solution(history);
 }
 
 /**
@@ -636,8 +636,8 @@ cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour
  * Cette fonction initialise une liste chaînée avec le premier mouvement de la solution. Elle renvoie un pointeur
  * vers le premier élément (rubiks_solution.solution) de la liste chaînée (solution_steps)
  *
- * @param new_step Description du premier mouvement, au format texte)
- * @return Pointeur vers le premier élément de la liste chaînée.
+ * @param new_step Description du premier mouvement, au format texte
+ * @return Pointeur vers le premier élément de la liste chaînée de l'historique des étapes de résolution.
  */
 solutions_steps * init_solution(char new_step[SIZE_MOVE])
 {
@@ -658,6 +658,12 @@ solutions_steps * init_solution(char new_step[SIZE_MOVE])
     return step;
 }
 
+/**
+ * Cette fonction ajoute une nouvelle étape de résolution à un historique déjà existant.
+ *
+ * @param first_step Pointeur vers le premier élément de la liste chaînée de l'historique des étapes de résolution
+ * @param new_step Texte à stocker pour cette nouvelle étape
+ */
 void add_step_to_solution(solutions_steps *first_step, char new_step[SIZE_MOVE])
 {
     // On alloue la mémoire pour une nouvelle étape de la solution
@@ -680,46 +686,51 @@ void add_step_to_solution(solutions_steps *first_step, char new_step[SIZE_MOVE])
     // Et enfin, on ajoute le nouvel élément à la fin.
     tmp->next_step = step_tmp;
     strcpy(tmp->next_step->solution_step, new_step);
+    // Le suivant est donc NULL
     tmp->next_step->next_step = NULL;
 }
 
 /**
  * Cette fonction imprime à l'écran, toutes les étapes d'une solution
  *
- * @param first_step Pointeur vers le premier élément de la liste chaînée à imprimer.
+ * @param first_step Pointeur vers le premier élément de la liste chaînée de l'historique des étapes de résolution à imprimer.
  */
 void print_solution(solutions_steps *first_step)
 {
     int i = 0;
     solutions_steps *tmp = NULL;
 
+    // Si first_step n'est pas initialisé, on ne peut rien faire, on sort.
     if (first_step == NULL) {
         return;
     }
 
+    printf("La couleur indiquée donne la face à faire tourner et un \"'\" indique que la rotation se fait dans un sens antihoraire.\n");
     // On sauvegarde la position du premier pointeur pour ne pas le modifier
     tmp = first_step;
-    printf("La couleur indiquée donne la face à tourner et un \"'\" indique que la rotation se fait dans un sens antihoraire.\n");
     do {
+        // On affiche les différents mouvements, en sautant de ligne toutes les 6 "mouvements"
         printf("%s | ", tmp->solution_step);
         tmp = tmp->next_step;
         if( i % 6 == 0 && i != 0) printf("\n");
         i++;
     } while (tmp != NULL);
+    printf("\nLe cube a été résolu en %d mouvements\n", --i);
 }
 
 /**
- * Cette fonction libère totalement la mémoire allouée par la liste chainée.
+ * Cette fonction libère totalement la mémoire allouée par la liste chainée des étapes d'une solution.
  *
- * @param first_step Pointeur vers le premier élément de la liste chaînée à supprimer.
+ * @param first_step Pointeur vers le premier élément de la liste chaînée de l'historique des étapes de résolution à supprimer.
  */
-void clear_solution(solutions_steps *first_step)
+void free_solution(solutions_steps *first_step)
 {
     solutions_steps *next_move;
     solutions_steps * tmp;
 
     next_move = first_step;
     while (next_move != NULL) {
+        // On parcourt la liste chaînée en libérant à chaque fois l'étape en cours, et on se position sur le suivant
         tmp = next_move->next_step;
         free(next_move);
         next_move = tmp;

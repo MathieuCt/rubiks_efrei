@@ -276,7 +276,7 @@ void draw_rubiks(rubiks_side *rubiks)
     // revienne à celle par défaut.
     char tabcolor[][30] = {WHT "W" RESET, ORG "O" RESET, GRN "G" RESET, ARED "R" RESET, BLU "B" RESET, YEL "Y" RESET, GRY "?", " "};
 
-    printf("--------------\n");
+    printf("\n--------------\n");
     // On "imprime" face par face, et cubie par cubie.
     printf("    %s%s%s       \n",
            tabcolor[rubiks[WHITE].cubie[0].color],
