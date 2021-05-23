@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #include "draw.h"
 #include "moves_rubiks.h"
@@ -641,4 +642,95 @@ cubies search_cubie(rubiks_side * rubiks, T_COLOR cubie_color, T_COLOR neighbour
         }
     }
     return rubiks[0].cubie[0];
+}
+
+/**
+ * Cette fonction initialise une liste chaînée avec le premier mouvement de la solution. Elle renvoie un pointeur
+ * vers le premier élément (rubiks_solution.solution) de la liste chaînée (solution_steps)
+ *
+ * @param new_step Description du premier mouvement, au format texte)
+ * @return Pointeur vers le premier élément de la liste chaînée.
+ */
+solutions_steps * init_solution(char new_step[SIZE_MOVE])
+{
+    // On initialise le premier élément de la solution, soit le premier élément de la liste chaînée.
+    solutions_steps *step = malloc(sizeof(solutions_steps));
+
+    // Gestion des erreurs d'allocation. Moindre problème, on quitte le programme.
+    if (step == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    // Et on initialise la nouvelle liste chaînée avec son premier élément, sans élément suivant
+    strcpy(step->solution_step, new_step);
+    step->next_step = NULL;
+    // Et enfin, on retourne un pointeur vers vers le premier élément de la liste chaînée.
+    // Ce pointeur devra être conservé non modifié tout au long de la vie de la liste. Il ne doit pas varier !
+    return step;
+}
+
+void add_move_to_solution(solutions_steps *first_step, char new_step[SIZE_MOVE])
+{
+    // On alloue la mémoire pour une nouvelle étape de la solution
+    solutions_steps *step_tmp = malloc(sizeof(solutions_steps));
+    solutions_steps *tmp;
+
+    // Gestion des erreurs, si l'un des pointeurs est NULL, on quitte.
+    if (first_step == NULL || step_tmp == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    // On sauvegarde le pointeur de tête de liste chaînée, car il ne faut jamais modifier "first_step".
+    tmp = first_step;
+    // Et on se déplace jusqu'à la fin de la liste chaînée, dans ce cas next_step == NULL
+    while (tmp->next_step != NULL) {
+        tmp = tmp->next_step;
+    }
+
+    // Et enfin, on ajoute le nouvel élément à la fin.
+    tmp->next_step = step_tmp;
+    strcpy(tmp->next_step->solution_step, new_step);
+    tmp->next_step->next_step = NULL;
+}
+
+/**
+ * Cette fonction imprime à l'écran, toutes les étapes d'une solution
+ *
+ * @param first_step Pointeur vers le premier élément de la liste chaînée à imprimer.
+ */
+void print_solution(solutions_steps *first_step)
+{
+    solutions_steps *tmp = NULL;
+
+    if (first_step == NULL) {
+        return;
+    }
+
+    // On sauvegarde la position du premier pointeur pour ne pas le modifier
+    tmp = first_step;
+    do {
+        printf("%s", tmp->solution_step);
+        tmp = tmp->next_step;
+    } while (tmp != NULL);
+}
+
+/**
+ * Cette fonction libère totalement la mémoire allouée par la liste chainée.
+ *
+ * @param first_step Pointeur vers le premier élément de la liste chaînée à supprimer.
+ */
+void clear_solution(solutions_steps *first_step)
+{
+    solutions_steps *next_move;
+    solutions_steps * tmp;
+
+    next_move = first_step;
+    while (next_move != NULL) {
+        tmp = next_move->next_step;
+        free(next_move);
+        next_move = tmp;
+    }
+    first_step = NULL;
 }

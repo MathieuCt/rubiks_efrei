@@ -9,6 +9,17 @@
 #define RUBIKS_EFREI_MOVES_RUBIKS_H
 #include "rubiks.h"
 
+#define SIZE_MOVE 20
+typedef struct solutions_steps solutions_steps;
+struct solutions_steps{
+    char solution_step[SIZE_MOVE];
+    solutions_steps *next_step;
+};
+
+typedef struct {
+    struct solutions_steps *solution;
+} rubiks_solution;
+
 void move_side_clockwise(rubiks_side *rubiks, int side);
 void move_side_anticlockwise(rubiks_side *rubiks, int side);
 void move_corner(rubiks_side *rubiks, int side, int from, int to);
