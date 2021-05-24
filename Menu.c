@@ -27,8 +27,8 @@ void show_menu(rubiks_side *rubiks)
         printf("2-> Résoudre le rubiks.\n");
         printf("3-> Faire vos propre mouvements.\n");
         printf("4-> Placer les couleurs.\n");
-        printf("5-> Afficher le rubiks\n");
-        printf("6-> Quitter le programme\n");
+        printf("5-> Afficher le rubiks.\n");
+        printf("6-> Quitter le programme.\n");
         start_choice = choice_menu(6);
 
         printf("--------------------------------\n");

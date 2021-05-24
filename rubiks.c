@@ -213,7 +213,7 @@ void rubiks_neighbour(rubiks_side *rubiks) {
  *
  * @param rubiks Un pointeur vers une structure rubiks_side
  * @param side La face principale qui nous sert de référence pour la recherche
- * @param neighbour_face todo : expliquer
+ * @param neighbour_face la face voisine, celle dont on cherche position
  * @return Renvoi l'indice de la face trouvée ou 0 en cas d'échec de la recherche
  */
 int research_side(rubiks_side *rubiks, int side, int neighbour_face){
