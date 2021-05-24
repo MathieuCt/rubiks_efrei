@@ -90,7 +90,7 @@ extern short NB_COLS;
 #define GRY "\033[38;2;80;80m"
 #define RESET "\x1B[0m"
 
-// Les fonction
+// Les fonctions
 int check_and_set_term(void);
 void set_colors(void);
 void change_color(short, short, short, short, short);
