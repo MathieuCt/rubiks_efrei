@@ -238,7 +238,7 @@ int creation_liste_cubie(rubiks_side * rubiks,cubies * liste, T_CUBIE_TYPE type)
 /**
  * Purge des buffers de getchar(), car elle conserve les return du clavier. On les supprime donc quand ça nous arrange.
  */
-void clear_buffer()
+void clear_buffer(void)
 {
     int c = 0;
     while (c != '\n' && c != EOF)

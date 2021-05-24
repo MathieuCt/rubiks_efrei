@@ -93,6 +93,8 @@ extern short NB_COLS;
 // Les fonction
 int check_and_set_term(void);
 void set_colors(void);
+void change_color(short, short, short, short, short);
+void create_rubik_side(short, short, short, char);
 void create_board(void);
 void destroy_board(void);
 void detect_resize(__attribute__((unused)) int);
