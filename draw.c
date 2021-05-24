@@ -251,7 +251,6 @@ void rubiks_display(rubiks_side *rubiks){
     int face, cubie;
     for(face = 0; face < 6 ; face++){
         printf("\n\n\n");
-        rubiks[face].side;
         for(cubie = 0 ; cubie < 9 ; cubie++){
             printf("num :%d, x : %d, y : %d, type : %d, color : %d, voisin1(side): %d, voisin1(num) : %d voisin2(side): %d, voisin2(num) : %d\n",
                    rubiks[face].cubie[cubie].num,
