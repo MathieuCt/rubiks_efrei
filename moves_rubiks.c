@@ -258,10 +258,8 @@ void solve_yellow_cross(rubiks_side *rubiks) {
     // un tableau pour savoir quelles arètes jaunes sont sur la face jaunes
     int yellow_edge[9] = {0};
     int j = 0;
-    // si la croix est déjà résolue ou complètement non résolue
-    int cross = 0, no_cross = 0;
-    //cubie pour enregistrer les informations du cubie recherché
-    cubies cubie;
+    // si la croix est déjà résolue.
+    int cross = 0;
     // on cherche d'abord à résoudre la croix sans se soucier des arêtes
     // parcourir les cubies de la face jaune
     do {
